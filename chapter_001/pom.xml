@@ -19,5 +19,8 @@
 		<module>
 			Triangle
 		</module>
+		<module>
+			Max
+		</module>
 	</modules>
 </project>

@@ -16,5 +16,8 @@
 		<module>
 			Calculator
 		</module>
+		<module>
+			Triangle
+		</module>
 	</modules>
 </project>

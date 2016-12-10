@@ -22,5 +22,8 @@
 		<module>
 			Max
 		</module>
+		<module>
+			Counter
+		</module>
 	</modules>
 </project>

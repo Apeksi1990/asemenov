@@ -25,5 +25,8 @@
 		<module>
 			Counter
 		</module>
+		<module>
+			Factorial
+		</module>
 	</modules>
 </project>

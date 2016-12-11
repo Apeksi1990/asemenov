@@ -28,5 +28,8 @@
 		<module>
 			Factorial
 		</module>
+		<module>
+			Paint
+		</module>
 	</modules>
 </project>

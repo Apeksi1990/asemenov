@@ -38,7 +38,7 @@ public class RotationTest {
 	* Тест сортировки массива.
 	*/
 	@Test
-	public void whenGiveMassivThenGiveSortingMassiv() {
+	public void whenGiveMassivThenGiveRotationMassiv() {
 		Rotation rotation = new Rotation();
 		assertThat(rotation.rotation(values), is(valuestest));
 	}

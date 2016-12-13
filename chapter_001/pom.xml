@@ -34,5 +34,8 @@
 		<module>
 			Turn
 		</module>
+		<module>
+			Sorting
+		</module>
 	</modules>
 </project>

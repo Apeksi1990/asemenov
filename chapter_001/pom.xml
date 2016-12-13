@@ -31,5 +31,8 @@
 		<module>
 			Paint
 		</module>
+		<module>
+			Turn
+		</module>
 	</modules>
 </project>

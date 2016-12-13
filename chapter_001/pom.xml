@@ -37,5 +37,8 @@
 		<module>
 			Sorting
 		</module>
+		<module>
+			Rotation
+		</module>
 	</modules>
 </project>

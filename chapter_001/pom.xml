@@ -40,5 +40,8 @@
 		<module>
 			Rotation
 		</module>
+		<module>
+			DeleteDuplication
+		</module>
 	</modules>
 </project>

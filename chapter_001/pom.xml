@@ -46,5 +46,8 @@
 		<module>
 			TestTask
 		</module>
+		<module>
+			TwoArray
+		</module>
 	</modules>
 </project>

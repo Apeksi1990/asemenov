@@ -58,6 +58,7 @@ public class Tracker {
         for (int i = 0; i < itemCount; i++) {
             if (this.items[i] != null && this.items[i].getId().equals(id)) {
                 this.items[i] = null;
+				itemCount--;
             }
         }
     }
@@ -67,8 +68,11 @@ public class Tracker {
      */
     public Item[] findAll() {
         Item[] result = new Item[this.itemCount];
-        for (int i = 0; i < itemCount; i++) {
-            result[i] = this.items[i];
+        int j = 0;
+        for (int i = 0; i < this.items.length; i++) {
+            if (this.items[i] != null) {
+                result[j++] = this.items[i];
+            }
         }
         return result;
     }

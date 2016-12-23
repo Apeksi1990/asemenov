@@ -1,0 +1,3 @@
+В StartUI скорее всего нужно выделить отдельно в классы методы которые взаимодействуют со значениями в Tracker. Это методы add, update, delete, findAll, findByID, findByName, addComment.
+Можно было бы сделать отдельно интерфейс для группы изменяющие Tracker - это add, update, delete.
+И интерфейс для группы методов поиска findAll, findById, findByName. Отдельный интерфейс для метода addComment.

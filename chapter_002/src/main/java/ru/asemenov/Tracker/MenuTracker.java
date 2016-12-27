@@ -72,7 +72,7 @@ public class MenuTracker {
     /**
      * Добавить заявку.
      */
-    private class AddItem implements UserAction {
+    private class AddItem extends BaseAction {
         /**
          * Номер метода.
          * @return number.
@@ -94,16 +94,15 @@ public class MenuTracker {
         }
         /**
          * Информация о методе.
-         * @return info.
          */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Add the new item.");
+        AddItem() {
+            super("Add the new item.");
         }
     }
     /**
      * Редактировать заявку.
      */
-    private class EditItem implements UserAction {
+    private class EditItem extends BaseAction {
         /**
          * Номер метода.
          * @return number.
@@ -128,16 +127,15 @@ public class MenuTracker {
         }
         /**
          * Информация о методе.
-         * @return info.
          */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Edit item.");
+        EditItem() {
+            super("Edit item.");
         }
     }
     /**
      * Удалить заявку.
      */
-    private class DeleteItem implements UserAction {
+    private class DeleteItem extends BaseAction {
         /**
          * Номер метода.
          * @return number.
@@ -158,16 +156,15 @@ public class MenuTracker {
         }
         /**
          * Информация о методе.
-         * @return info.
          */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Delete item.");
+        DeleteItem() {
+            super("Delete item.");
         }
     }
     /**
      * Показать все заявки.
      */
-    private class ShowAll implements UserAction {
+    private class ShowAll extends BaseAction {
         /**
          * Номер метода.
          * @return number.
@@ -188,16 +185,15 @@ public class MenuTracker {
         }
         /**
          * Информация о методе.
-         * @return info.
          */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Show all item.");
+        ShowAll() {
+            super("Show all item.");
         }
     }
     /**
      * Найти по id.
      */
-    private class FindById implements UserAction {
+    private class FindById extends BaseAction {
         /**
          * Номер метода.
          * @return number.
@@ -222,16 +218,15 @@ public class MenuTracker {
         }
         /**
          * Информация о методе.
-         * @return info.
          */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Find item by id.");
+        FindById() {
+            super("Find item by id.");
         }
     }
     /**
      * Найти по имени.
      */
-    private class FindByName implements UserAction {
+    private class FindByName extends BaseAction {
         /**
          * Номер метода.
          * @return number.
@@ -254,16 +249,15 @@ public class MenuTracker {
         }
         /**
          * Информация о методе.
-         * @return info.
          */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Find item by name.");
+        FindByName() {
+            super("Find item by name.");
         }
     }
     /**
      * Добавить комментарий.
      */
-    private class AddComment implements UserAction {
+    private class AddComment extends BaseAction {
         /**
          * Номер метода.
          * @return number.
@@ -288,10 +282,9 @@ public class MenuTracker {
         }
         /**
          * Информация о методе.
-         * @return info.
          */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Add comment");
+        AddComment() {
+            super("Add comment");
         }
     }
 }

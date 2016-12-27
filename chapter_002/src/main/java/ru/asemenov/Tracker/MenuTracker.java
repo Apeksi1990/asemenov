@@ -39,6 +39,13 @@ public class MenuTracker {
         this.actions[6] = new AddComment();
     }
     /**
+     * Размер меню.
+     * @return range.
+     */
+    public int getRange() {
+        return actions.length;
+    }
+    /**
      * Выбор пункта меню.
      * @param key key.
      */
@@ -204,9 +211,14 @@ public class MenuTracker {
          * @param tracker tracker.
          */
         public void execute(Input input, Tracker tracker) {
-            String id = input.ask("Please enter the id item: ");
-            Item result = tracker.findById(id);
-            showItem(result);
+            try {
+                select(3);
+                String id = input.ask("Please enter the id item: ");
+                Item result = tracker.findById(id);
+                showItem(result);
+            } catch (NullPointerException npe) {
+                System.out.println("Incorrect id");
+            }
         }
         /**
          * Информация о методе.
@@ -233,6 +245,7 @@ public class MenuTracker {
          * @param tracker tracker.
          */
         public void execute(Input input, Tracker tracker) {
+            select(3);
             String name = input.ask("Please enter the item name: ");
             Item[] result = tracker.findByName(name);
             for (Item i : result) {
@@ -264,10 +277,14 @@ public class MenuTracker {
          * @param tracker tracker.
          */
         public void execute(Input input, Tracker tracker) {
-            select(3);
-            String id = input.ask("Please enter the id item: ");
-            String comment = input.ask("Please enter the comment for item: ");
-            tracker.addComment(id, comment);
+            try {
+                select(3);
+                String id = input.ask("Please enter the id item: ");
+                String comment = input.ask("Please enter the comment for item: ");
+                tracker.addComment(id, comment);
+            } catch (NullPointerException npe) {
+                System.out.println("Incorrect id");
+            }
         }
         /**
          * Информация о методе.

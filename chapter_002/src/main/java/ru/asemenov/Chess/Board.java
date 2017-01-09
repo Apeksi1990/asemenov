@@ -60,7 +60,7 @@ public class Board {
          */
         for (Cell cell : currectWay) {
             for (Figure figure : this.figures) {
-                if (figure.getPosition().equals(cell)) {
+                if (figure.getPosition().getX() == cell.getX() & figure.getPosition().getY() == cell.getY()) {
                     throw new OccupiedWayException("Occupied Way");
                 }
             }

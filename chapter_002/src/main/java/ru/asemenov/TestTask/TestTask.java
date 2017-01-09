@@ -11,11 +11,13 @@ public class TestTask {
     boolean equal(String str) {
         char[] chars = str.toCharArray();
         int count = 0;
-        for (char a : chars) {
-            if (a == '(') {
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] == '(' & i % 2 == 0) {
                 count++;
+            } else {
+                count--;
             }
         }
-        return count == chars.length / 2 && chars.length % 2 == 0;
+        return count == 0;
     }
 }

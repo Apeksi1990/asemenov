@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Objects;
 /**
  * Class Palidrom решение задачи части 003 урока 1.
  * @author asemenov
@@ -22,7 +21,7 @@ public class Palidrom {
             String palidrom = br.readLine();
             palidrom = palidrom.toLowerCase();
             String rotation = new StringBuffer(palidrom).reverse().toString();
-            return palidrom.length() == 5 & Objects.equals(palidrom, rotation);
+            return palidrom.length() == 5 & palidrom.equals(rotation);
         } catch (IOException exc) {
             System.out.println(exc);
         }

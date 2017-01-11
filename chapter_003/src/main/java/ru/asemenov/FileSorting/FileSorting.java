@@ -3,7 +3,11 @@ package ru.asemenov.FileSorting;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-
+/**
+ * Class FileSorting решение задачи части 003 урока 1.
+ * @author asemenov
+ * @version 1
+ */
 public class FileSorting {
     /**
      * Метод внешний сортировки.
@@ -11,33 +15,32 @@ public class FileSorting {
      * @param distance distance.
      */
     void sort(File sourse, File distance) {
-        try {
-            RandomAccessFile read = new RandomAccessFile(sourse, "r");
-            RandomAccessFile write = new RandomAccessFile(distance, "rw");
+        try (RandomAccessFile read = new RandomAccessFile(sourse, "r");
+            RandomAccessFile write = new RandomAccessFile(distance, "rw")) {
+
+            File firstFile = new File("FirstFile.txt");
+            File secondFile = new File("SecondFile.txt");
+            RandomAccessFile firstRaf = new RandomAccessFile(firstFile, "rw");
+            RandomAccessFile secondRaf = new RandomAccessFile(secondFile, "rw");
+
             boolean result;
+
             String line;
             while ((line = read.readLine()) != null) {
                 write.writeBytes(line + "\r\n");
             }
             do {
-                File firstFile = new File("First.txt");
-                File secondFile = new File("Second.txt");
-
                 dividedDistance(distance, firstFile, secondFile);
-
-                write.close();
-                distance.delete();
-                distance = new File(distance.getName());
-                write = new RandomAccessFile(distance, "rw");
-
+                write.setLength(0);
                 result = mergerFiles(distance, firstFile, secondFile);
+                firstRaf.setLength(0);
+                secondRaf.setLength(0);
+            } while (!result);
 
-                firstFile.delete();
-                secondFile.delete();
-
-
-            }while (!result);
-
+            firstRaf.close();
+            firstFile.delete();
+            secondRaf.close();
+            secondFile.delete();
         } catch (IOException exc) {
             System.out.println(exc);
         }
@@ -49,10 +52,9 @@ public class FileSorting {
      * @param second secondFile.
      */
     private void dividedDistance(File distance, File first, File second) {
-        try {
-            RandomAccessFile dist = new RandomAccessFile(distance, "rw");
-            RandomAccessFile firstFile = new RandomAccessFile(first, "rw");
-            RandomAccessFile secondFile = new RandomAccessFile(second, "rw");
+        try (RandomAccessFile dist = new RandomAccessFile(distance, "rw");
+             RandomAccessFile firstFile = new RandomAccessFile(first, "rw");
+             RandomAccessFile secondFile = new RandomAccessFile(second, "rw");) {
 
             String line;
             String lastLine = "";
@@ -63,14 +65,14 @@ public class FileSorting {
             }
             while ((line = dist.readLine()) != null) {
                 if (fileNumber == 0) {
-                    if (line.length() > lastLine.length()) {
+                    if (line.length() >= lastLine.length()) {
                         firstFile.writeBytes(line + "\r\n");
                     } else {
                         secondFile.writeBytes(line + "\r\n");
                         fileNumber = 1;
                     }
                 } else {
-                    if (line.length() > lastLine.length()) {
+                    if (line.length() >= lastLine.length()) {
                         secondFile.writeBytes(line + "\r\n");
                     } else {
                         firstFile.writeBytes(line + "\r\n");
@@ -91,15 +93,12 @@ public class FileSorting {
      * @return result.
      */
     private boolean mergerFiles(File distance, File first, File second) {
-        try {
-            RandomAccessFile dist = new RandomAccessFile(distance, "rw");
+        try (RandomAccessFile dist = new RandomAccessFile(distance, "rw");
             RandomAccessFile firstFile = new RandomAccessFile(first, "rw");
-            RandomAccessFile secondFile = new RandomAccessFile(second, "rw");
+            RandomAccessFile secondFile = new RandomAccessFile(second, "rw");) {
 
             String lineOne = firstFile.readLine();
             String lineTwo = secondFile.readLine();
-            String lastLine = "";
-
             if (lineTwo == null) {
                 dist.writeBytes(lineOne + "\r\n");
                 while ((lineOne = firstFile.readLine()) != null) {
@@ -107,40 +106,23 @@ public class FileSorting {
                 }
                 return true;
             }
-
             while (lineOne != null & lineTwo != null) {
-                if (lineOne != null & lineTwo == null) {
+                if (lineOne.length() <= lineTwo.length()) {
                     dist.writeBytes(lineOne + "\r\n");
                     lineOne = firstFile.readLine();
-                }
-                else if (lineTwo != null & lineOne == null) {
+                } else {
                     dist.writeBytes(lineTwo + "\r\n");
                     lineTwo = secondFile.readLine();
                 }
-                else if (lineOne.length() < lineTwo.length()) {
-                    if (lineOne.length() > lastLine.length()) {
-                        dist.writeBytes(lineOne + "\r\n");
-                        lastLine = lineOne;
-                        lineOne = firstFile.readLine();
-                    } else {
-                        dist.writeBytes(lineTwo + "\r\n");
-                        lastLine = lineTwo;
-                        lineTwo = secondFile.readLine();
-                    }
-                }
-                else if (lineOne.length() > lineTwo.length()) {
-                    if (lineTwo.length() > lastLine.length()) {
-                        dist.writeBytes(lineTwo + "\r\n");
-                        lastLine = lineTwo;
-                        lineTwo = secondFile.readLine();
-                    } else {
-                        dist.writeBytes(lineOne + "\r\n");
-                        lastLine = lineOne;
-                        lineOne = firstFile.readLine();
-                    }
-                }
             }
-
+            while (lineOne != null) {
+                dist.writeBytes(lineOne + "\r\n");
+                lineOne = firstFile.readLine();
+            }
+            while (lineTwo != null) {
+                dist.writeBytes(lineTwo + "\r\n");
+                lineTwo = secondFile.readLine();
+            }
         } catch (IOException exc) {
             System.out.println(exc);
         }

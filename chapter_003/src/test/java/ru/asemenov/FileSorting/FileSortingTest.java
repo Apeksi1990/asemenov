@@ -41,7 +41,7 @@ public class FileSortingTest {
                 lastLine = line;
             }
         } catch (IOException exc) {
-            System.out.println(exc);
+            exc.printStackTrace();
         }
         assertThat(result, is(true));
         start.delete();

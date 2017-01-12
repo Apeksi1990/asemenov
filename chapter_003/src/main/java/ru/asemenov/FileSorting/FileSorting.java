@@ -10,6 +10,10 @@ import java.io.RandomAccessFile;
  */
 public class FileSorting {
     /**
+     * Separator.
+     */
+    private String separator = System.getProperty("line.separator");
+    /**
      * Метод внешний сортировки.
      * @param sourse sourse.
      * @param distance distance.
@@ -27,7 +31,8 @@ public class FileSorting {
 
             String line;
             while ((line = read.readLine()) != null) {
-                write.writeBytes(line + "\r\n");
+                write.writeBytes(line);
+                write.writeBytes(separator);
             }
             do {
                 dividedDistance(distance, firstFile, secondFile);
@@ -42,7 +47,7 @@ public class FileSorting {
             secondRaf.close();
             secondFile.delete();
         } catch (IOException exc) {
-            System.out.println(exc);
+            exc.printStackTrace();
         }
     }
     /**
@@ -60,29 +65,34 @@ public class FileSorting {
             String lastLine = "";
             int fileNumber = 0; // 0 = firstFile, 1 = secondFile
             if ((line = dist.readLine()) != null) {
-                firstFile.writeBytes(line  + "\r\n");
+                firstFile.writeBytes(line);
+                firstFile.writeBytes(separator);
                 lastLine = line;
             }
             while ((line = dist.readLine()) != null) {
                 if (fileNumber == 0) {
                     if (line.length() >= lastLine.length()) {
-                        firstFile.writeBytes(line + "\r\n");
+                        firstFile.writeBytes(line);
+                        firstFile.writeBytes(separator);
                     } else {
-                        secondFile.writeBytes(line + "\r\n");
+                        secondFile.writeBytes(line);
+                        secondFile.writeBytes(separator);
                         fileNumber = 1;
                     }
                 } else {
                     if (line.length() >= lastLine.length()) {
-                        secondFile.writeBytes(line + "\r\n");
+                        secondFile.writeBytes(line);
+                        secondFile.writeBytes(separator);
                     } else {
-                        firstFile.writeBytes(line + "\r\n");
+                        firstFile.writeBytes(line);
+                        firstFile.writeBytes(separator);
                         fileNumber = 0;
                     }
                 }
                 lastLine = line;
             }
         } catch (IOException exc) {
-            System.out.println(exc);
+            exc.printStackTrace();
         }
     }
     /**
@@ -100,31 +110,37 @@ public class FileSorting {
             String lineOne = firstFile.readLine();
             String lineTwo = secondFile.readLine();
             if (lineTwo == null) {
-                dist.writeBytes(lineOne + "\r\n");
+                dist.writeBytes(lineOne);
+                dist.writeBytes(separator);
                 while ((lineOne = firstFile.readLine()) != null) {
-                    dist.writeBytes(lineOne + "\r\n");
+                    dist.writeBytes(lineOne);
+                    dist.writeBytes(separator);
                 }
                 return true;
             }
             while (lineOne != null & lineTwo != null) {
                 if (lineOne.length() <= lineTwo.length()) {
-                    dist.writeBytes(lineOne + "\r\n");
+                    dist.writeBytes(lineOne);
+                    dist.writeBytes(separator);
                     lineOne = firstFile.readLine();
                 } else {
-                    dist.writeBytes(lineTwo + "\r\n");
+                    dist.writeBytes(lineTwo);
+                    dist.writeBytes(separator);
                     lineTwo = secondFile.readLine();
                 }
             }
             while (lineOne != null) {
-                dist.writeBytes(lineOne + "\r\n");
+                dist.writeBytes(lineOne);
+                dist.writeBytes(separator);
                 lineOne = firstFile.readLine();
             }
             while (lineTwo != null) {
-                dist.writeBytes(lineTwo + "\r\n");
+                dist.writeBytes(lineTwo);
+                dist.writeBytes(separator);
                 lineTwo = secondFile.readLine();
             }
         } catch (IOException exc) {
-            System.out.println(exc);
+            exc.printStackTrace();
         }
         return false;
     }

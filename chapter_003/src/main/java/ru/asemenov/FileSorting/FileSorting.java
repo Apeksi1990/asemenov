@@ -64,11 +64,10 @@ public class FileSorting {
             String line;
             String lastLine = "";
             int fileNumber = 0; // 0 = firstFile, 1 = secondFile
-            if ((line = dist.readLine()) != null) {
-                firstFile.writeBytes(line);
-                firstFile.writeBytes(separator);
-                lastLine = line;
-            }
+            line = dist.readLine();
+            firstFile.writeBytes(line);
+            firstFile.writeBytes(separator);
+            lastLine = line;
             while ((line = dist.readLine()) != null) {
                 if (fileNumber == 0) {
                     if (line.length() >= lastLine.length()) {

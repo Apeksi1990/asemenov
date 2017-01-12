@@ -1,9 +1,18 @@
 package ru.asemenov.ConsoleChat;
 
-import java.io.*;
-import java.util.Objects;
-
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+/**
+ * Class ConsoleChat решение задачи части 003 урока 1.
+ * @author asemenov
+ * @version 1
+ */
 public class ConsoleChat {
+    /**
+     * Separator.
+     */
+    private String separator = System.getProperty("line.separator");
     /**
      * Включение ответов на сообщения.
      */
@@ -11,55 +20,52 @@ public class ConsoleChat {
     /**
      * Файл с ответами.
      */
-    private File answers = new File("./answers.txt");
+    private File answers;
     /**
      * Файл логов.
      */
-    private File textLog = new File("./textlog.txt");
+    private File textLog;
+    /**
+     * Input.
+     */
+    private Input input;
+    /**
+     * Конструктор.
+     * @param answers answer.
+     * @param textLog textLog.
+     * @param input input.
+     */
+    ConsoleChat(File answers, File textLog, Input input) {
+        this.answers = answers;
+        this.textLog = textLog;
+        this.input = input;
+    }
     /**
      * Консольный чат.
      */
-    public void chat() {
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            RandomAccessFile random = new RandomAccessFile(answers, "rw");
-            RandomAccessFile writeLog = new RandomAccessFile(textLog, "rw");
+    void chat() {
+        try (RandomAccessFile writeLog = new RandomAccessFile(textLog, "rw")) {
+            ChatBot chatBot = new ChatBot(this.answers);
+            chatBot.readAnswers();
             String message;
-            random.writeBytes("Wow");
             do {
-                message = br.readLine();
-                writeLog.writeBytes(message + "\r\n");
-
+                message = input.message();
+                System.out.println(message);
+                writeLog.writeBytes(message);
+                writeLog.writeBytes(separator);
                 if (message.equals("Stop")) {
                     answer = false;
                 } else if (message.equals("Continue")) {
                     answer = true;
-                    continue;
-                }
-
-                if (answer & !Objects.equals(message, "Finish")) {
-                    random.seek(0);
-                    writeLog.writeBytes(random.readLine() + "\r\n");
-                    random.seek(0);
-                    System.out.println(random.readLine());
+                } else if (answer & !message.equals("Finish")) {
+                    message = chatBot.bot();
+                    System.out.println(message);
+                    writeLog.writeBytes(message);
+                    writeLog.writeBytes(separator);
                 }
             } while (!message.equals("Finish"));
-
-            System.out.println();
-            writeLog.seek(0);
-            while ((message = writeLog.readLine()) != null) {
-                System.out.println(message);
-            }
-            writeLog.close();
-            textLog.delete();
-            random.close();
-            answers.delete();
         } catch (IOException exc) {
-            System.out.println(exc);
+            exc.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        new ConsoleChat().chat();
     }
 }

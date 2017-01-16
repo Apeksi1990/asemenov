@@ -35,10 +35,11 @@ public class Palidrom {
      */
     private String revString(String str) {
         char[] palidrom = str.toCharArray();
-        char[] reverse = new char[palidrom.length];
-        for (int i = 0; i < palidrom.length; i++) {
-            reverse[(palidrom.length - 1) - i] = palidrom[i];
+        for (int i = 0; i < palidrom.length / 2; i++) {
+            char character = palidrom[i];
+            palidrom[i] = palidrom[palidrom.length - 1 - i];
+            palidrom[palidrom.length - 1 - i] = character;
         }
-        return new String(reverse);
+        return new String(palidrom);
     }
 }

@@ -10,6 +10,18 @@ import java.io.RandomAccessFile;
  */
 public class ConsoleChat {
     /**
+     * String STOP.
+     */
+    private final String STOP = "Stop";
+    /**
+     * String CONTINUE.
+     */
+    private final String CONTINUE = "Continue";
+    /**
+     * String FINISH.
+     */
+    private final String FINISH = "Finish";
+    /**
      * Separator.
      */
     private String separator = System.getProperty("line.separator");
@@ -53,17 +65,17 @@ public class ConsoleChat {
                 System.out.println(message);
                 writeLog.writeBytes(message);
                 writeLog.writeBytes(separator);
-                if (message.equals("Stop")) {
+                if (STOP.equals(message)) {
                     answer = false;
-                } else if (message.equals("Continue")) {
+                } else if (CONTINUE.equals(message)) {
                     answer = true;
-                } else if (answer & !message.equals("Finish")) {
+                } else if (answer & !FINISH.equals(message)) {
                     message = chatBot.bot();
                     System.out.println(message);
                     writeLog.writeBytes(message);
                     writeLog.writeBytes(separator);
                 }
-            } while (!message.equals("Finish"));
+            } while (!FINISH.equals(message));
         } catch (IOException exc) {
             exc.printStackTrace();
         }

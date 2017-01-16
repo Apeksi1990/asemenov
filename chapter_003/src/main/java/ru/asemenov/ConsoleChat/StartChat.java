@@ -14,6 +14,7 @@ public class StartChat {
      * @param args args.
      */
     public static void main(String[] args) {
+        String separator = System.getProperty("line.separator");
         File answers = new File("Answers.txt");
         File textLog = new File("Textlog.txt");
         Input input = new ConsoleInput();
@@ -21,8 +22,10 @@ public class StartChat {
 
         try (RandomAccessFile randomAnswer = new RandomAccessFile(answers, "rw");
              RandomAccessFile textFile = new RandomAccessFile(textLog, "rw")) {
-            randomAnswer.writeBytes("testAnswerOne" + "\r\n");
-            randomAnswer.writeBytes("testAnswerTwo" + "\r\n");
+            randomAnswer.writeBytes("testAnswerOne");
+            randomAnswer.writeBytes(separator);
+            randomAnswer.writeBytes("testAnswerTwo");
+            randomAnswer.writeBytes(separator);
             new ConsoleChat(answers, textLog, input).chat();
 
             System.out.println();

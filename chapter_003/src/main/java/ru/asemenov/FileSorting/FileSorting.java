@@ -19,13 +19,17 @@ public class FileSorting {
      * @param distance distance.
      */
     void sort(File sourse, File distance) {
+        File firstFile = null;
+        File secondFile = null;
+        RandomAccessFile firstRaf = null;
+        RandomAccessFile secondRaf = null;
         try (RandomAccessFile read = new RandomAccessFile(sourse, "r");
             RandomAccessFile write = new RandomAccessFile(distance, "rw")) {
 
-            File firstFile = new File("FirstFile.txt");
-            File secondFile = new File("SecondFile.txt");
-            RandomAccessFile firstRaf = new RandomAccessFile(firstFile, "rw");
-            RandomAccessFile secondRaf = new RandomAccessFile(secondFile, "rw");
+            firstFile = new File("FirstFile.txt");
+            secondFile = new File("SecondFile.txt");
+            firstRaf = new RandomAccessFile(firstFile, "rw");
+            secondRaf = new RandomAccessFile(secondFile, "rw");
 
             boolean result;
 
@@ -41,13 +45,17 @@ public class FileSorting {
                 firstRaf.setLength(0);
                 secondRaf.setLength(0);
             } while (!result);
-
-            firstRaf.close();
-            firstFile.delete();
-            secondRaf.close();
-            secondFile.delete();
         } catch (IOException exc) {
             exc.printStackTrace();
+        } finally {
+            try {
+                firstRaf.close();
+                secondRaf.close();
+                firstFile.delete();
+                secondFile.delete();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
     /**

@@ -16,30 +16,18 @@ public class Palidrom {
      * @return result.
      */
     boolean isPalidrom(InputStream in) {
-        boolean result = false;
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            String palidrom = br.readLine();
-            palidrom = palidrom.toLowerCase();
-            String reverse = revString(palidrom);
-            result = palidrom.equals(reverse);
+        String palidrom = "";
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
+            palidrom = br.readLine();
         } catch (IOException exc) {
             exc.printStackTrace();
         }
-        return result;
-    }
-    /**
-     * Метод поворота слова.
-     * @param str string.
-     * @return result.
-     */
-    private String revString(String str) {
-        char[] palidrom = str.toCharArray();
-        for (int i = 0; i < palidrom.length / 2; i++) {
-            char character = palidrom[i];
-            palidrom[i] = palidrom[palidrom.length - 1 - i];
-            palidrom[palidrom.length - 1 - i] = character;
+        palidrom = palidrom.toLowerCase();
+        char[] charStr = palidrom.toCharArray();
+        String reverse = "";
+        for (int i = charStr.length - 1; i >= 0; i--) {
+            reverse = String.format("%s%s", reverse, palidrom.charAt(i));
         }
-        return new String(palidrom);
+        return palidrom.length() == 5 & palidrom.equals(reverse);
     }
 }

@@ -16,6 +16,7 @@ public class Palidrom {
      * @return result.
      */
     boolean isPalidrom(InputStream in) {
+        boolean result = true;
         String palidrom = "";
         try (BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
             palidrom = br.readLine();
@@ -24,10 +25,11 @@ public class Palidrom {
         }
         palidrom = palidrom.toLowerCase();
         char[] charStr = palidrom.toCharArray();
-        String reverse = "";
-        for (int i = charStr.length - 1; i >= 0; i--) {
-            reverse = String.format("%s%s", reverse, palidrom.charAt(i));
+        for (int i = 0; i < charStr.length; i++) {
+            if (charStr[i] != charStr[charStr.length - i - 1]) {
+                result = false;
+            }
         }
-        return palidrom.length() == 5 & palidrom.equals(reverse);
+        return palidrom.length() == 5 & result;
     }
 }

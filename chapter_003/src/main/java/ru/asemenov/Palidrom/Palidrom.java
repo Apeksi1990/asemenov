@@ -25,7 +25,7 @@ public class Palidrom {
         }
         palidrom = palidrom.toLowerCase();
         char[] charStr = palidrom.toCharArray();
-        for (int i = 0; i < charStr.length; i++) {
+        for (int i = 0; i < charStr.length / 2; i++) {
             if (charStr[i] != charStr[charStr.length - i - 1]) {
                 result = false;
             }

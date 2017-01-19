@@ -12,15 +12,15 @@ public class ConsoleChat {
     /**
      * String STOP.
      */
-    private final String STOP = "Stop";
+    private final String stopStr = "Stop";
     /**
      * String CONTINUE.
      */
-    private final String CONTINUE = "Continue";
+    private final String continueStr = "Continue";
     /**
      * String FINISH.
      */
-    private final String FINISH = "Finish";
+    private final String finishStr = "Finish";
     /**
      * Separator.
      */
@@ -65,17 +65,17 @@ public class ConsoleChat {
                 System.out.println(message);
                 writeLog.writeBytes(message);
                 writeLog.writeBytes(separator);
-                if (STOP.equals(message)) {
+                if (stopStr.equals(message)) {
                     answer = false;
-                } else if (CONTINUE.equals(message)) {
+                } else if (continueStr.equals(message)) {
                     answer = true;
-                } else if (answer & !FINISH.equals(message)) {
+                } else if (answer & !finishStr.equals(message)) {
                     message = chatBot.bot();
                     System.out.println(message);
                     writeLog.writeBytes(message);
                     writeLog.writeBytes(separator);
                 }
-            } while (!FINISH.equals(message));
+            } while (!finishStr.equals(message));
         } catch (IOException exc) {
             exc.printStackTrace();
         }

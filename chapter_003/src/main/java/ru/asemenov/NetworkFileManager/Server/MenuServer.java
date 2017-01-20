@@ -33,10 +33,6 @@ public class MenuServer {
      */
     private File currentPath;
     /**
-     * BufferedReader.
-     */
-    private BufferedReader reader;
-    /**
      * PrintWriter.
      */
     private PrintWriter write;

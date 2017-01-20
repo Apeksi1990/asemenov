@@ -1,0 +1,10 @@
+<project>
+    <parent>
+        <artifactId>asemenov</artifactId>
+        <groupId>ru.job4j</groupId>
+        <version>1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>chapter_004</artifactId>
+    <packaging>jar</packaging>
+</project>

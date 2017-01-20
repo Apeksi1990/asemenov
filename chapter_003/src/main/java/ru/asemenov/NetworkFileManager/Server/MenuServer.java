@@ -62,7 +62,6 @@ public class MenuServer {
         this.in = in;
         this.out = out;
         this.currentPath = homePath;
-        reader = new BufferedReader(new InputStreamReader(in));
         write = new PrintWriter(out, true);
     }
     /**
@@ -283,6 +282,7 @@ public class MenuServer {
          * @throws IOException exception.
          */
         public void execute(String[] message) throws IOException {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             File file = new File(message[1]);
             write.println("File created");
             int fileSize = Integer.parseInt(reader.readLine());

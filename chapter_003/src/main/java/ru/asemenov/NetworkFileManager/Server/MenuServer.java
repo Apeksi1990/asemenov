@@ -280,7 +280,7 @@ public class MenuServer {
         public void execute(String[] message) throws IOException {
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             File file = new File(message[1]);
-            write.println("File created");
+            write.println("Файл создан");
             int fileSize = Integer.parseInt(reader.readLine());
             try (FileOutputStream out = new FileOutputStream(file)) {
                 byte[] bytes = new byte[16 * 1024];

@@ -44,7 +44,7 @@ public class MoveFile {
         PrintWriter writer = new PrintWriter(this.out, true);
         BufferedReader reader = new BufferedReader(new InputStreamReader(this.in));
         writer.println(String.format("upload %s", fileServer));
-        if (reader.readLine().equals("File created")) {
+        if (reader.readLine().equals("Файл создан")) {
             writer.println(file.length());
             byte[] bytes = new byte[16 * 1024];
             int count;

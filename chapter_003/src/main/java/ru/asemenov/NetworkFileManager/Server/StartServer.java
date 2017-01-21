@@ -1,9 +1,6 @@
 package ru.asemenov.NetworkFileManager.Server;
 
-import ru.asemenov.NetworkFileManager.Settings;
-
 import java.io.IOException;
-import java.io.InputStream;
 /**
  * Class StartServer решение задачи части 003 урока 2.
  * @author asemenov
@@ -16,18 +13,10 @@ public class StartServer {
      * @throws IOException exception
      */
     public static void main(String[] args) throws IOException {
-        Settings settings = new Settings();
-        ClassLoader loader = Settings.class.getClassLoader();
-        try (InputStream in = loader.getResourceAsStream("app.properties")) {
-            settings.load(in);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ServerSettings ss = new ServerSettings();
+        ss.setSettings();
 
-        int port = Integer.parseInt(settings.getValue("port"));
-        String homePath = settings.getValue("home.path");
-
-        Server server = new Server(port, homePath);
+        Server server = new Server(ss.getPort(), ss.getHomePath());
         server.start();
     }
 }

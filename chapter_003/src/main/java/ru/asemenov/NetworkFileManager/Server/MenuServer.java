@@ -54,16 +54,22 @@ public class MenuServer {
      * @param out OutputStream.
      * @param homePath Home path.
      */
-    MenuServer(InputStream in, OutputStream out, File homePath) {
+    public MenuServer(InputStream in, OutputStream out, File homePath) {
         this.in = in;
         this.out = out;
         this.currentPath = homePath;
         write = new PrintWriter(out, true);
     }
     /**
+     * Default constructor.
+     */
+    public MenuServer() {
+
+    }
+    /**
      * Fill actions.
      */
-    void fillActions() {
+    public void fillActions() {
         this.actions[position++] = new ShowCurrentPath();
         this.actions[position++] = new InDirectory();
         this.actions[position++] = new OutDirectory();
@@ -91,7 +97,7 @@ public class MenuServer {
      * @param message message.
      * @return result.
      */
-    private BaseAction checkKey(String message) {
+    public BaseAction checkKey(String message) {
         BaseAction result = null;
         for (BaseAction action : this.actions) {
             if (message.equals(action.key())) {

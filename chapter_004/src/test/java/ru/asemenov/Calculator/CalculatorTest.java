@@ -3,6 +3,7 @@ package ru.asemenov.Calculator;
 import org.junit.Test;
 import ru.asemenov.Calculator.Input.Input;
 import ru.asemenov.Calculator.Input.StubInput;
+import ru.asemenov.Calculator.MenuCalc.InterfaceMenu;
 import ru.asemenov.Calculator.MenuCalc.MenuCalculator;
 import ru.asemenov.Calculator.MenuCalc.MenuScientificCalculator;
 
@@ -25,7 +26,7 @@ public class CalculatorTest {
     public void calculatorTest() throws IOException {
         Input input = new StubInput(new String[]{"2", "4", "+", "4", "=", "y"});
         Calculator calculator = new Calculator();
-        MenuCalculator mc = new MenuCalculator(input, calculator);
+        InterfaceMenu mc = new MenuCalculator(input, calculator);
         mc.fillActions();
         InteractCalc ic = new InteractCalc(input, mc);
         ic.init();
@@ -41,7 +42,7 @@ public class CalculatorTest {
     public void engenerCalculatorTest() throws IOException {
         Input input = new StubInput(new String[]{"2", "60", "tan", "=", "y"});
         Calculator calculator = new Calculator();
-        MenuCalculator mc = new MenuScientificCalculator(input, calculator);
+        InterfaceMenu mc = new MenuScientificCalculator(new MenuCalculator(input, calculator), calculator);
         mc.fillActions();
         InteractCalc ic = new InteractCalc(input, mc);
         ic.init();

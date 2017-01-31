@@ -9,32 +9,34 @@ import java.io.IOException;
  * @author asemenov
  * @version 1
  */
-public class MenuScientificCalculator extends MenuCalculator {
+public class MenuScientificCalculator extends MenuDecorator {
+    /**
+     * Calculator.
+     */
+    private Calculator calculator;
     /**
      * MenuScientificCalculator constructor.
-     * @param input input.
+     * @param menu menu.
      * @param calculator calculator.
      */
-    public MenuScientificCalculator(Input input, Calculator calculator) {
-        super(input, calculator);
+    public MenuScientificCalculator(InterfaceMenu menu, Calculator calculator) {
+        super(menu);
+        this.calculator = calculator;
     }
     /**
      * Fill actions.
      */
     @Override
     public void fillActions() {
-        this.actions.add(new Add());
-        this.actions.add(new Sub());
-        this.actions.add(new Mult());
-        this.actions.add(new Div());
-        this.actions.add(new Sin());
-        this.actions.add(new Cos());
-        this.actions.add(new Tan());
+        super.fillActions();
+        super.addAction(new Sin());
+        super.addAction(new Cos());
+        super.addAction(new Tan());
     }
     /**
      * Sin.
      */
-    class Sin extends BaseAction {
+    private class Sin extends BaseAction {
         /**
          * Key.
          * @return key.
@@ -62,7 +64,7 @@ public class MenuScientificCalculator extends MenuCalculator {
     /**
      * Cos.
      */
-    class Cos extends BaseAction {
+    private class Cos extends BaseAction {
         /**
          * Key.
          * @return key.
@@ -90,7 +92,7 @@ public class MenuScientificCalculator extends MenuCalculator {
     /**
      * Tan.
      */
-    class Tan extends BaseAction {
+    private class Tan extends BaseAction {
         /**
          * Key.
          * @return key.

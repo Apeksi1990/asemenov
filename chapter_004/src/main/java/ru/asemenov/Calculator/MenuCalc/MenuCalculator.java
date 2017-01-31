@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @author asemenov
  * @version 1
  */
-public class MenuCalculator {
+public class MenuCalculator implements InterfaceMenu {
     /**
      * Input.
      */
@@ -18,7 +18,7 @@ public class MenuCalculator {
     /**
      * Calculator.
      */
-    protected Calculator calculator;
+    private Calculator calculator;
     /**
      * MenuCalculator constructor.
      * @param input input.
@@ -31,7 +31,7 @@ public class MenuCalculator {
     /**
      * Actions.
      */
-    protected ArrayList<BaseAction> actions = new ArrayList<>();
+    private ArrayList<BaseAction> actions = new ArrayList<>();
     /**
      * Add action.
      * @param action action.
@@ -68,7 +68,7 @@ public class MenuCalculator {
      * Start.
      * @throws IOException exception.
      */
-    private void start() throws IOException {
+    public void start() throws IOException {
         try {
             double first = input.askDouble("First value: ");
             String action = symbolSelect();
@@ -100,7 +100,7 @@ public class MenuCalculator {
     /**
      * Show result.
      */
-    private void result() {
+    public void result() {
         System.out.println(String.format("Result: %s", calculator.getResult()));
     }
     /**

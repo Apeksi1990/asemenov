@@ -1,7 +1,7 @@
 package ru.asemenov.Calculator;
 
 import ru.asemenov.Calculator.Input.Input;
-import ru.asemenov.Calculator.MenuCalc.MenuCalculator;
+import ru.asemenov.Calculator.MenuCalc.InterfaceMenu;
 
 import java.io.IOException;
 
@@ -18,13 +18,13 @@ public class InteractCalc {
     /**
      * Menu calculator.
      */
-    private MenuCalculator mc;
+    private InterfaceMenu mc;
     /**
      * InteractCalc constructor.
      * @param input input.
      * @param mc mc.
      */
-    InteractCalc(Input input, MenuCalculator mc) {
+    InteractCalc(Input input, InterfaceMenu mc) {
         this.input = input;
         this.mc = mc;
     }

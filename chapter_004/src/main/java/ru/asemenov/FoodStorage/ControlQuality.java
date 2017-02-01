@@ -1,9 +1,10 @@
 package ru.asemenov.FoodStorage;
 
 import ru.asemenov.FoodStorage.Products.Food;
-import ru.asemenov.FoodStorage.Storage.Storage;
+import ru.asemenov.FoodStorage.Storage.InterfaceStorage;
 
 import java.util.ArrayList;
+
 /**
  * Class ControlQuality решение задачи части 004 урока 3.
  * @author asemenov
@@ -13,20 +14,20 @@ public class ControlQuality {
     /**
      * Storages.
      */
-    private ArrayList<Storage> storages = new ArrayList<>();
+    private ArrayList<InterfaceStorage> storages = new ArrayList<>();
     /**
      * Add storage.
      * @param storage storage.
      */
-    void addStorage(Storage storage) {
+    public void addStorage(InterfaceStorage storage) {
         this.storages.add(storage);
     }
     /**
      * Control action.
      * @param product product.
      */
-    void controlAction(Food product) {
-        for (Storage storage : this.storages) {
+    public void controlAction(Food product) {
+        for (InterfaceStorage storage : this.storages) {
             if (storage.condition(product)) {
                 storage.addProduct(product);
                 break;

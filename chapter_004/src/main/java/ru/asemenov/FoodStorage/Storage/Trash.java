@@ -3,12 +3,17 @@ package ru.asemenov.FoodStorage.Storage;
 import ru.asemenov.FoodStorage.Products.Food;
 
 import java.util.ArrayList;
+
 /**
  * Class Trash решение задачи части 004 урока 3.
  * @author asemenov
  * @version 1
  */
-public class Trash extends Storage {
+public class Trash implements InterfaceStorage {
+    /**
+     * Percent trash.
+     */
+    private double percentTrash = 100;
     /**
      * Food storage.
      */

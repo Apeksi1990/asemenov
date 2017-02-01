@@ -5,6 +5,7 @@ import org.junit.Test;
 import ru.asemenov.FoodStorage.Products.Chicken;
 import ru.asemenov.FoodStorage.Products.Fish;
 import ru.asemenov.FoodStorage.Products.Meat;
+import ru.asemenov.FoodStorage.Storage.InterfaceStorage;
 import ru.asemenov.FoodStorage.Storage.Shop;
 import ru.asemenov.FoodStorage.Storage.Trash;
 import ru.asemenov.FoodStorage.Storage.Warehouse;
@@ -12,8 +13,10 @@ import ru.asemenov.FoodStorage.Storage.Warehouse;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import static org.junit.Assert.assertThat;
+
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+
 /**
  * Class ControlQualityTest решение задачи части 004 урока 3.
  * @author asemenov
@@ -31,15 +34,15 @@ public class ControlQualityTest {
     /**
      * Warehouse.
      */
-    private Warehouse warehouse;
+    private InterfaceStorage warehouse;
     /**
      * Shop.
      */
-    private Shop shop;
+    private InterfaceStorage shop;
     /**
      * Trash.
      */
-    private Trash trash;
+    private InterfaceStorage trash;
 
     /**
      * Before test.
@@ -88,7 +91,7 @@ public class ControlQualityTest {
     @Test
     public void discountTest() throws ParseException {
         Date dateCreate = sdf.parse("01.01.2017");
-        Date dateExpiry = sdf.parse("31.01.2017");
+        Date dateExpiry = sdf.parse("05.02.2017");
         Fish fish = new Fish("fish", dateExpiry, dateCreate, 20, 0);
         cq.controlAction(fish);
         double result = fish.getDiscount();

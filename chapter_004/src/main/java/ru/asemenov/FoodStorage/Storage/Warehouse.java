@@ -3,12 +3,17 @@ package ru.asemenov.FoodStorage.Storage;
 import ru.asemenov.FoodStorage.Products.Food;
 
 import java.util.ArrayList;
+
 /**
  * Class Warehouse решение задачи части 004 урока 3.
  * @author asemenov
  * @version 1
  */
-public class Warehouse extends Storage {
+public class Warehouse implements InterfaceStorage {
+    /**
+     * Percent warehouse.
+     */
+    private double percentWarehouse = 25;
     /**
      * Food storage.
      */

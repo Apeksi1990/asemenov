@@ -3,12 +3,29 @@ package ru.asemenov.FoodStorage.Storage;
 import ru.asemenov.FoodStorage.Products.Food;
 
 import java.util.ArrayList;
+
 /**
  * Class Shop решение задачи части 004 урока 3.
  * @author asemenov
  * @version 1
  */
-public class Shop extends Storage {
+public class Shop implements InterfaceStorage {
+    /**
+     * Discount.
+     */
+    private double discount = 10;
+    /**
+     * Percent warehouse.
+     */
+    private double percentWarehouse = 25;
+    /**
+     * Percent shop.
+     */
+    private double percentShop = 75;
+    /**
+     * Percent trash.
+     */
+    private double percentTrash = 100;
     /**
      * Food storage.
      */

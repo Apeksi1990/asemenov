@@ -7,24 +7,24 @@ package ru.asemenov.Menu;
  */
 public class StubInput implements Input {
     /**
-     * this.answer.
+     * Answers.
      */
-	private String[] answers;
-	/**
-     * position.
+    private String[] answers;
+    /**
+     * Position.
      */
     private int position = 0;
-	/**
+    /**
      * Конструктор принимающий значения ответов.
-	 * @param answers ответы.
+     * @param answers answer.
      */
     public StubInput(String[] answers) {
         this.answers = answers;
     }
-	/**
+    /**
      * Получения значения из массива answer.
-	 * @param question question.
-	 * @return answer answer.
+     * @param question question.
+     * @return answer.
      */
     public String ask(String question) {
         return answers[position++];

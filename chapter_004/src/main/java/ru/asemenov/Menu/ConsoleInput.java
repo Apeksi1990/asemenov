@@ -12,7 +12,6 @@ public class ConsoleInput implements Input {
      * Scanner.
      */
     private Scanner scanner = new Scanner(System.in);
-
     /**
      * Ask.
      * @param question question.

@@ -68,11 +68,11 @@ public class Item implements ShowAction {
      * @return count above.
      */
     public int getAllAbove(Item item) {
-        Item parent;
+        Item above;
         if (item.getAbove() != null) {
-            parent = item.getAbove();
+            above = item.getAbove();
             count++;
-            getAllAbove(parent);
+            getAllAbove(above);
         }
         return this.count;
     }

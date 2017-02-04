@@ -32,7 +32,10 @@ public class Menu implements Show {
     ArrayList<Item> getItem() {
         return this.items;
     }
-    public void sort() {
+    /**
+     * Sorting by key.
+     */
+    private void sort() {
         Collections.sort(items, new Comparator<Item>() {
             @Override
             public int compare(Item o1, Item o2) {

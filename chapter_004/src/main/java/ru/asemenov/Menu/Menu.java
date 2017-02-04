@@ -1,6 +1,9 @@
 package ru.asemenov.Menu;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 /**
  * Class Menu решение задачи части 004 урока 4.
  * @author asemenov
@@ -29,40 +32,20 @@ public class Menu implements Show {
     ArrayList<Item> getItem() {
         return this.items;
     }
+    public void sort() {
+        Collections.sort(items, new Comparator<Item>() {
+            @Override
+            public int compare(Item o1, Item o2) {
+                return o1.getKey().compareTo(o2.getKey());
+            }
+        });
+    }
     /**
-     * Task.
+     * Set items.
+     * @param item item.
      */
-    private Item taskOne = new Item("Task", "1");
-    /**
-     * Task.
-     */
-    private Item subTaskOne = new Item("SubTask", "1.1", taskOne);
-    /**
-     * Task.
-     */
-    private Item subSubTaskOne = new Item("SubSubTask", "1.1.1", subTaskOne);
-    /**
-     * Task.
-     */
-    private Item subSubTaskTwo = new Item("SubSubTask", "1.1.2", subTaskOne);
-    /**
-     * Task.
-     */
-    private Item subTaskTwo = new Item("SubTask", "1.2", taskOne);
-    /**
-     * Task.
-     */
-    private Item taskTwo = new Item("Task", "2");
-    /**
-     * Fill item.
-     */
-    void fillItem() {
-        items.add(taskOne);
-        items.add(subTaskOne);
-        items.add(subSubTaskOne);
-        items.add(subSubTaskTwo);
-        items.add(subTaskTwo);
-        items.add(taskTwo);
+    public void setItems(Item item) {
+        this.items.add(item);
     }
     /**
      * Show.
@@ -109,6 +92,8 @@ public class Menu implements Show {
      * Init.
      */
     public void init() {
+        sort();
+        show();
         do {
             String key = this.input.ask("Enter key task: ");
             select(key);

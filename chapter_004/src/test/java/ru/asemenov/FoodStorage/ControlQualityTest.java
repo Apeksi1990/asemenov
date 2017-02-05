@@ -2,6 +2,7 @@ package ru.asemenov.FoodStorage;
 
 import org.junit.Before;
 import org.junit.Test;
+import ru.asemenov.FoodStorage.Control.ControlQuality;
 import ru.asemenov.FoodStorage.Products.Chicken;
 import ru.asemenov.FoodStorage.Products.Fish;
 import ru.asemenov.FoodStorage.Products.Meat;
@@ -30,7 +31,7 @@ public class ControlQualityTest {
     /**
      * ControlQuality.
      */
-    private ControlQuality cq;
+    private ControlQuality control;
     /**
      * Warehouse.
      */
@@ -50,13 +51,13 @@ public class ControlQualityTest {
     @Before
     public void beforeTest() {
         sdf = new SimpleDateFormat("dd.MM.yyyy");
-        cq = new ControlQuality();
+        control = new ControlQuality();
         warehouse = new Warehouse();
         shop = new Shop();
         trash = new Trash();
-        cq.addStorage(warehouse);
-        cq.addStorage(shop);
-        cq.addStorage(trash);
+        control.addStorage(warehouse);
+        control.addStorage(shop);
+        control.addStorage(trash);
     }
     /**
      * Add the product to Warehouse Test.
@@ -67,7 +68,7 @@ public class ControlQualityTest {
         Date dateCreate = sdf.parse("01.01.2017");
         Date dateExpiry = sdf.parse("11.06.2017");
         Chicken chicken = new Chicken("chicken", dateExpiry, dateCreate, 20, 0);
-        cq.controlAction(chicken);
+        control.controlAction(chicken);
         int result = warehouse.getProducts().size();
         assertThat(result, is(1));
     }
@@ -80,7 +81,7 @@ public class ControlQualityTest {
         Date dateCreate = sdf.parse("01.01.2017");
         Date dateExpiry = sdf.parse("11.04.2017");
         Fish fish = new Fish("fish", dateExpiry, dateCreate, 20, 0);
-        cq.controlAction(fish);
+        control.controlAction(fish);
         int result = shop.getProducts().size();
         assertThat(result, is(1));
     }
@@ -93,7 +94,7 @@ public class ControlQualityTest {
         Date dateCreate = sdf.parse("01.01.2017");
         Date dateExpiry = sdf.parse("05.02.2017");
         Fish fish = new Fish("fish", dateExpiry, dateCreate, 20, 0);
-        cq.controlAction(fish);
+        control.controlAction(fish);
         double result = fish.getDiscount();
         assertThat(result, is(10.0));
     }
@@ -106,7 +107,7 @@ public class ControlQualityTest {
         Date dateCreate = sdf.parse("01.01.2017");
         Date dateExpiry = sdf.parse("25.01.2017");
         Meat meat = new Meat("meat", dateExpiry, dateCreate, 20, 0);
-        cq.controlAction(meat);
+        control.controlAction(meat);
         int result = trash.getProducts().size();
         assertThat(result, is(1));
     }

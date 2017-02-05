@@ -1,4 +1,4 @@
-package ru.asemenov.FoodStorage;
+package ru.asemenov.FoodStorage.Control;
 
 import ru.asemenov.FoodStorage.Products.Food;
 import ru.asemenov.FoodStorage.Storage.InterfaceStorage;
@@ -10,11 +10,18 @@ import java.util.ArrayList;
  * @author asemenov
  * @version 1
  */
-public class ControlQuality {
+public class ControlQuality implements InterfaceControl {
     /**
      * Storages.
      */
     private ArrayList<InterfaceStorage> storages = new ArrayList<>();
+    /**
+     * Get storages.
+     * @return storages.
+     */
+    public ArrayList<InterfaceStorage> getStorages() {
+        return this.storages;
+    }
     /**
      * Add storage.
      * @param storage storage.

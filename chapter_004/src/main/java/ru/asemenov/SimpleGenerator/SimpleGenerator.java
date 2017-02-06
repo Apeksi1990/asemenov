@@ -1,20 +1,61 @@
 package ru.asemenov.SimpleGenerator;
 
 import java.util.Map;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+/**
+ * Class SimpleGenerator решение задачи части 004 урока 6.
+ * @author asemenov
+ * @version 1
+ */
 public class SimpleGenerator implements Template {
+    /**
+     * Replace text.
+     * @param template text.
+     * @param data map.
+     * @return result.
+     */
     @Override
     public String generate(String template, Map<String, String> data) {
         check(template, data);
-        return "Hello, Alex.";
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            String text = "\\$\\{" + entry.getKey() + "\\}";
+            template = template.replaceAll(text, entry.getValue());
+        }
+        return template;
     }
-
-    public void check(String template, Map<String, String> data) {
+    /**
+     * Check exception.
+     * @param template text.
+     * @param data map.
+     */
+    private void check(String template, Map<String, String> data) {
         for (String key : data.keySet()) {
             if (!template.contains(key)) {
                 throw new KeyException("Excess key");
             }
         }
-
+        Pattern pattern = Pattern.compile("\\$\\{\\w*\\}");
+        Matcher matcher = pattern.matcher(template);
+        while (matcher.find()) {
+            if (!checkKey(matcher.group(), data)) {
+                throw new KeyException("Key not found");
+            }
+        }
+    }
+    /**
+     * Check key.
+     * @param key text.
+     * @param data map.
+     * @return boolean result.
+     */
+    private boolean checkKey(String key, Map<String, String> data) {
+        boolean result = false;
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            if (key.contains(entry.getKey())) {
+                result = true;
+            }
+        }
+        return result;
     }
 }

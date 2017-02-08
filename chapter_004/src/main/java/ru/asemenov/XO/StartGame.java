@@ -1,8 +1,16 @@
 package ru.asemenov.XO;
-
+/**
+ * Class Main решение задачи части 004.
+ * @author asemenov
+ * @version 1
+ */
 public class StartGame {
+    /**
+     * Main.
+     * @param args arg.
+     */
     public static void main(String[] args) {
-        Board board = new Board();
+        BoardWithList board = new BoardXO();
         CheckBoard checkBoard = new CheckBoard(board);
         Input input = new ConsoleInput();
         Player player = new Human(input, board, checkBoard);

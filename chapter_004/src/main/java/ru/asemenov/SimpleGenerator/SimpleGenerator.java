@@ -20,7 +20,13 @@ public class SimpleGenerator implements Template {
         check(template, data);
         for (Map.Entry<String, String> entry : data.entrySet()) {
             String text = "\\$\\{" + entry.getKey() + "\\}";
-            template = template.replaceAll(text, entry.getValue());
+            Pattern pattern = Pattern.compile(text);
+            Matcher matcher = pattern.matcher(template);
+            if (matcher.find()) {
+                template = template.replaceAll(text, entry.getValue());
+            } else {
+                throw new KeyException("Key not found");
+            }
         }
         return template;
     }
@@ -35,27 +41,5 @@ public class SimpleGenerator implements Template {
                 throw new KeyException("Excess key");
             }
         }
-        Pattern pattern = Pattern.compile("\\$\\{\\w*\\}");
-        Matcher matcher = pattern.matcher(template);
-        while (matcher.find()) {
-            if (!checkKey(matcher.group(), data)) {
-                throw new KeyException("Key not found");
-            }
-        }
-    }
-    /**
-     * Check key.
-     * @param key text.
-     * @param data map.
-     * @return boolean result.
-     */
-    private boolean checkKey(String key, Map<String, String> data) {
-        boolean result = false;
-        for (Map.Entry<String, String> entry : data.entrySet()) {
-            if (key.contains(entry.getKey())) {
-                result = true;
-            }
-        }
-        return result;
     }
 }

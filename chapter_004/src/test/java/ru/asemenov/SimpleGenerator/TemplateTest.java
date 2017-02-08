@@ -51,6 +51,7 @@ public class TemplateTest {
         String text = "Hello, ${name}, my name is ${language}.";
         String checked = "Hello, Alex, my name is Java.";
         Map<String, String> data = new HashMap<>();
+        data.put("filter", "Error");
         String result = template.generate(text, data);
         Assert.assertThat(result, is(checked));
     }

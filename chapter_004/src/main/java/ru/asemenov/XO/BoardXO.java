@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @author asemenov
  * @version 1
  */
-public class BoardXO implements BoardWithList{
+public class BoardXO implements BoardWithList {
     /**
      * Size.
      */

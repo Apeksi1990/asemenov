@@ -100,7 +100,7 @@ public class Game {
     }
 
     /**
-     * Print congratulation/
+     * Print congratulation.
      * @param key player.
      */
     private void congratulations(boolean key) {

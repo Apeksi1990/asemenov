@@ -60,7 +60,7 @@ public class CheckBoard {
         boolean result = false;
         int count = 0;
         for (int i = 0; i < size * size;) {
-            for (int j = i; j < size; j ++) {
+            for (int j = i; j < size; j++) {
                 if (board.getBoard().get(j).equals(board.getBoard().get(i))) {
                     count++;
                 } else {
@@ -113,8 +113,8 @@ public class CheckBoard {
     private boolean checkCross(int size) {
         boolean result = false;
         int count = 0;
-        for (int i = 0; i < size; ) {
-            for (int j = i; i < size * size; ) {
+        for (int i = 0; i < size;) {
+            for (int j = i; i < size * size;) {
                 if (board.getBoard().get(j).equals(board.getBoard().get(i))) {
                     count++;
                     if (i == 0) {

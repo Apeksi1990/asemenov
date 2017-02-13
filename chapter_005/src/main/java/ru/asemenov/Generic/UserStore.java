@@ -1,11 +1,26 @@
 package ru.asemenov.Generic;
-
+/**
+ * Class UserStore решение задачи части 005.
+ * @author asemenov
+ * @version 1
+ */
 public class UserStore implements Store<User> {
-
+    /**
+     * Storage user.
+     */
     private SimpleArray<User> storage;
+    /**
+     * Size.
+     */
+    private int size = 0;
 
+    /**
+     * UserStore constructor.
+     * @param size storage.
+     */
     public UserStore(int size) {
         this.storage = new SimpleArray<>(size);
+        this.size = size;
     }
 
     /**
@@ -14,7 +29,7 @@ public class UserStore implements Store<User> {
      */
     @Override
     public void add(User value) {
-
+        this.storage.add(value);
     }
 
     /**
@@ -24,7 +39,14 @@ public class UserStore implements Store<User> {
      */
     @Override
     public User get(String id) {
-        return null;
+        User result = null;
+        for (int i = 0; i < this.size; i++) {
+            if (id.equals(this.storage.get(i).getId())) {
+                result = this.storage.get(i);
+                break;
+            }
+        }
+        return result;
     }
 
     /**
@@ -34,7 +56,12 @@ public class UserStore implements Store<User> {
      */
     @Override
     public void update(String id, User value) {
-
+        for (int i = 0; i < this.size; i++) {
+            if (id.equals(this.storage.get(i).getId())) {
+                this.storage.update(i, value);
+                break;
+            }
+        }
     }
 
     /**
@@ -43,6 +70,11 @@ public class UserStore implements Store<User> {
      */
     @Override
     public void delete(String id) {
-
+        for (int i = 0; i < this.size; i++) {
+            if (id.equals(this.storage.get(i).getId())) {
+                this.storage.delete(i);
+                break;
+            }
+        }
     }
 }

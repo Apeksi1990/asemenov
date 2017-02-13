@@ -1,5 +1,10 @@
 package ru.asemenov.Generic;
-
+/**
+ * Interface Store решение задачи части 005.
+ * @author asemenov
+ * @version 1
+ * @param <T> generic.
+ */
 public interface Store<T extends Base> {
     /**
      * Add value.

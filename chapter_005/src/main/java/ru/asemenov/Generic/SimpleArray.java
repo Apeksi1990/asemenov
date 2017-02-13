@@ -54,6 +54,9 @@ public class SimpleArray<E> {
      * @param position value.
      */
     public void delete(int position) {
-        this.objects[position] = null;
+        for (int i = position; i < objects.length - 1; i++) {
+            this.objects[i] = this.objects[i + 1];
+            this.objects[i + 1] = null;
+        }
     }
 }

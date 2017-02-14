@@ -1,7 +1,6 @@
 package ru.asemenov.List;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 public class LinkedList<T> implements SimpleContainer<T> {
     /**
@@ -88,7 +87,7 @@ public class LinkedList<T> implements SimpleContainer<T> {
             if (this.hasNext()) {
                 return (I) get(position++);
             } else {
-                throw new NoSuchElementException();
+                throw new ArrayIndexOutOfBoundsException();
             }
         }
     }

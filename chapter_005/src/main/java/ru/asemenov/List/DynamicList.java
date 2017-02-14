@@ -2,7 +2,6 @@ package ru.asemenov.List;
 
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 public class DynamicList<T> implements SimpleContainer<T> {
     /**
@@ -74,7 +73,7 @@ public class DynamicList<T> implements SimpleContainer<T> {
             if (this.hasNext()) {
                 return (I) get(this.position++);
             } else {
-                throw new NoSuchElementException();
+                throw new ArrayIndexOutOfBoundsException();
             }
         }
     }

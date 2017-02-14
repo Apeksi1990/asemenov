@@ -52,7 +52,7 @@ public class DynamicList<T> implements SimpleContainer<T> {
         return new DynamicIterator<>();
     }
 
-    public class DynamicIterator<I> implements Iterator<I> {
+    private class DynamicIterator<I> implements Iterator<I> {
         /**
          * Position.
          */

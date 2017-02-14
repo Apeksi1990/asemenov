@@ -66,7 +66,7 @@ public class LinkedList<T> implements SimpleContainer<T> {
         return new LinkedListIterator<>();
     }
 
-    public class LinkedListIterator<I> implements Iterator<I> {
+    private class LinkedListIterator<I> implements Iterator<I> {
         /**
          * Position.
          */

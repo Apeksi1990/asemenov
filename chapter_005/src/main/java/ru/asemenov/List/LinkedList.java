@@ -56,14 +56,14 @@ public class LinkedList<T> implements SimpleContainer<T> {
         }
         return result;
     }
-    
+
     public void delete(int index) {
         Entry<T> current = first;
         int count = 0;
         while (current != null) {
             if (count == index) {
-                Entry prev = current.prev;
-                Entry next = current.next;
+                Entry<T> prev = current.prev;
+                Entry<T> next = current.next;
                 if (prev == null && next == null) {
                     this.first = null;
                     this.last = null;

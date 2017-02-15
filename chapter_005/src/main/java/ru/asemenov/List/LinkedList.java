@@ -56,6 +56,34 @@ public class LinkedList<T> implements SimpleContainer<T> {
         }
         return result;
     }
+    
+    public void delete(int index) {
+        Entry<T> current = first;
+        int count = 0;
+        while (current != null) {
+            if (count == index) {
+                Entry prev = current.prev;
+                Entry next = current.next;
+                if (prev == null && next == null) {
+                    this.first = null;
+                    this.last = null;
+                } else if (next == null) {
+                    prev.next = null;
+                    this.last = prev;
+                } else if (prev == null) {
+                    next.prev = null;
+                    this.first = next;
+                } else {
+                    prev.next = next;
+                    next.prev = prev;
+                }
+                break;
+            }
+            current = current.next;
+            count++;
+        }
+        this.index--;
+    }
 
     /**
      * Returns an iterator over elements of type {@code T}.

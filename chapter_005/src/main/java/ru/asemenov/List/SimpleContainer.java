@@ -1,7 +1,11 @@
 package ru.asemenov.List;
 
-import java.util.Iterator;
-
+/**
+ * Interface SimpleContainer решение задачи части 005.
+ * @author asemenov
+ * @version 1
+ * @param <E> generic.
+ */
 public interface SimpleContainer<E> extends Iterable<E> {
     /**
      * Add.

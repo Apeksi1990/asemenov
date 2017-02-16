@@ -1,11 +1,11 @@
 package ru.asemenov.List;
 /**
- * Class StackList решение задачи части 005.
+ * Class QueueList решение задачи части 005.
  * @author asemenov
  * @version 1
  * @param <T> generic.
  */
-public class StackList<T> implements SimpleStack<T> {
+public class QueueList<T> implements SimpleQueue<T> {
     /**
      * List storage.
      */
@@ -24,10 +24,10 @@ public class StackList<T> implements SimpleStack<T> {
      * @return element.
      */
     @Override
-    public T pop() {
+    public T poll() {
         T result;
-        result = list.get(list.size() - 1);
-        list.delete(list.size() - 1);
+        result = list.get(0);
+        list.delete(0);
         return result;
     }
 }

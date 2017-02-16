@@ -2,7 +2,12 @@ package ru.asemenov.List;
 
 import java.util.Arrays;
 import java.util.Iterator;
-
+/**
+ * Class DynamicList решение задачи части 005.
+ * @author asemenov
+ * @version 1
+ * @param <T> generic.
+ */
 public class DynamicList<T> implements SimpleContainer<T> {
     /**
      * Objects.
@@ -52,11 +57,15 @@ public class DynamicList<T> implements SimpleContainer<T> {
         return new DynamicIterator<>();
     }
 
+    /**
+     * DynamicIterator.
+     * @param <I> generic.
+     */
     private class DynamicIterator<I> implements Iterator<I> {
         /**
          * Position.
          */
-        int position = 0;
+        private int position = 0;
         /**
          * Has next.
          */

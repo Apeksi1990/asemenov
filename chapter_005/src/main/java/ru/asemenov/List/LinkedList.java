@@ -1,7 +1,12 @@
 package ru.asemenov.List;
 
 import java.util.Iterator;
-
+/**
+ * Class LinkedList решение задачи части 005.
+ * @author asemenov
+ * @version 1
+ * @param <T> generic.
+ */
 public class LinkedList<T> implements SimpleContainer<T> {
     /**
      * First.
@@ -57,6 +62,10 @@ public class LinkedList<T> implements SimpleContainer<T> {
         return result;
     }
 
+    /**
+     * Delete element.
+     * @param index element.
+     */
     public void delete(int index) {
         Entry<T> current = first;
         int count = 0;
@@ -86,6 +95,14 @@ public class LinkedList<T> implements SimpleContainer<T> {
     }
 
     /**
+     * Get size.
+     * @return size.
+     */
+    public int size() {
+        return this.index;
+    }
+
+    /**
      * Returns an iterator over elements of type {@code T}.
      * @return an Iterator.
      */
@@ -94,11 +111,15 @@ public class LinkedList<T> implements SimpleContainer<T> {
         return new LinkedListIterator<>();
     }
 
+    /**
+     * LinkedListIterator.
+     * @param <I> generic.
+     */
     private class LinkedListIterator<I> implements Iterator<I> {
         /**
          * Position.
          */
-        int position = 0;
+        private int position = 0;
         /**
          * Has next.
          */
@@ -120,19 +141,23 @@ public class LinkedList<T> implements SimpleContainer<T> {
         }
     }
 
+    /**
+     * Entry.
+     * @param <E> generic.
+     */
     private class Entry<E> {
         /**
          * Element.
          */
-        E element;
+        private E element;
         /**
          * Next element.
          */
-        Entry<E> next;
+        private Entry<E> next;
         /**
          * Previous element.
          */
-        Entry<E> prev;
+        private Entry<E> prev;
 
         /**
          * Entry constructor.

@@ -14,14 +14,14 @@ public class RoleStoreTest {
     /**
      * Role store.
      */
-    private RoleStore roleStore;
+    private RoleStore<Role> roleStore;
 
     /**
      * Before test.
      */
     @Before
     public void beforeTest() {
-        roleStore = new RoleStore(5);
+        roleStore = new RoleStore<>(5);
         Role roleOne = new Role("121");
         Role roleTwo = new Role("431");
         roleStore.add(roleOne);
@@ -33,7 +33,7 @@ public class RoleStoreTest {
      */
     @Test
     public void whenAddNewRoleThenReturnThisRole() {
-        Role result = roleStore.get("121");
+        Base result = roleStore.get("121");
         assertThat(result.getId(), is("121"));
     }
 
@@ -44,7 +44,7 @@ public class RoleStoreTest {
     public void whenUpdateRoleThenReturnNewRole() {
         Role newRole = new Role("739");
         roleStore.update("431", newRole);
-        Role result = roleStore.get("739");
+        Base result = roleStore.get("739");
         assertThat(result.getId(), is("739"));
     }
 
@@ -54,7 +54,7 @@ public class RoleStoreTest {
     @Test
     public void whenDeleteRoleThenReturnNull() {
         roleStore.delete("121");
-        Role result = roleStore.get("431");
+        Base result = roleStore.get("431");
         assertThat(result.getId(), is("431"));
     }
 }

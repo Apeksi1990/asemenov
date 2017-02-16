@@ -30,7 +30,20 @@ public class IteratorEven implements Iterator {
      */
     @Override
     public boolean hasNext() {
-        return value.length > index;
+        boolean result = false;
+        if (index >= value.length) {
+            result = false;
+        } else {
+            while (index < value.length) {
+                if (value[index] % 2 == 0) {
+                    result = true;
+                    break;
+                } else {
+                    index++;
+                }
+            }
+        }
+        return result;
     }
 
     /**
@@ -39,9 +52,12 @@ public class IteratorEven implements Iterator {
      */
     @Override
     public Object next() {
-        while (!(value[index] % 2 == 0)) {
+        if (hasNext()) {
+            Object result = value[index];
             index++;
+            return result;
+        } else {
+            throw new ArrayIndexOutOfBoundsException();
         }
-        return value[index++];
     }
 }

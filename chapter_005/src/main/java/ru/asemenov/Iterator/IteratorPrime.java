@@ -29,29 +29,40 @@ public class IteratorPrime implements Iterator {
      * @return boolean.
      */
     @Override
-    public boolean hasNext() {
+    /*public boolean hasNext() {
         return value.length > index;
+    }*/
+    public boolean hasNext() {
+        boolean result = false;
+        while (!result) {
+            if (index >= value.length) {
+                break;
+            } else {
+                result = true;
+                for (int i = 2; i <= value[index] / 2; i++) {
+                    int temp = value[index] % i;
+                    if (temp == 0) {
+                        result = false;
+                        index++;
+                        break;
+                    }
+                }
+            }
+        }
+        return result;
     }
-
     /**
      * Next.
      * @return value.
      */
     @Override
     public Object next() {
-        boolean isPrime;
-        do {
-            isPrime = true;
-            for (int i = 2; i <= value[index] / 2; i++) {
-                int temp = value[index] % i;
-                if (temp == 0) {
-                    isPrime = false;
-                    index++;
-                    break;
-                }
-            }
-        } while (!isPrime);
-
-        return value[index++];
+        if (hasNext()) {
+            Object result = value[index];
+            index++;
+            return result;
+        } else {
+            throw new ArrayIndexOutOfBoundsException();
+        }
     }
 }

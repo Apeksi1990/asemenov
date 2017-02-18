@@ -9,6 +9,11 @@ public class UserEquals extends User {
 
     @Override
     public boolean equals(Object obj) {
-        return  true;
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        User user = (User) obj;
+        if (children != user.children) return false;
+        if (name != null ? !name.equals(user.name) : user.name != null) return false;
+        return birthday != null ? birthday.equals(user.birthday) : user.birthday == null;
     }
 }

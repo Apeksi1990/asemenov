@@ -1,12 +1,26 @@
 package ru.asemenov.Map;
 
 import java.util.Calendar;
-
+/**
+ * Class UserHashEquals решение задачи части 005.
+ * @author asemenov
+ * @version 1
+ */
 public class UserHashEquals extends User {
+    /**
+     * UserHashEquals constructor.
+     * @param name user.
+     * @param children user.
+     * @param birthday user.
+     */
     public UserHashEquals(String name, int children, Calendar birthday) {
         super(name, children, birthday);
     }
 
+    /**
+     * Override hashCode.
+     * @return int.
+     */
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
@@ -15,6 +29,11 @@ public class UserHashEquals extends User {
         return result;
     }
 
+    /**
+     * Override equals.
+     * @param obj user.
+     * @return boolean.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

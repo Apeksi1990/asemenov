@@ -1,5 +1,11 @@
 package ru.asemenov.Map;
-
+/**
+ * Class Directory решение задачи части 005.
+ * @author asemenov
+ * @version 1
+ * @param <T>
+ * @param <V>
+ */
 public interface Directory<T, V> extends Iterable<V> {
     /**
      * Insert.

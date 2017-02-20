@@ -2,7 +2,13 @@ package ru.asemenov.Map;
 
 import java.util.Arrays;
 import java.util.Iterator;
-
+/**
+ * Class PhoneDirectory решение задачи части 005.
+ * @author asemenov
+ * @version 1
+ * @param <T>
+ * @param <V>
+ */
 public class PhoneDirectory<T, V> implements Directory<T, V> {
     /**
      * Storage phone.
@@ -12,7 +18,7 @@ public class PhoneDirectory<T, V> implements Directory<T, V> {
     /**
      * Position element.
      */
-    private int position = 0;
+    private int index = 0;
 
     /**
      * PhoneDirectory constructor.
@@ -33,30 +39,47 @@ public class PhoneDirectory<T, V> implements Directory<T, V> {
         boolean result = true;
         if (key == null) {
             result = false;
-        }else if (checkNew(key, value)){
+        } else if (checkNew(key, value)) {
             add(key, value);
         }
         return result;
     }
 
+    /**
+     * Check new element.
+     * @param key  element.
+     * @param value element.
+     * @return boolean.
+     */
     private boolean checkNew(T key, V value) {
         boolean result = true;
-        Entry<T, V> newValue = new Entry<>(key, value);
-        for (int i = 0; i < this.position; i++) {
-            if (key.hashCode() == this.storage[i].getKey().hashCode()) {
-                this.storage[i] = newValue;
-                result = false;
-                break;
-            }
+        if (this.storage[getIndex(key)] != null) {
+            this.storage[getIndex(key)].setValue(value);
+            result = false;
         }
         return result;
     }
 
+    /**
+     * Set index.
+     * @param key element.
+     * @return int.
+     */
+    private int getIndex(T key) {
+        return key.hashCode() % this.storage.length;
+    }
+
+    /**
+     * Add element.
+     * @param key  element.
+     * @param value element.
+     */
     public void add(T key, V value) {
-        if (this.position >= this.storage.length) {
+        if (this.index >= this.storage.length) {
             this.storage = Arrays.copyOf(this.storage, this.storage.length * 2);
         }
-        this.storage[position++] = new Entry<>(key, value);
+        this.storage[getIndex(key)] = new Entry<>(key, value);
+        this.index++;
     }
 
     /**
@@ -66,14 +89,7 @@ public class PhoneDirectory<T, V> implements Directory<T, V> {
      */
     @Override
     public V get(T key) {
-        V result = null;
-        for (int i = 0; i < this.storage.length; i++) {
-            if (key.hashCode() == this.storage[i].getKey().hashCode()) {
-                result = this.storage[i].getValue();
-                break;
-            }
-        }
-        return result;
+        return this.storage[getIndex(key)].getValue();
     }
 
     /**
@@ -87,11 +103,10 @@ public class PhoneDirectory<T, V> implements Directory<T, V> {
         if (key == null) {
             result = false;
         } else {
-            for (int i = 0; i < this.storage.length; i++) {
-                if (key.hashCode() == this.storage[i].getKey().hashCode()) {
-                    this.storage[i] = null;
-                    break;
-                }
+            if (this.storage[getIndex(key)] != null) {
+                this.storage[getIndex(key)] = null;
+            } else {
+                result = false;
             }
         }
         return result;
@@ -106,6 +121,11 @@ public class PhoneDirectory<T, V> implements Directory<T, V> {
         return new DirectoryIterator<>();
     }
 
+    /**
+     * Entry.
+     * @param <P>
+     * @param <N>
+     */
     private class Entry<P, N> {
         /**
          * Phone.
@@ -121,7 +141,7 @@ public class PhoneDirectory<T, V> implements Directory<T, V> {
          * @param key element.
          * @param value element.
          */
-        public Entry(P key, N value) {
+        Entry(P key, N value) {
             this.key = key;
             this.value = value;
         }
@@ -131,7 +151,7 @@ public class PhoneDirectory<T, V> implements Directory<T, V> {
          * @return phone.
          */
         public P getKey() {
-            return key;
+            return this.key;
         }
 
         /**
@@ -139,21 +159,42 @@ public class PhoneDirectory<T, V> implements Directory<T, V> {
          * @return name.
          */
         public N getValue() {
-            return value;
+            return this.value;
+        }
+
+        /**
+         * Set value.
+         * @param value new.
+         */
+        public void setValue(N value) {
+            this.value = value;
         }
     }
 
+    /**
+     * Iterator.
+     * @param <N>
+     */
     private class DirectoryIterator<N> implements Iterator<N> {
         /**
          * Position.
          */
-        private int index = 0;
+        private int position = 0;
         /**
          * Has next.
          */
         @Override
         public boolean hasNext() {
-            return index < position;
+            boolean result = false;
+            for (int i = position; i < storage.length; i++) {
+                if (storage[i] != null) {
+                    result = true;
+                    break;
+                } else {
+                    position++;
+                }
+            }
+            return result;
         }
 
         /**
@@ -162,7 +203,7 @@ public class PhoneDirectory<T, V> implements Directory<T, V> {
         @Override
         public N next() {
             if (this.hasNext()) {
-                return (N) storage[index++].getValue();
+                return (N) storage[position++].getValue();
             } else {
                 throw new ArrayIndexOutOfBoundsException();
             }

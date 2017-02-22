@@ -23,9 +23,9 @@ public class UserHash extends User {
      */
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + children;
-        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        int result = super.getName() != null ? super.getName().hashCode() : 0;
+        result = 31 * result + super.getChildren();
+        result = 31 * result + (super.getBirthday() != null ? super.getBirthday().hashCode() : 0);
         return result;
     }
 }

@@ -10,15 +10,15 @@ public class User {
     /**
      * Name.
      */
-    protected final String name;
+    private final String name;
     /**
      * Children.
      */
-    protected final int children;
+    private final int children;
     /**
      * Birthday.
      */
-    protected final Calendar birthday;
+    private final Calendar birthday;
 
     /**
      * User constructor.
@@ -30,5 +30,29 @@ public class User {
         this.name = name;
         this.children = children;
         this.birthday = birthday;
+    }
+
+    /**
+     * Get name.
+     * @return name.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Get children.
+     * @return children.
+     */
+    public int getChildren() {
+        return children;
+    }
+
+    /**
+     * Get birthday.
+     * @return birthday.
+     */
+    public Calendar getBirthday() {
+        return birthday;
     }
 }

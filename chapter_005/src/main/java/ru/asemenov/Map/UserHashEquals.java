@@ -23,9 +23,9 @@ public class UserHashEquals extends User {
      */
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + children;
-        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        int result = super.getName() != null ? super.getName().hashCode() : 0;
+        result = 31 * result + super.getChildren();
+        result = 31 * result + (super.getBirthday() != null ? super.getBirthday().hashCode() : 0);
         return result;
     }
 
@@ -43,12 +43,12 @@ public class UserHashEquals extends User {
             return false;
         }
         User user = (User) obj;
-        if (children != user.children) {
+        if (super.getChildren() != user.getChildren()) {
             return false;
         }
-        if (name != null ? !name.equals(user.name) : user.name != null) {
+        if (super.getName() != null ? !super.getName().equals(user.getName()) : user.getName() != null) {
             return false;
         }
-        return birthday != null ? birthday.equals(user.birthday) : user.birthday == null;
+        return super.getBirthday() != null ? super.getBirthday().equals(user.getBirthday()) : user.getBirthday() == null;
     }
 }

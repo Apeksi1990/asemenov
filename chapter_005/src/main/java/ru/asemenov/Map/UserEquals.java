@@ -1,6 +1,7 @@
 package ru.asemenov.Map;
 
 import java.util.Calendar;
+
 /**
  * Class UserEquals решение задачи части 005.
  * @author asemenov
@@ -31,12 +32,21 @@ public class UserEquals extends User {
             return false;
         }
         User user = (User) obj;
-        if (children != user.children) {
+        if (super.getChildren() != user.getChildren()) {
             return false;
         }
-        if (name != null ? !name.equals(user.name) : user.name != null) {
+        if (super.getName() != null ? !super.getName().equals(user.getName()) : user.getName() != null) {
             return false;
         }
-        return birthday != null ? birthday.equals(user.birthday) : user.birthday == null;
+        return super.getBirthday() != null ? super.getBirthday().equals(user.getBirthday()) : user.getBirthday() == null;
+    }
+
+    /**
+     * HashCode.
+     * @return hash.
+     */
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

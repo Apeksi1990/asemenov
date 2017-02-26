@@ -60,6 +60,6 @@ public class ReadXML {
 
     private void delete(XMLStreamReader reader) {
         OrderBook orderBook = this.orderBooks.get(reader.getAttributeValue(0));
-        orderBook.delete(Integer.valueOf(reader.getAttributeValue(4)));
+        orderBook.delete(Integer.valueOf(reader.getAttributeValue(1)));
     }
 }

@@ -10,9 +10,11 @@ import java.util.Map;
 public class Start {
     public static void main(String[] args) throws FileNotFoundException, XMLStreamException {
         Map<String, OrderBook> orderBooks = new HashMap<>();
-
         ReadXML read = new ReadXML(orderBooks);
         read.readXML(getFile());
+        for (String e : orderBooks.keySet()) {
+            System.out.println(e);
+        }
     }
     /**
      * Get file.

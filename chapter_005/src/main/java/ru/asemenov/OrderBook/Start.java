@@ -14,6 +14,8 @@ public class Start {
         read.readXML(getFile());
         for (String e : orderBooks.keySet()) {
             System.out.println(e);
+            System.out.println("SELL " + " PRICE " + " BUY ");
+            orderBooks.get(e).print();
         }
     }
     /**

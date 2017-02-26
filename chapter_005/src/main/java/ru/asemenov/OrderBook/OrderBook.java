@@ -8,25 +8,36 @@ public class OrderBook {
     /**
      * Buy.
      */
-    private Map<Integer, Order> buy = new TreeMap<>(new Comparator<Integer>() {
+    private Map<Double, Order> buy = new TreeMap<>(new Comparator<Double>() {
         @Override
-        public int compare(Integer o1, Integer o2) {
+        public int compare(Double o1, Double o2) {
             return o2.compareTo(o1);
         }
     });
     /**
      * Sell.
      */
-    private Map<Integer, Order> sell = new TreeMap<>();
+    private Map<Double, Order> sell = new TreeMap<>();
     /**
      * Add new order.
      * @param order new.
      */
     void add(Order order) {
         if ("BUY".equals(order.getOperation())) {
-            buy.put(order.getOrderId(), order);
+            Order newOrder = buy.get(order.getPrice());
+            if (newOrder != null) {
+                newOrder.setVolume(newOrder.getVolume() + order.getVolume());
+            } else {
+                buy.put(order.getPrice(), order);
+            }
+
         } else {
-            sell.put(order.getOrderId(), order);
+            Order newOrder = sell.get(order.getPrice());
+            if (newOrder != null) {
+                newOrder.setVolume(newOrder.getVolume() + order.getVolume());
+            } else {
+                sell.put(order.getPrice(), order);
+            }
         }
     }
 
@@ -34,11 +45,29 @@ public class OrderBook {
      * Delete order.
      * @param orderId delete.
      */
-    void delete(int orderId) {
-        if (buy.get(orderId) != null) {
-            buy.remove(orderId);
-        } else {
-            sell.remove(orderId);
+    boolean delete(int orderId) {
+        for (Map.Entry<Double, Order> e: buy.entrySet()) {
+            if (e.getValue().getOrderId() == orderId) {
+                buy.remove(e.getKey());
+                return true;
+            }
+        }
+        for (Map.Entry<Double, Order> e: sell.entrySet()) {
+            if (e.getValue().getOrderId() == orderId) {
+                buy.remove(e.getKey());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void print() {
+        for (Map.Entry<Double, Order> e: buy.entrySet()) {
+            System.out.println("\t\t" + e.getKey() + "@" + e.getValue().getVolume());
+        }
+
+        for (Map.Entry<Double, Order> e: sell.entrySet()) {
+            System.out.println(e.getValue().getVolume() + "@" +  e.getKey());
         }
     }
 }

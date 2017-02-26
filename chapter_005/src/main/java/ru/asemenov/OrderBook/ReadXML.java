@@ -7,7 +7,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Map;
-
+/**
+ * Class ReadXML решение задачи части 005.
+ * @author asemenov
+ * @version 1
+ */
 public class ReadXML {
     /**
      * Map order.
@@ -26,6 +30,7 @@ public class ReadXML {
      * Read XML.
      * @throws FileNotFoundException exception.
      * @throws XMLStreamException exception.
+     * @param file xml.
      */
     void readXML(String file) throws FileNotFoundException, XMLStreamException {
         XMLInputFactory xmlInput = XMLInputFactory.newInstance();
@@ -43,6 +48,10 @@ public class ReadXML {
         }
     }
 
+    /**
+     * Add order.
+     * @param reader xml.
+     */
     private void add(XMLStreamReader reader) {
         String bookName = reader.getAttributeValue(0);
         Order order = new Order(reader.getAttributeValue(1),
@@ -58,6 +67,10 @@ public class ReadXML {
 
     }
 
+    /**
+     * Delete order.
+     * @param reader xml.
+     */
     private void delete(XMLStreamReader reader) {
         OrderBook orderBook = this.orderBooks.get(reader.getAttributeValue(0));
         orderBook.delete(Integer.valueOf(reader.getAttributeValue(1)));

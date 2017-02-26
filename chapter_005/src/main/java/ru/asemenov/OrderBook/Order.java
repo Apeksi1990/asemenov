@@ -1,5 +1,9 @@
 package ru.asemenov.OrderBook;
-
+/**
+ * Class Order решение задачи части 005.
+ * @author asemenov
+ * @version 1
+ */
 public class Order {
     /**
      * Operation.
@@ -57,7 +61,7 @@ public class Order {
     }
 
     /**
-     * Get order ID;
+     * Get order ID.
      * @return id.
      */
     public int getOrderId() {

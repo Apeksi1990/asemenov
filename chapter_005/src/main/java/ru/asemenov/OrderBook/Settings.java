@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Class Settings решение задачи части 003 урока 2.
+ * Class Settings решение задачи части 005.
  * @author asemenov
  * @version 1
  */

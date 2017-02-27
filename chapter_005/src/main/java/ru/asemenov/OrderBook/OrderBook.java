@@ -1,6 +1,7 @@
 package ru.asemenov.OrderBook;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 /**
@@ -9,6 +10,7 @@ import java.util.TreeMap;
  * @version 1
  */
 public class OrderBook {
+    private Map<Integer, Order> allOrder = new HashMap<>();
     /**
      * Buy.
      */
@@ -27,55 +29,45 @@ public class OrderBook {
      * @param order new.
      */
     void add(Order order) {
-        if ("BUY".equals(order.getOperation())) {
-            Order newOrder = buy.get(order.getPrice());
-            if (newOrder != null) {
-                newOrder.setVolume(newOrder.getVolume() + order.getVolume());
-            } else {
-                buy.put(order.getPrice(), order);
-            }
-
-        } else {
-            Order newOrder = sell.get(order.getPrice());
-            if (newOrder != null) {
-                newOrder.setVolume(newOrder.getVolume() + order.getVolume());
-            } else {
-                sell.put(order.getPrice(), order);
-            }
-        }
+        allOrder.put(order.getOrderId(), order);
     }
 
     /**
      * Delete order.
      * @param orderId delete.
-     * @return boolean.
      */
-    boolean delete(int orderId) {
-        for (Map.Entry<Double, Order> e: buy.entrySet()) {
-            if (e.getValue().getOrderId() == orderId) {
-                buy.remove(e.getKey());
-                return true;
-            }
-        }
-        for (Map.Entry<Double, Order> e: sell.entrySet()) {
-            if (e.getValue().getOrderId() == orderId) {
-                buy.remove(e.getKey());
-                return true;
-            }
-        }
-        return false;
+    void delete(int orderId) {
+        allOrder.remove(orderId);
     }
 
     /**
      * Print order.
      */
     void print() {
+        for (Map.Entry<Integer, Order> e : allOrder.entrySet()) {
+            if ("BUY".equals(e.getValue().getOperation())) {
+                Order newOrder = buy.get(e.getValue().getPrice());
+                if (newOrder != null) {
+                    newOrder.setVolume(newOrder.getVolume() + e.getValue().getVolume());
+                } else {
+                    buy.put(e.getValue().getPrice(), e.getValue());
+                }
+            } else {
+                Order newOrder = sell.get(e.getValue().getPrice());
+                if (newOrder != null) {
+                    newOrder.setVolume(newOrder.getVolume() + e.getValue().getVolume());
+                } else {
+                    sell.put(e.getValue().getPrice(), e.getValue());
+                }
+            }
+        }
+
         for (Map.Entry<Double, Order> e: buy.entrySet()) {
             System.out.println("\t\t" + e.getKey() + "@" + e.getValue().getVolume());
         }
 
         for (Map.Entry<Double, Order> e: sell.entrySet()) {
-            System.out.println(e.getValue().getVolume() + "@" +  e.getKey());
+            System.out.printf("%7s@%s\n", e.getValue().getVolume(), e.getKey());
         }
     }
 }

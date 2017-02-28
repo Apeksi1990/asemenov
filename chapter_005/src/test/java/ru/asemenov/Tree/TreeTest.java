@@ -54,7 +54,7 @@ public class TreeTest {
      */
     @Test
     public void whenSearchValueThenFindCorrectLeaf() {
-        assertThat(tree.findLeaf("21", root).getValue(), is("21"));
+        assertThat(tree.findLeaf("21").getValue(), is("21"));
     }
 
     /**
@@ -64,6 +64,6 @@ public class TreeTest {
     public void whenGiveTreeThenReturnBalance() {
         Leaf<String> leaf23 = new Leaf<>("23");
         tree.addChild(root, leaf23);
-        assertThat(tree.treeBalance(root), is(false));
+        assertThat(tree.isBalance(), is(false));
     }
 }

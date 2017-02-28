@@ -54,17 +54,26 @@ public class Tree<E> implements SimpleTree<E> {
     /**
      * Find leaf for value.
      * @param value E.
-     * @param leaf E.
      * @return Leaf.
      */
-    public Leaf<E> findLeaf(E value, Leaf<E> leaf) {
+    public Leaf<E> findLeaf(E value) {
+        return find(value, this.main);
+    }
+
+    /**
+     * Find.
+     * @param value E.
+     * @param leaf E.
+     * @return leaf.
+     */
+    private Leaf<E> find(E value, Leaf<E> leaf) {
         Leaf<E> result = null;
         if (value.equals(leaf.getValue())) {
             result = leaf;
         } else if (leaf.getChildren().size() != 0) {
             for (Leaf<E> e : leaf.getChildren()) {
                 if (result == null) {
-                    result = findLeaf(value, e);
+                    result = find(value, e);
                 }
             }
         }
@@ -72,11 +81,18 @@ public class Tree<E> implements SimpleTree<E> {
     }
 
     /**
+     * Is balance.
+     * @return boolean.
+     */
+    public boolean isBalance() {
+        return treeBalance(this.main);
+    }
+    /**
      * Balance.
      * @param leaf E.
      * @return boolean.
      */
-    public boolean treeBalance(Leaf<E> leaf) {
+    private boolean treeBalance(Leaf<E> leaf) {
         boolean result = true;
         if (leaf.getChildren().size() != 2 && leaf.getChildren().size() != 0) {
             result = false;

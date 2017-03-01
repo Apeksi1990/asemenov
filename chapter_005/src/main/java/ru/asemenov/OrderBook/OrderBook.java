@@ -1,18 +1,19 @@
 package ru.asemenov.OrderBook;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
+
 /**
  * Class OrderBook решение задачи части 005.
  * @author asemenov
  * @version 1
  */
 public class OrderBook {
+    /**
+     * All order.
+     */
     private Map<Integer, Order> allOrder = new HashMap<>();
     /**
-     * Buy.
+     * Buy order.
      */
     private Map<Double, Order> buy = new TreeMap<>(new Comparator<Double>() {
         @Override
@@ -21,12 +22,13 @@ public class OrderBook {
         }
     });
     /**
-     * Sell.
+     * Sell order.
      */
     private Map<Double, Order> sell = new TreeMap<>();
+
     /**
-     * Add new order.
-     * @param order new.
+     * Add order.
+     * @param order add.
      */
     void add(Order order) {
         allOrder.put(order.getOrderId(), order);
@@ -34,16 +36,16 @@ public class OrderBook {
 
     /**
      * Delete order.
-     * @param orderId delete.
+     * @param orderId order.
      */
     void delete(int orderId) {
         allOrder.remove(orderId);
     }
 
     /**
-     * Print order.
+     * Sort all order.
      */
-    void print() {
+    private void sort() {
         for (Map.Entry<Integer, Order> e : allOrder.entrySet()) {
             if ("BUY".equals(e.getValue().getOperation())) {
                 Order newOrder = buy.get(e.getValue().getPrice());
@@ -61,13 +63,71 @@ public class OrderBook {
                 }
             }
         }
+    }
 
-        for (Map.Entry<Double, Order> e: buy.entrySet()) {
-            System.out.println("\t\t" + e.getKey() + "@" + e.getValue().getVolume());
+    /**
+     * Delete order.
+     */
+    private void delValue() {
+        Iterator<Double> buyIterator = buy.keySet().iterator();
+        Iterator<Double> sellIterator = sell.keySet().iterator();
+
+        Double nextBuy = buyIterator.next();
+        Double nextSell = sellIterator.next();
+
+        List<Double> delBuy = new ArrayList<>();
+        List<Double> delSell = new ArrayList<>();
+
+        boolean result = false;
+
+        while (!result) {
+            Order orderBuy = buy.get(nextBuy);
+            Order orderSell = sell.get(nextSell);
+            if (orderBuy.getPrice() >= orderSell.getPrice()) {
+                if (orderBuy.getVolume() > orderSell.getVolume()) {
+                    orderBuy.setVolume(orderBuy.getVolume() - orderSell.getVolume());
+                    nextSell = sellIterator.next();
+                    delSell.add(orderSell.getPrice());
+                } else if (orderBuy.getVolume() < orderSell.getVolume()) {
+                    orderSell.setVolume(orderSell.getVolume() - orderBuy.getVolume());
+                    nextBuy = buyIterator.next();
+                    delBuy.add(orderBuy.getPrice());
+                } else {
+                    buy.remove(orderBuy.getPrice());
+                    sell.remove(orderSell.getPrice());
+                    nextBuy = buyIterator.next();
+                    nextSell = sellIterator.next();
+                }
+            } else {
+                result = true;
+            }
         }
+        for (Double e : delBuy) {
+            buy.remove(e);
+        }
+        for (Double e : delSell) {
+            sell.remove(e);
+        }
+    }
 
-        for (Map.Entry<Double, Order> e: sell.entrySet()) {
-            System.out.printf("%7s@%s\n", e.getValue().getVolume(), e.getKey());
+    /**
+     * Print order book.
+     */
+    void print() {
+        sort();
+        delValue();
+        Iterator<Double> buyIterator = buy.keySet().iterator();
+        Iterator<Double> sellIterator = sell.keySet().iterator();
+        while (buyIterator.hasNext() && sellIterator.hasNext()) {
+
+            Double nextBuy = buyIterator.next();
+            Double nextSell = sellIterator.next();
+
+            Order orderBuy = buy.get(nextBuy);
+            Order orderSell = sell.get(nextSell);
+
+            System.out.print(String.format("%7s@%s", orderBuy.getVolume(), orderBuy.getPrice()));
+            System.out.println(String.format(" - %s@%s", orderSell.getPrice(), orderSell.getVolume()));
         }
     }
 }

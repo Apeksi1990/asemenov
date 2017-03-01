@@ -2,8 +2,6 @@ package ru.asemenov.OrderBook;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 /**
@@ -19,27 +17,16 @@ public class Start {
      * @throws XMLStreamException exception.
      */
     public static void main(String[] args) throws FileNotFoundException, XMLStreamException {
+        long start = System.currentTimeMillis();
         Map<String, OrderBook> orderBooks = new HashMap<>();
         ReadXML read = new ReadXML(orderBooks);
-        read.readXML(getFile());
+        read.readXML("C:\\orders.xml");
         for (String e : orderBooks.keySet()) {
-            System.out.println(e);
-            System.out.println("SELL " + " PRICE " + " BUY ");
+            System.out.println("Book name: " + e);
+            System.out.println("\tBUY" + "\t\tPRICE" + "\tSELL");
             orderBooks.get(e).print();
+            System.out.println();
         }
-    }
-    /**
-     * Get file.
-     * @return file.
-     */
-    private static String getFile() {
-        Settings settings = new Settings();
-        ClassLoader loader = Settings.class.getClassLoader();
-        try (InputStream in = loader.getResourceAsStream("app.properties")) {
-            settings.load(in);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return settings.getValue("file");
+        System.out.println("Time: " + (System.currentTimeMillis() - start));
     }
 }

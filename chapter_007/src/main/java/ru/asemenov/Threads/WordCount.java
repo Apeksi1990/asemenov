@@ -1,7 +1,11 @@
 package ru.asemenov.Threads;
 
 import java.util.Scanner;
-
+/**
+ * Class WordCount решение задачи части 007.
+ * @author asemenov
+ * @version 1
+ */
 public class WordCount implements Runnable {
     /**
      * Count.

@@ -1,5 +1,9 @@
 package ru.asemenov.Threads;
-
+/**
+ * Class SpaceCount решение задачи части 007.
+ * @author asemenov
+ * @version 1
+ */
 public class SpaceCount implements Runnable {
     /**
      * Count.

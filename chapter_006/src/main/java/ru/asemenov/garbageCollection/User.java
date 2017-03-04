@@ -49,6 +49,10 @@ public class User {
         return this.name;
     }
 
+    /**
+     * Main.
+     * @param args arg.
+     */
     public static void main(String[] args) {
         User user;
         for (int i = 0; i < 300; i++) {

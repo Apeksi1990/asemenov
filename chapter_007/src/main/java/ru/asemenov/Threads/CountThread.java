@@ -1,5 +1,9 @@
 package ru.asemenov.Threads;
-
+/**
+ * Class CountThread решение задачи части 007.
+ * @author asemenov
+ * @version 1
+ */
 public class CountThread {
     /**
      * Count space and words.

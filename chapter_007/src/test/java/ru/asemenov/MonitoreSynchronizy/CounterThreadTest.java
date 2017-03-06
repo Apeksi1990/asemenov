@@ -2,6 +2,8 @@ package ru.asemenov.MonitoreSynchronizy;
 
 import org.junit.Assert;
 import org.junit.Test;
+import ru.asemenov.MonitoreSynchronizy.Counter.Counter;
+import ru.asemenov.MonitoreSynchronizy.Counter.CounterThread;
 
 import static org.hamcrest.core.Is.is;
 /**

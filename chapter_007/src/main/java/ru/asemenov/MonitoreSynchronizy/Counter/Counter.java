@@ -1,4 +1,4 @@
-package ru.asemenov.MonitoreSynchronizy;
+package ru.asemenov.MonitoreSynchronizy.Counter;
 /**
  * Class Counter решение задачи части 007.
  * @author asemenov

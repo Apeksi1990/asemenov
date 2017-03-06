@@ -1,4 +1,4 @@
-package ru.asemenov.MonitoreSynchronizy;
+package ru.asemenov.MonitoreSynchronizy.Counter;
 
 /**
  * Class CounterThread решение задачи части 007.

@@ -35,7 +35,7 @@ public class SpaceCount implements Runnable {
                     count++;
                     System.out.println("Кол-во пробелов: " + this.count);
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

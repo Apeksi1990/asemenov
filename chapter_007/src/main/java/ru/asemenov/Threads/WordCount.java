@@ -37,7 +37,7 @@ public class WordCount implements Runnable {
                 this.count++;
                 System.out.println("Кол-во слов: " + this.count);
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

@@ -35,7 +35,6 @@ public class StartFind {
      * @param args text for search.
      */
     public static void main(String[] args) throws InterruptedException {
-        String[] arg = {"Super", "text", "tut"};
-        new StartFind(arg);
+        new StartFind(args);
     }
 }

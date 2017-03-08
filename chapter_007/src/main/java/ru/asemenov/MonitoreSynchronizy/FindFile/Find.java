@@ -4,7 +4,11 @@ package ru.asemenov.MonitoreSynchronizy.FindFile;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
+/**
+ * Class Find решение задачи части 007.
+ * @author asemenov
+ * @version 1
+ */
 public class Find implements Runnable {
     /**
      * Text for search.
@@ -21,7 +25,9 @@ public class Find implements Runnable {
 
     /**
      * Find constructor.
-     * @param find text for search.
+     * @param find find.
+     * @param result result.
+     * @param file file.
      */
     public Find(String find, Result result, File file) {
         this.find = find;
@@ -62,7 +68,9 @@ public class Find implements Runnable {
                     }
                 }
             }
-        }catch (NullPointerException ignored){}
+        } catch (NullPointerException ignored) {
+
+        }
     }
 
     /**

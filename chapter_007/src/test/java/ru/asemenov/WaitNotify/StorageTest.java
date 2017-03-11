@@ -1,6 +1,10 @@
 package ru.asemenov.WaitNotify;
 
 import org.junit.Test;
+import ru.asemenov.WaitNotify.ProducerCustomer.Customer;
+import ru.asemenov.WaitNotify.ProducerCustomer.Producer;
+import ru.asemenov.WaitNotify.ProducerCustomer.Storage;
+
 /**
  * Class StorageTest решение задачи части 007.
  * @author asemenov

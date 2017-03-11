@@ -1,4 +1,4 @@
-package ru.asemenov.WaitNotify;
+package ru.asemenov.WaitNotify.ProducerCustomer;
 /**
  * Class Producer решение задачи части 007.
  * @author asemenov

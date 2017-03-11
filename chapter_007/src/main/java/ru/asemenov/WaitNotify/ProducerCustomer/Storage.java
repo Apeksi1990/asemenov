@@ -1,4 +1,4 @@
-package ru.asemenov.WaitNotify;
+package ru.asemenov.WaitNotify.ProducerCustomer;
 
 import java.util.PriorityQueue;
 import java.util.Queue;

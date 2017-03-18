@@ -12,4 +12,9 @@ public class Frog {
         this.start = start;
         this.finish = finish;
     }
+
+    private void startJump() {
+
+    }
+    
 }

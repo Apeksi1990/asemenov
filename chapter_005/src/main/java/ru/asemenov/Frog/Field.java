@@ -34,14 +34,13 @@ public class Field {
     public boolean canJump(Point point) {
         if (point.getX() == 14 & point.getY() == 9) {
             return false;
-        } else if (point.getX() == 5 & point.getY() == 8) {
-            return false;
-        } else if (point.getX() > getxAmount() || point.getX() < 1){
-            return false;
-        } else if (point.getY() > getyAmount() || point.getY() < 1) {
-            return false;
-        } else {
-            return true;
         }
+        if (point.getX() == 5 & point.getY() == 8) {
+            return false;
+        }
+        if (point.getY() > getyAmount() || point.getY() < 1) {
+            return false;
+        }
+        return true;
     }
 }

@@ -68,13 +68,13 @@ public class Frog {
         System.out.println(point.getX() + " " + point.getY());
         boolean result = false;
         Point newPoint = null;
-        route = Route.LEFT;
+        this.route = Route.LEFT;
         while (!result) {
             newPoint = maxX(route.jump(point));
             if (this.field.canJump(newPoint)) {
                 result = true;
             } else {
-                route = route.changeRoute();
+                this.route = this.route.changeRoute();
             }
         }
         return newPoint;

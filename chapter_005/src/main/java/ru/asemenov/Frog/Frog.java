@@ -1,5 +1,9 @@
 package ru.asemenov.Frog;
-
+/**
+ * Class Frog.
+ * @author asemenov
+ * @version 1
+ */
 public class Frog {
     /**
      * Route.
@@ -56,7 +60,7 @@ public class Frog {
     }
 
     /**
-     * route jump.
+     * jump jump.
      * @param point this.
      * @return Point.
      */
@@ -66,7 +70,7 @@ public class Frog {
         Point newPoint = null;
         route = Route.LEFT;
         while (!result) {
-            newPoint = maxX(route.route(point));
+            newPoint = maxX(route.jump(point));
             if (this.field.canJump(newPoint)) {
                 result = true;
             } else {
@@ -83,8 +87,8 @@ public class Frog {
      */
     private Point maxX(Point point) {
         Point newPoint = point;
-        if (newPoint.getX() > this.field.getxAmount()) {
-            newPoint = new Point(newPoint.getX() - this.field.getxAmount(), newPoint.getY());
+        if (newPoint.getX() > this.field.getMaxX()) {
+            newPoint = new Point(newPoint.getX() - this.field.getMaxX(), newPoint.getY());
         }
         return newPoint;
     }

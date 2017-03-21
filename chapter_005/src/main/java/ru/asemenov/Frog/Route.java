@@ -1,9 +1,16 @@
 package ru.asemenov.Frog;
-
+/**
+ * Class Route решение задачи части 005.
+ * @author asemenov
+ * @version 1
+ */
 public enum Route {
+    /**
+     * Left route.
+     */
     LEFT {
         @Override
-        public Point route(Point point) {
+        public Point jump(Point point) {
             return new Point(point.getX() + 1, point.getY() + 2);
         }
 
@@ -12,9 +19,12 @@ public enum Route {
             return LEFTFORWARD;
         }
     },
+    /**
+     * Left forward route.
+     */
     LEFTFORWARD {
         @Override
-        public Point route(Point point) {
+        public Point jump(Point point) {
             return new Point(point.getX() + 2, point.getY() + 1);
         }
 
@@ -23,9 +33,12 @@ public enum Route {
             return FORWARD;
         }
     },
+    /**
+     * Forward route.
+     */
     FORWARD {
         @Override
-        public Point route(Point point) {
+        public Point jump(Point point) {
             return new Point(point.getX() + 3, point.getY());
         }
 
@@ -34,9 +47,12 @@ public enum Route {
             return RIGHTFORWARD;
         }
     },
+    /**
+     * Right forward route.
+     */
     RIGHTFORWARD {
         @Override
-        public Point route(Point point) {
+        public Point jump(Point point) {
             return new Point(point.getX() + 2, point.getY() - 1);
         }
 
@@ -45,9 +61,12 @@ public enum Route {
             return RIGHT;
         }
     },
+    /**
+     * Right route.
+     */
     RIGHT {
         @Override
-        public Point route(Point point) {
+        public Point jump(Point point) {
             return new Point(point.getX() + 1, point.getY() - 2);
         }
 
@@ -56,6 +75,17 @@ public enum Route {
             return LEFT;
         }
     };
-    public abstract Point route(Point point);
+
+    /**
+     * Jump.
+     * @param point this.
+     * @return new Point.
+     */
+    public abstract Point jump(Point point);
+
+    /**
+     * Change route.
+     * @return new Route.
+     */
     public abstract Route changeRoute();
 }

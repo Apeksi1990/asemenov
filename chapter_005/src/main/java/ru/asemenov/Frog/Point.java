@@ -1,5 +1,9 @@
 package ru.asemenov.Frog;
-
+/**
+ * Class Point.
+ * @author asemenov
+ * @version 1
+ */
 public class Point {
     /**
      * X position.

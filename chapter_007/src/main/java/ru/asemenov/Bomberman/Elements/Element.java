@@ -1,26 +1,58 @@
 package ru.asemenov.Bomberman.Elements;
 
 import ru.asemenov.Bomberman.Cell;
-
+/**
+ * Abstract class Element решение задачи части 007.
+ * @author asemenov
+ * @version 1
+ */
 public abstract class Element {
+    /**
+     * X position.
+     */
     private int x;
+    /**
+     * Y position.
+     */
     private int y;
+    /**
+     * Board.
+     */
     private Cell[][] board;
 
+    /**
+     * Element constructor.
+     * @param x position.
+     * @param y position.
+     * @param board Cell[][].
+     */
     public Element(int x, int y, Cell[][] board) {
         this.x = x;
         this.y = y;
         this.board = board;
     }
 
+    /**
+     * GEt x position.
+     * @return int.
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * GEt y position.
+     * @return int.
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * Can walk.
+     * @param roure Route.
+     * @return boolean.
+     */
     public boolean canWalk(Route roure) {
         boolean result;
         final int distX = this.x + roure.route()[0];

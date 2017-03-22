@@ -1,6 +1,13 @@
 package ru.asemenov.Bomberman.Elements;
-
+/**
+ * Enum Route решение задачи части 007.
+ * @author asemenov
+ * @version 1
+ */
 public enum Route {
+    /**
+     * Up route.
+     */
     UP {
         @Override
         public int[] route() {
@@ -12,6 +19,9 @@ public enum Route {
             return RIGHT;
         }
     },
+    /**
+     * Down route.
+     */
     DOWN {
         @Override
         public int[] route() {
@@ -23,6 +33,9 @@ public enum Route {
             return LEFT;
         }
     },
+    /**
+     * Left route.
+     */
     LEFT {
         @Override
         public int[] route() {
@@ -34,6 +47,9 @@ public enum Route {
             return UP;
         }
     },
+    /**
+     * Right route.
+     */
     RIGHT {
         @Override
         public int[] route() {
@@ -45,6 +61,16 @@ public enum Route {
             return DOWN;
         }
     };
+
+    /**
+     * Walk.
+     * @return int[].
+     */
     public abstract int[] route();
+
+    /**
+     * Change route.
+     * @return new Route.
+     */
     public abstract Route changeRoute();
 }

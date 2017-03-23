@@ -68,8 +68,8 @@ public class Find implements Runnable {
                     }
                 }
             }
-        } catch (NullPointerException ignored) {
-
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
     }
 

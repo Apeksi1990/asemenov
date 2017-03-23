@@ -21,6 +21,11 @@ public class Storage {
         this.storage.offer(data);
         System.out.println("Add data");
         notify();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -29,8 +34,8 @@ public class Storage {
      */
     public synchronized void get() throws InterruptedException {
         while (this.storage.peek() == null) {
-            wait();
             System.out.println("Wait!");
+            wait();
         }
         System.out.println(this.storage.poll());
     }

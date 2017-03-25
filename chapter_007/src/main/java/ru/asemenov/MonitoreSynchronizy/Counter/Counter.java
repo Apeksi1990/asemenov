@@ -21,7 +21,7 @@ public class Counter {
      * Get counter.
      * @return counter.
      */
-    public long getCounter() {
+    public synchronized long getCounter() {
         return counter;
     }
 }

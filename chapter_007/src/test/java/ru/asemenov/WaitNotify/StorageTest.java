@@ -13,6 +13,7 @@ import ru.asemenov.WaitNotify.ProducerCustomer.Storage;
 public class StorageTest {
     /**
      * ProducerCustomer test.
+     * @throws InterruptedException exception.
      */
     @Test
     public void producerCustomer() throws InterruptedException {

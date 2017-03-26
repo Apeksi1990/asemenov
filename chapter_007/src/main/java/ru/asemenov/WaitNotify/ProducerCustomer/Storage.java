@@ -30,6 +30,7 @@ public class Storage {
 
     /**
      * Get data.
+     * @return String.
      * @throws InterruptedException exception.
      */
     public synchronized String get() throws InterruptedException {

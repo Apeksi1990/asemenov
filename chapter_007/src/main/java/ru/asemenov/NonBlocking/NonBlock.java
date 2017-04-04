@@ -27,11 +27,11 @@ public class NonBlock<K, V extends Model> {
     /**
      * Update model.
      * @param key model.
-     * @param newModel new.
      */
-    public void update(K key, V newModel) {
-        if (this.cache.get(key).getVersion() == newModel.getVersion()) {
-            add(key, newModel);
+    public void update(K key) {
+        int version = this.cache.get(key).getVersion();
+        if (version == this.cache.get(key).getVersion()) {
+            this.cache.get(key).setVersion();
         } else {
             throw  new OplimisticException();
         }

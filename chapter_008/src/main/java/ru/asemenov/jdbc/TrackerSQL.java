@@ -1,10 +1,22 @@
 package ru.asemenov.jdbc;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-
+/**
+ * Class TrackerSQL решение задачи части 008.
+ * @author asemenov
+ * @version 1
+ */
 public class TrackerSQL {
-
+    /**
+     * Connection to SQL.
+     * @return connection.
+     */
     private Connection connector() {
         Connection connection = null;
         String url = "jdbc:postgresql://localhost:5432/postgres";
@@ -18,6 +30,11 @@ public class TrackerSQL {
         return connection;
     }
 
+    /**
+     * Add item.
+     * @param name String.
+     * @param description String.
+     */
     public void add(String name, String description) {
         try {
             PreparedStatement ps = connector().prepareStatement("INSERT INTO item(name, description, create_date) VALUES (?,?,?)");
@@ -32,6 +49,12 @@ public class TrackerSQL {
         }
     }
 
+    /**
+     * Update item.
+     * @param id new.
+     * @param name new.
+     * @param description new.
+     */
     public void update(int id, String name, String description) {
         try {
             PreparedStatement ps = connector().prepareStatement("UPDATE item SET name = ?, description = ? where id = ?");
@@ -46,6 +69,10 @@ public class TrackerSQL {
         }
     }
 
+    /**
+     * Delete item.
+     * @param id delete.
+     */
     public void delete(int id) {
         try {
             PreparedStatement ps = connector().prepareStatement("DELETE FROM item where id = ?");
@@ -58,6 +85,10 @@ public class TrackerSQL {
         }
     }
 
+    /**
+     * Find all item.
+     * @return List.
+     */
     public ArrayList<Item> findAll() {
         ArrayList<Item> result = new ArrayList<>();
         try {
@@ -75,6 +106,11 @@ public class TrackerSQL {
         return result;
     }
 
+    /**
+     * Find by id.
+     * @param id find.
+     * @return Item.
+     */
     public Item findById(int id) {
         Item result = null;
         try {
@@ -93,6 +129,11 @@ public class TrackerSQL {
         return result;
     }
 
+    /**
+     * Find by name.
+     * @param name find.
+     * @return Item.
+     */
     public Item findByName(String name) {
         Item result = null;
         try {
@@ -111,6 +152,11 @@ public class TrackerSQL {
         return result;
     }
 
+    /**
+     * Add comment to item.
+     * @param id item.
+     * @param comment String.
+     */
     public void addComment(int id, String comment) {
         try {
             PreparedStatement ps = connector().prepareStatement("INSERT INTO comments(comment, item_id) VALUES (?,?)");

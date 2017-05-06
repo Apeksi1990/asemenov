@@ -25,7 +25,13 @@ public class Item {
 	*/
     private Timestamp date;
 
-
+    /**
+     * Item.
+     * @param id this.
+     * @param name this.
+     * @param description this.
+     * @param date this.
+     */
     public Item(int id, String name, String description, Timestamp date) {
         this.id = id;
 		this.name = name;
@@ -33,20 +39,34 @@ public class Item {
 		this.date = date;
     }
 
+    /**
+     * Get id.
+     * @return int.
+     */
     public int getId() {
         return this.id;
     }
 
-
+    /**
+     * Get name.
+     * @return String.
+     */
     public String getName() {
         return this.name;
     }
 
-
+    /**
+     * Get description.
+     * @return String.
+     */
     public String getDescription() {
         return this.description;
     }
 
+    /**
+     * Get create date.
+     * @return date.
+     */
     public Timestamp getDate() {
         return this.date;
     }

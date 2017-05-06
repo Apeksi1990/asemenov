@@ -1,7 +1,11 @@
 package ru.asemenov.jdbc;
 
 import java.util.ArrayList;
-
+/**
+ * Class MenuTrackerSQL решение задачи части 008.
+ * @author asemenov
+ * @version 1
+ */
 public class MenuTrackerSQL {
     /**
      * this.input.

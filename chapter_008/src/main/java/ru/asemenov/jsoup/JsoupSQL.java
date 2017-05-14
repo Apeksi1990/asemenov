@@ -13,17 +13,35 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
+/**
+ * Class JsoupSQL решение задачи части 008.
+ * @author asemenov
+ * @version 1
+ */
 public class JsoupSQL {
-
+    /**
+     * URL.
+     */
     private String firstURL = "http://www.sql.ru/forum/job-offers/";
+    /**
+     * Connect sql.
+     */
     private ConnectSql connSQL;
+    /**
+     * Count.
+     */
     private int count = 1;
 
+    /**
+     * Jsoup constructor.
+     */
     JsoupSQL() {
         this.connSQL = new ConnectSql();
     }
 
+    /**
+     * Start.
+     */
     void start() {
         String URL = this.firstURL + this.count;
         this.count++;
@@ -32,6 +50,9 @@ public class JsoupSQL {
         } else work();
     }
 
+    /**
+     * Work.
+     */
     void work() {
         try {
             Thread.sleep(86400000); // 86400000 = 1 день
@@ -42,6 +63,11 @@ public class JsoupSQL {
         work();
     }
 
+    /**
+     * Pars.
+     * @param URL strung.
+     * @return boolean.
+     */
     private Boolean pars(String URL) {
         boolean result = true;
         Document doc = null;
@@ -50,7 +76,6 @@ public class JsoupSQL {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         Element table = doc.select(".forumTable").get(0);
         Elements rows = table.select("tr");
         for (int i = 1; i< rows.size(); i++) {
@@ -74,6 +99,11 @@ public class JsoupSQL {
         return result;
     }
 
+    /**
+     * Date pars.
+     * @param date tamestamp.
+     * @return timestamp.
+     */
     private Timestamp datePars(String date) {
         SimpleDateFormat format = new SimpleDateFormat("d MMM yy, HH:mm", new Locale("ru", "RU"));
         Calendar calendar = Calendar.getInstance();
@@ -94,6 +124,10 @@ public class JsoupSQL {
         return new Timestamp(calendar.getTimeInMillis());
     }
 
+    /**
+     * 2017.
+     * @return timestamp.
+     */
     private Timestamp thisYear() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = null;
@@ -106,6 +140,10 @@ public class JsoupSQL {
         return new Timestamp(time);
     }
 
+    /**
+     * Main method.
+     * @param args arg.
+     */
     public static void main(String[] args) {
         new JsoupSQL().start();
     }

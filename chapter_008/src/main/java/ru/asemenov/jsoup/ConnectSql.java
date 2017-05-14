@@ -1,14 +1,29 @@
 package ru.asemenov.jsoup;
 
 import java.sql.*;
-
+/**
+ * Class ConnectSql решение задачи части 008.
+ * @author asemenov
+ * @version 1
+ */
 public class ConnectSql {
-
-    //  Database credentials
+    /**
+     * URL.
+     */
     static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
+    /**
+     * Login.
+     */
     static final String USER = "postgres";
+    /**
+     * Password.
+     */
     static final String PASS = "password";
 
+    /**
+     * Connection.
+     * @return connection.
+     */
     public Connection connection() {
         Connection connection = null;
         try {
@@ -20,6 +35,13 @@ public class ConnectSql {
         return connection;
     }
 
+    /**
+     * Add job.
+     * @param head string.
+     * @param linkHref string.
+     * @param author string.
+     * @param time timestamp.
+     */
     public void addJob(String head, String linkHref, String author, Timestamp time) {
         PreparedStatement ps = null;
         try {
@@ -41,31 +63,5 @@ public class ConnectSql {
                 e.printStackTrace();
             }
         }
-    }
-
-    public Timestamp lastTime() {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Timestamp time = null;
-        try {
-            ps = connection().prepareStatement("SELECT create_date FROM job ORDER BY create_date DESC Limit 1");
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                time =  rs.getTimestamp("create_date");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (ps != null) {
-                    rs.close();
-                    ps.close();
-                    connection().close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return time;
     }
 }

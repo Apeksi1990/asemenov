@@ -78,7 +78,7 @@ public class JsoupSQL {
         }
         Element table = doc.select(".forumTable").get(0);
         Elements rows = table.select("tr");
-        for (int i = 1; i< rows.size(); i++) {
+        for (int i = 1; i < rows.size(); i++) {
             Element row = rows.get(i);
             Elements cols = row.select("td");
             String text = cols.get(1).text().toLowerCase();

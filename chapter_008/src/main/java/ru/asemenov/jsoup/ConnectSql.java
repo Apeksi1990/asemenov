@@ -31,6 +31,14 @@ public class ConnectSql {
         } catch (SQLException e) {
             System.out.println("Connection Failed");
             e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return connection;
     }

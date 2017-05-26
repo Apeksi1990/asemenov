@@ -10,15 +10,15 @@ public class ConnectSql {
     /**
      * URL.
      */
-    static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
+    private static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
     /**
      * Login.
      */
-    static final String USER = "postgres";
+    private static final String USER = "postgres";
     /**
      * Password.
      */
-    static final String PASS = "password";
+    private static final String PASS = "password";
 
     /**
      * Connection.
@@ -31,14 +31,6 @@ public class ConnectSql {
         } catch (SQLException e) {
             System.out.println("Connection Failed");
             e.printStackTrace();
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return connection;
     }

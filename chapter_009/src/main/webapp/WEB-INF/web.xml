@@ -18,4 +18,44 @@
         <servlet-name>UsersServlet</servlet-name>
         <url-pattern>/users</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetUsersServlet</servlet-name>
+        <servlet-class>ru.asemenov.servlet.GetUsers</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetUsersServlet</servlet-name>
+        <url-pattern>/getusersservlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddUsersServlet</servlet-name>
+        <servlet-class>ru.asemenov.servlet.AddUser</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddUsersServlet</servlet-name>
+        <url-pattern>/addusersservlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditUsersServlet</servlet-name>
+        <servlet-class>ru.asemenov.servlet.EditUser</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditUsersServlet</servlet-name>
+        <url-pattern>/editusersservlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteUsersServlet</servlet-name>
+        <servlet-class>ru.asemenov.servlet.DeleteUser</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteUsersServlet</servlet-name>
+        <url-pattern>/deleteusersservlet</url-pattern>
+    </servlet-mapping>
 </web-app>

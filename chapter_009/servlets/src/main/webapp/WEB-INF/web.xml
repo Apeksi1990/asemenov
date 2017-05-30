@@ -1,25 +1,5 @@
 <web-app>
     <servlet>
-        <servlet-name>EchoServlet</servlet-name>
-        <servlet-class>ru.asemenov.servlets.EchoServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>EchoServlet</servlet-name>
-        <url-pattern>/echo</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>UsersServlet</servlet-name>
-        <servlet-class>ru.asemenov.UsersServlet.UsersServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>UsersServlet</servlet-name>
-        <url-pattern>/users</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>GetUsersServlet</servlet-name>
         <servlet-class>ru.asemenov.servlet.GetUsers</servlet-class>
     </servlet>

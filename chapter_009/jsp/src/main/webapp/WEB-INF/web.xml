@@ -1,0 +1,31 @@
+<web-app>
+    <servlet>
+        <servlet-name>AddUserJsp</servlet-name>
+        <servlet-class>ru.asemenov.JSP.AddUser</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddUserJsp</servlet-name>
+        <url-pattern>/adduserjsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditUserJsp</servlet-name>
+        <servlet-class>ru.asemenov.JSP.EditUser</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditUserJsp</servlet-name>
+        <url-pattern>/edituserjsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteUserJsp</servlet-name>
+        <servlet-class>ru.asemenov.JSP.DeleteUser</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteUserJsp</servlet-name>
+        <url-pattern>/deleteuserjsp</url-pattern>
+    </servlet-mapping>
+</web-app>

@@ -1,0 +1,41 @@
+<web-app>
+    <servlet>
+        <servlet-name>ViewUsers</servlet-name>
+        <servlet-class>ru.asemenov.JSTL.ViewUsers</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ViewUsers</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddUser</servlet-name>
+        <servlet-class>ru.asemenov.JSTL.AddUser</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddUser</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditUser</servlet-name>
+        <servlet-class>ru.asemenov.JSTL.EditUser</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditUser</servlet-name>
+        <url-pattern>/edit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteUser</servlet-name>
+        <servlet-class>ru.asemenov.JSTL.DeleteUser</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteUser</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+</web-app>

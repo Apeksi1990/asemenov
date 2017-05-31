@@ -12,9 +12,15 @@ import java.io.IOException;
  * @version 1
  */
 public class AddUser extends HttpServlet {
-
+    /**
+     * Connect.
+     */
     private ConnectSql connect = new ConnectSql();
 
+    /**
+     * Initialization.
+     * @throws ServletException exception.
+     */
     @Override
     public void init() throws ServletException {
         this.connect.openConnection();

@@ -12,14 +12,23 @@ import java.io.IOException;
  * @version 1
  */
 public class EditUser extends HttpServlet {
-
+    /**
+     * Connect.
+     */
     private ConnectSql connect = new ConnectSql();
 
+    /**
+     * Initialization.
+     * @throws ServletException exception.
+     */
     @Override
     public void init() throws ServletException {
         this.connect.openConnection();
     }
 
+    /**
+     * Destroy.
+     */
     @Override
     public void destroy() {
         this.connect.closeConnection();

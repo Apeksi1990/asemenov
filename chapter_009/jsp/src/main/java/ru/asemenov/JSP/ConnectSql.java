@@ -1,6 +1,11 @@
 package ru.asemenov.JSP;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,14 +31,23 @@ public class ConnectSql {
      * Connection.
      */
     private Connection connection = null;
+    /**
+     * Instance.
+     */
+    private static final ConnectSql INSTANCE = new ConnectSql();
 
-    private static final ConnectSql instance = new ConnectSql();
-
+    /**
+     * Constructor.
+     */
     private ConnectSql() {
     }
 
+    /**
+     * Get instance.
+     * @return ConnectSql.
+     */
     public static ConnectSql getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     /**

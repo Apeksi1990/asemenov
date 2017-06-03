@@ -15,6 +15,7 @@
         <module>servlets</module>
         <module>userservlet</module>
         <module>jstl</module>
+        <module>filter_security</module>
     </modules>
 
     <dependencies>
@@ -34,8 +35,10 @@
             <artifactId>jstl-api</artifactId>
             <version>1.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.1.1</version>
+        </dependency>
     </dependencies>
-
-
-
 </project>

@@ -14,6 +14,7 @@
             <th>Name</th>
             <th>Login</th>
             <th>E-mail</th>
+            <th>Role</th>
             <th>Edit</th>
             <c:if test="${role == 'administrator'}">
                 <th>Delete</th>
@@ -24,10 +25,12 @@
             <td><c:out value="${user.name}"></c:out></td>
             <td><c:out value="${user.login}"></c:out></td>
             <td><c:out value="${user.email}"></c:out></td>
+            <td><c:out value="${user.role.name}"></c:out></td>
             <td><form action="${pageContext.servletContext.contextPath}/edit">
                 <input type='hidden' name = 'name'   value='<c:out value="${user.name}"></c:out>'/>
                 <input type='hidden' name = 'login'   value='<c:out value="${user.login}"></c:out>'/>
                 <input type='hidden' name = 'email'   value='<c:out value="${user.email}"></c:out>'/>
+                <input type='hidden' name = 'role'   value='<c:out value="${user.role.name}"></c:out>'/>
                 <c:choose>
                     <c:when test="${role == 'administrator'}">
                         <button type='submit'>Edit</button>

@@ -8,7 +8,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Class ConnectSql решение задачи части 009.
@@ -52,7 +54,7 @@ public class ConnectSql {
     public void addUser(String name, String login, String password,  String email, int role_id) {
         PreparedStatement ps = null;
         try {
-            ps = connection().prepareStatement("INSERT INTO sec_users(name, login, password, email, create_table, role_id) VALUES (?,?,?,?,?,?)");
+            ps = connection().prepareStatement("INSERT INTO sec_users(name, login, password, email, create_date, role_id) VALUES (?,?,?,?,?,?)");
             ps.setString(1, name);
             ps.setString(2, login);
             ps.setString(3, password);
@@ -220,5 +222,54 @@ public class ConnectSql {
             }
         }
         return result;
+    }
+
+    public Map<Integer, String> getRoles() {
+        Map<Integer, String> result = new HashMap<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = connection().prepareStatement("SELECT * from roles");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                result.put(rs.getInt("id"), rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection().close();
+                if (ps != null) {
+                    ps.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    public void setRole(String login, int role_id) {
+        PreparedStatement ps = null;
+        try {
+            ps = connection().prepareStatement("UPDATE sec_users SET role_id = ? WHERE login = ?");
+            ps.setInt(1, role_id);
+            ps.setString(2, login);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection().close();
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

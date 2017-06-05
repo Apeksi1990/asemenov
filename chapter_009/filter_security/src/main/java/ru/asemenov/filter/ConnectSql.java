@@ -52,9 +52,10 @@ public class ConnectSql {
      * @param email String.
      */
     public void addUser(String name, String login, String password,  String email, int role_id) {
+        Connection connection = connection();
         PreparedStatement ps = null;
         try {
-            ps = connection().prepareStatement("INSERT INTO sec_users(name, login, password, email, create_date, role_id) VALUES (?,?,?,?,?,?)");
+            ps = connection.prepareStatement("INSERT INTO sec_users(name, login, password, email, create_date, role_id) VALUES (?,?,?,?,?,?)");
             ps.setString(1, name);
             ps.setString(2, login);
             ps.setString(3, password);
@@ -66,7 +67,7 @@ public class ConnectSql {
             e.printStackTrace();
         } finally {
             try {
-                connection().close();
+                connection.close();
                 if (ps != null) {
                     ps.close();
                 }
@@ -83,9 +84,10 @@ public class ConnectSql {
      * @param email String.
      */
     public void editUser(String name, String login, String email) {
+        Connection connection = connection();
         PreparedStatement ps = null;
         try {
-            ps = connection().prepareStatement("UPDATE sec_users SET name = ?, login = ?, email = ? WHERE login = ?");
+            ps = connection.prepareStatement("UPDATE sec_users SET name = ?, login = ?, email = ? WHERE login = ?");
             ps.setString(1, name);
             ps.setString(2, login);
             ps.setString(3, email);
@@ -95,7 +97,7 @@ public class ConnectSql {
             e.printStackTrace();
         } finally {
             try {
-                connection().close();
+                connection.close();
                 if (ps != null) {
                     ps.close();
                 }
@@ -110,11 +112,12 @@ public class ConnectSql {
      * @return List.
      */
     public List<User> getUser() {
+        Connection connection = connection();
         List<User> users = new ArrayList<>();
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = connection().prepareStatement("SELECT u.id, u.name, u.login, u.password, u.email, u.role_id, r.name role_name from sec_users u LEFT JOIN roles r on u.role_id = r.id");
+            ps = connection.prepareStatement("SELECT u.id, u.name, u.login, u.password, u.email, u.role_id, r.name role_name from sec_users u LEFT JOIN roles r on u.role_id = r.id");
             rs = ps.executeQuery();
             while (rs.next()) {
                 users.add(new User(rs.getInt("id"),
@@ -128,7 +131,7 @@ public class ConnectSql {
             e.printStackTrace();
         } finally {
             try {
-                connection().close();
+                connection.close();
                 if (ps != null) {
                     ps.close();
                 }
@@ -147,16 +150,17 @@ public class ConnectSql {
      * @param login String.
      */
     public void deleteUser(String login) {
+        Connection connection = connection();
         PreparedStatement ps = null;
         try {
-            ps = connection().prepareStatement("DELETE FROM sec_users WHERE login = ?");
+            ps = connection.prepareStatement("DELETE FROM sec_users WHERE login = ?");
             ps.setString(1, login);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
-                connection().close();
+                connection.close();
                 if (ps != null) {
                     ps.close();
                 }
@@ -167,11 +171,12 @@ public class ConnectSql {
     }
 
     public boolean checkPassword(String login, String password) {
+        Connection connection = connection();
         boolean result = false;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = connection().prepareStatement("SELECT password from sec_users where login = ?");
+            ps = connection.prepareStatement("SELECT password from sec_users where login = ?");
             ps.setString(1, login);
             rs = ps.executeQuery();
             rs.next();
@@ -182,7 +187,7 @@ public class ConnectSql {
             e.printStackTrace();
         } finally {
             try {
-                connection().close();
+                connection.close();
                 if (ps != null) {
                     ps.close();
                 }
@@ -197,11 +202,12 @@ public class ConnectSql {
     }
 
     public String getRole(String login) {
+        Connection connection = connection();
         String result = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = connection().prepareStatement("SELECT r.name role_name from sec_users u LEFT JOIN roles r on u.role_id = r.id where login = ?");
+            ps = connection.prepareStatement("SELECT r.name role_name from sec_users u LEFT JOIN roles r on u.role_id = r.id where login = ?");
             ps.setString(1, login);
             rs = ps.executeQuery();
             rs.next();
@@ -210,7 +216,7 @@ public class ConnectSql {
             e.printStackTrace();
         } finally {
             try {
-                connection().close();
+                connection.close();
                 if (ps != null) {
                     ps.close();
                 }
@@ -225,11 +231,12 @@ public class ConnectSql {
     }
 
     public Map<Integer, String> getRoles() {
+        Connection connection = connection();
         Map<Integer, String> result = new HashMap<>();
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = connection().prepareStatement("SELECT * from roles");
+            ps = connection.prepareStatement("SELECT * from roles");
             rs = ps.executeQuery();
             while (rs.next()) {
                 result.put(rs.getInt("id"), rs.getString("name"));
@@ -238,7 +245,7 @@ public class ConnectSql {
             e.printStackTrace();
         } finally {
             try {
-                connection().close();
+                connection.close();
                 if (ps != null) {
                     ps.close();
                 }
@@ -253,9 +260,10 @@ public class ConnectSql {
     }
 
     public void setRole(String login, int role_id) {
+        Connection connection = connection();
         PreparedStatement ps = null;
         try {
-            ps = connection().prepareStatement("UPDATE sec_users SET role_id = ? WHERE login = ?");
+            ps = connection.prepareStatement("UPDATE sec_users SET role_id = ? WHERE login = ?");
             ps.setInt(1, role_id);
             ps.setString(2, login);
             ps.executeUpdate();
@@ -263,7 +271,7 @@ public class ConnectSql {
             e.printStackTrace();
         } finally {
             try {
-                connection().close();
+                connection.close();
                 if (ps != null) {
                     ps.close();
                 }

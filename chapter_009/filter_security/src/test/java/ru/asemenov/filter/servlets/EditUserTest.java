@@ -1,6 +1,8 @@
 package ru.asemenov.filter.servlets;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import ru.asemenov.filter.ConnectSql;
 import ru.asemenov.filter.models.User;
@@ -16,8 +18,8 @@ import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class AddDeleteTest {
-    @Test
+public class EditUserTest {
+    @Before
     public void addUser() throws ServletException, IOException {
         AddUser addUser = new AddUser();
         HttpServletRequest request = mock(HttpServletRequest.class);
@@ -30,10 +32,6 @@ public class AddDeleteTest {
         when(request.getParameter("role_id")).thenReturn("2");
 
         addUser.doPost(request, response);
-
-        List<User> users = ConnectSql.getInstance().getUser();
-
-        Assert.assertThat(users.get(2).getLogin(), is("test"));
     }
     @Test
     public void edit() throws ServletException, IOException {
@@ -57,15 +55,12 @@ public class AddDeleteTest {
 
         Assert.assertThat(users.get(2).getLogin(), is("testNew"));
     }
-    @Test
+    @After
     public void delete() throws ServletException, IOException {
         DeleteUser deleteUser = new DeleteUser();
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         when(request.getParameter("login")).thenReturn("testNew");
         deleteUser.doPost(request, response);
-        List<User> users = ConnectSql.getInstance().getUser();
-
-        Assert.assertEquals(users.size(), 2);
     }
 }

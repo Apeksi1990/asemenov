@@ -27,6 +27,7 @@
             <td><c:out value="${user.email}"></c:out></td>
             <td><c:out value="${user.role.name}"></c:out></td>
             <td><form action="${pageContext.servletContext.contextPath}/edit">
+                <input type='hidden' name = 'id'   value='<c:out value="${user.id}"></c:out>'/>
                 <input type='hidden' name = 'name'   value='<c:out value="${user.name}"></c:out>'/>
                 <input type='hidden' name = 'login'   value='<c:out value="${user.login}"></c:out>'/>
                 <input type='hidden' name = 'email'   value='<c:out value="${user.email}"></c:out>'/>

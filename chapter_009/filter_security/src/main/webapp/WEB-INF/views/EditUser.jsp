@@ -8,7 +8,7 @@
     Edit user:
     <br/>
     <form action="${pageContext.servletContext.contextPath}/edit" method="post">
-        <input type='hidden' name = 'id'   value='<c:out value="${param.id}"></c:out>'/>
+        <input type='hidden' name = 'oldLogin'   value='<c:out value="${param.login}"></c:out>'/>
         Name: <input type='text' name = 'name'   value='<c:out value="${param.name}"></c:out>'/>
         <br/>
         Login: <input type='text' name = 'login'   value='<c:out value="${param.login}"></c:out>'/>

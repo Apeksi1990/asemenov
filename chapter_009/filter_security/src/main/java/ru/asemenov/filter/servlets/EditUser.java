@@ -44,9 +44,9 @@ public class EditUser extends HttpServlet {
         resp.setContentType("text/html");
         HttpSession session = req.getSession();
         if (!session.getAttribute("role").equals("administrator")) {
-            ConnectSql.getInstance().editUser(Integer.parseInt(req.getParameter("id")), req.getParameter("name"), req.getParameter("login"), req.getParameter("email"));
+            ConnectSql.getInstance().editUser(String.valueOf(req.getAttribute("login")), req.getParameter("name"), req.getParameter("login"), req.getParameter("email"));
         } else {
-            ConnectSql.getInstance().editUser(Integer.parseInt(req.getParameter("id")), req.getParameter("name"), req.getParameter("login"), req.getParameter("email"));
+            ConnectSql.getInstance().editUser(req.getParameter("oldLogin"), req.getParameter("name"), req.getParameter("login"), req.getParameter("email"));
             ConnectSql.getInstance().setRole(req.getParameter("login"), Integer.parseInt(req.getParameter("role_id")));
         }
         resp.sendRedirect(String.format("%s/", req.getContextPath()));

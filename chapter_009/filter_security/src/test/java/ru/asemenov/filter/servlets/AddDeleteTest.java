@@ -1,6 +1,5 @@
 package ru.asemenov.filter.servlets;
 
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import ru.asemenov.filter.ConnectSql;
@@ -45,6 +44,7 @@ public class AddDeleteTest {
 
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("role")).thenReturn("administrator");
+        when(request.getParameter("oldLogin")).thenReturn("test");
         when(request.getParameter("name")).thenReturn("test");
         when(request.getParameter("login")).thenReturn("testNew");
         when(request.getParameter("email")).thenReturn("test@mail");
@@ -57,12 +57,15 @@ public class AddDeleteTest {
 
         Assert.assertThat(users.get(2).getLogin(), is("testNew"));
     }
-    @After
+    @Test
     public void delete() throws ServletException, IOException {
         DeleteUser deleteUser = new DeleteUser();
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
-        when(request.getParameter("login")).thenReturn("test");
+        when(request.getParameter("login")).thenReturn("testNew");
         deleteUser.doPost(request, response);
+        List<User> users = ConnectSql.getInstance().getUser();
+
+        Assert.assertEquals(users.size(), 2);
     }
 }

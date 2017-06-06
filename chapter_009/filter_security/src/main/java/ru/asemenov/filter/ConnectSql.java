@@ -89,16 +89,16 @@ public class ConnectSql {
      * @param login String.
      * @param email String.
      */
-    public void editUser(int id, String name, String login, String email) {
+    public void editUser(String oldLogin, String name, String login, String email) {
         Connection connection = null;
         PreparedStatement ps = null;
         try {
             connection = getDataSource().getConnection();
-            ps = connection.prepareStatement("UPDATE sec_users SET name = ?, login = ?, email = ? WHERE id = ?");
+            ps = connection.prepareStatement("UPDATE sec_users SET name = ?, login = ?, email = ? WHERE login = ?");
             ps.setString(1, name);
             ps.setString(2, login);
             ps.setString(3, email);
-            ps.setInt(4, id);
+            ps.setString(4, oldLogin);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -19,7 +19,6 @@ public class ConnectSql {
     private static final ConnectSql instance = new ConnectSql();
 
     private ConnectSql() {
-        System.out.println("УРААА!!!!!!!!!!!!");
         setDataSoure();
     }
 

@@ -19,19 +19,23 @@ public class ConnectSql {
     private static final ConnectSql instance = new ConnectSql();
 
     private ConnectSql() {
+        System.out.println("УРААА!!!!!!!!!!!!");
+        setDataSoure();
     }
 
     public static ConnectSql getInstance() {
         return instance;
     }
 
+    private BasicDataSource ds;
+
     /**
      * Connection.
      */
-    private Connection getConnection() {
+    private void setDataSoure() {
         Properties props = new Properties();
         InputStream fis;
-        BasicDataSource ds = new BasicDataSource();
+        this.ds = new BasicDataSource();
         ClassLoader loader = getClass().getClassLoader();
         try {
             fis = loader.getResourceAsStream("db.properties");
@@ -39,17 +43,10 @@ public class ConnectSql {
         }catch(IOException e){
             e.printStackTrace();
         }
-        ds.setDriverClassName(props.getProperty("DRIVER"));
-        ds.setUrl(props.getProperty("URL"));
-        ds.setUsername(props.getProperty("USERNAME"));
-        ds.setPassword(props.getProperty("PASSWORD"));
-        Connection connection = null;
-        try {
-            connection = ds.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return connection;
+        this.ds.setDriverClassName(props.getProperty("DRIVER"));
+        this.ds.setUrl(props.getProperty("URL"));
+        this.ds.setUsername(props.getProperty("USERNAME"));
+        this.ds.setPassword(props.getProperty("PASSWORD"));
     }
 
     /**
@@ -62,7 +59,7 @@ public class ConnectSql {
         Connection connection = null;
         PreparedStatement ps = null;
         try {
-            connection = getConnection();
+            connection = this.ds.getConnection();
             ps = connection.prepareStatement("INSERT INTO sec_users(name, login, password, email, create_date, role_id) VALUES (?,?,?,?,?,?)");
             ps.setString(1, name);
             ps.setString(2, login);
@@ -97,7 +94,7 @@ public class ConnectSql {
         Connection connection = null;
         PreparedStatement ps = null;
         try {
-            connection = getConnection();
+            connection = this.ds.getConnection();
             ps = connection.prepareStatement("UPDATE sec_users SET name = ?, login = ?, email = ? WHERE login = ?");
             ps.setString(1, name);
             ps.setString(2, login);
@@ -130,7 +127,7 @@ public class ConnectSql {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            connection = getConnection();
+            connection = this.ds.getConnection();
             ps = connection.prepareStatement("SELECT u.id, u.name, u.login, u.password, u.email, u.role_id, r.name role_name from sec_users u LEFT JOIN roles r on u.role_id = r.id");
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -169,7 +166,7 @@ public class ConnectSql {
         Connection connection = null;
         PreparedStatement ps = null;
         try {
-            connection = getConnection();
+            connection = this.ds.getConnection();
             ps = connection.prepareStatement("DELETE FROM sec_users WHERE login = ?");
             ps.setString(1, login);
             ps.executeUpdate();
@@ -195,7 +192,7 @@ public class ConnectSql {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            connection = getConnection();
+            connection = this.ds.getConnection();
             ps = connection.prepareStatement("SELECT password from sec_users where login = ?");
             ps.setString(1, login);
             rs = ps.executeQuery();
@@ -229,7 +226,7 @@ public class ConnectSql {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            connection = getConnection();
+            connection = this.ds.getConnection();
             ps = connection.prepareStatement("SELECT r.name role_name from sec_users u LEFT JOIN roles r on u.role_id = r.id where login = ?");
             ps.setString(1, login);
             rs = ps.executeQuery();
@@ -261,7 +258,7 @@ public class ConnectSql {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            connection = getConnection();
+            connection = this.ds.getConnection();
             ps = connection.prepareStatement("SELECT * from roles");
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -291,7 +288,7 @@ public class ConnectSql {
         Connection connection = null;
         PreparedStatement ps = null;
         try {
-            connection = getConnection();
+            connection = this.ds.getConnection();
             ps = connection.prepareStatement("UPDATE sec_users SET role_id = ? WHERE login = ?");
             ps.setInt(1, role_id);
             ps.setString(2, login);

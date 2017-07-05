@@ -16,6 +16,7 @@
         <module>userservlet</module>
         <module>jstl</module>
         <module>filter_security</module>
+        <module>interface</module>
     </modules>
 
     <dependencies>

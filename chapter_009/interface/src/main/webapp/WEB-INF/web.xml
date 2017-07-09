@@ -9,15 +9,15 @@
         <url-pattern>*</url-pattern>
     </filter-mapping>
 
-    <!--<servlet>
+    <servlet>
         <servlet-name>ViewUsers</servlet-name>
         <servlet-class>ru.asemenov.filter.servlets.ViewUsers</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>ViewUsers</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>-->
+        <url-pattern>/get</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>AddUser</servlet-name>

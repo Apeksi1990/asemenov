@@ -43,8 +43,7 @@
                     password : $('#pwd').val()
                 },
                 success: function (data) {
-                    var result = data;
-                    if (result) {
+                    if (data) {
                         alert("Enter correct login/password")
                     } else {
                         location.href = "users.html";

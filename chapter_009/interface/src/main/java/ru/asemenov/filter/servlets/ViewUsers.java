@@ -1,15 +1,17 @@
 package ru.asemenov.filter.servlets;
 
+import com.google.gson.Gson;
 import ru.asemenov.filter.ConnectSql;
+import ru.asemenov.filter.models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 public class ViewUsers extends HttpServlet {
-
     /**
      * Do get.
      * @param req HttpServletRequest.
@@ -19,7 +21,10 @@ public class ViewUsers extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("users", ConnectSql.getInstance().getUser());
-        req.getRequestDispatcher("/WEB-INF/views/UsersView.jsp").forward(req, resp);
+        List<User> users = ConnectSql.getInstance().getUser();
+        String json = new Gson().toJson(users);
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().write(json);
     }
 }

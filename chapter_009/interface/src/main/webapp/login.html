@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Login</title>
+    <script>
+        $(document).ready(function() {
+            $(document).keyup(function(event) {
+                if (event.keyCode == 13) {
+                    $("#enter").click();
+                }
+            })
+        });
+        function validate() {
+            var result = true;
+            var name = $('#login').val();
+            var password = $('#pwd').val();
+            if (name == '' || password == '') {
+                result = false;
+            }
+            if (!result) {
+                if (name == '' && password == '') {
+                    alert("Please input login/password");
+                } else if (name == '') {
+                    alert("Please input login");
+                } else {
+                    alert("Please input password");
+                }
+            } else {
+                signin();
+            }
+            return result;
+        }
+        function signin() {
+            $.ajax('./signin',{
+                method: 'post',
+                data : {
+                    login : $('#login').val(),
+                    password : $('#pwd').val()
+                },
+                success: function (data) {
+                    var result = data;
+                    if (result) {
+                        alert("Enter correct login/password")
+                    } else {
+                        location.href = "users.html";
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h2>Log into the system</h2>
+    <form id="myForm">
+        <div class="form-group">
+            <label for="login">Login:</label>
+            <input type="text" class="form-control" id="login" placeholder="Enter login" name="login">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
+        </div>
+        <button id="enter" type="button" class="btn btn-default" onclick="validate()">Submit</button>
+    </form>
+</div>
+</body>
+</html>

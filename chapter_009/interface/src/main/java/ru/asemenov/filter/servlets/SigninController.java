@@ -1,6 +1,8 @@
 package ru.asemenov.filter.servlets;
 
+import com.google.gson.Gson;
 import ru.asemenov.filter.ConnectSql;
+import ru.asemenov.filter.models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,10 +14,19 @@ import java.io.PrintWriter;
 
 public class SigninController extends HttpServlet {
 
-    /*@Override
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/login.html").forward(req, resp);
-    }*/
+        resp.setContentType("text/html");
+        User user;
+        HttpSession session = req.getSession();
+        synchronized (session) {
+            user = ConnectSql.getInstance().getUser((String) session.getAttribute("login"));
+        }
+        String json = new Gson().toJson(user);
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().write(json);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,7 +37,7 @@ public class SigninController extends HttpServlet {
             HttpSession session = req.getSession();
             synchronized (session) {
                 session.setAttribute("login", login);
-                session.setAttribute("role", ConnectSql.getInstance().getRole(login));
+                session.setAttribute("role", ConnectSql.getInstance().getUser(login).getRole().getName());
             }
         } else {
             PrintWriter out = new PrintWriter(resp.getOutputStream());

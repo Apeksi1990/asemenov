@@ -6,38 +6,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Title</title>
-    <script>
-        function loadUsers() {
-            $.ajax('./get', {
-                method : 'get',
-                complete: function(data) {
-                    var result = '';
-                    var users = JSON.parse(data.responseText);
-                    for (var i = 0; i != users.length; ++i) {
-                        result += "<tr>"+
-                                "<td>" + users[i].name + "</td>"+
-                                "<td>" + users[i].login + "</td>"+
-                                "<td>" + users[i].email + "</td>"+
-                                "<td>" + users[i].role.name + "</td>"+
-                                "</tr>";
-                    }
-                    $('#table-body').empty().append(result);
-                }
-            });
-        }
-        loadUsers();
-        $(document).ready(function() {
-            $( "#table-body" ).on( "click", "tr", function() {
-                var customerId = $(this).find("td").eq(2).html();
-                $('#edit-name').empty().append($(this).find("td").eq(0).html());
-                $('#edit-login').empty().append($(this).find("td").eq(1).html());
-                $('#edit-email').empty().append($(this).find("td").eq(2).html());
-                $('#edit-role').empty().append($(this).find("td").eq(3).html());
-                $('#myModal').modal('show');
-            });
-        })
-    </script>
+    <script src="myScript.js"></script>
+    <title>Users</title>
 </head>
 <body>
 <div class="container">
@@ -59,6 +29,12 @@
                     <td>mail</td>
                     <td>rolename</td>
                 </tr>
+                <tr>
+                    <td>UserT</td>
+                    <td>UserLog</td>
+                    <td>Usermail</td>
+                    <td>userRole</td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -79,11 +55,6 @@
                     <h4 class="modal-title">Edit user</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Some text in the modal.</p>
-                    <p id="edit-name"></p>
-                    <p id="edit-login"></p>
-                    <p id="edit-email"></p>
-                    <p id="edit-role"></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

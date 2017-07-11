@@ -120,7 +120,7 @@ public class ConnectSql {
      * Get user.
      * @return List.
      */
-    public List<User> getUser() {
+    public List<User> getUsers() {
         List<User> users = new ArrayList<>();
         Connection connection = null;
         PreparedStatement ps = null;
@@ -219,18 +219,24 @@ public class ConnectSql {
         return result;
     }
 
-    public String getRole(String login) {
-        String result = null;
+    public User getUser(String login) {
+        User user = null;
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
             connection = this.ds.getConnection();
-            ps = connection.prepareStatement("SELECT r.name role_name from sec_users u LEFT JOIN roles r on u.role_id = r.id where login = ?");
+            ps = connection.prepareStatement("SELECT u.id, u.name, u.login, u.password, u.email, u.role_id, r.name role_name from sec_users u LEFT JOIN roles r on u.role_id = r.id WHERE u.login = ?");
             ps.setString(1, login);
             rs = ps.executeQuery();
-            rs.next();
-            result = rs.getString("role_name");
+            while (rs.next()) {
+                user = new User(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("login"),
+                        rs.getString("password"),
+                        rs.getString("email"),
+                        new Role(rs.getInt("role_id"), rs.getString("role_name")));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -248,7 +254,7 @@ public class ConnectSql {
                 e.printStackTrace();
             }
         }
-        return result;
+        return user;
     }
 
     public Map<Integer, String> getRoles() {

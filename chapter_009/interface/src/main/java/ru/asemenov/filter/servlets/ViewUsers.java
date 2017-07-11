@@ -21,7 +21,7 @@ public class ViewUsers extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> users = ConnectSql.getInstance().getUser();
+        List<User> users = ConnectSql.getInstance().getUsers();
         String json = new Gson().toJson(users);
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");

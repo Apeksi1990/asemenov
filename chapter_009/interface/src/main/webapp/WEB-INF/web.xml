@@ -58,14 +58,4 @@
         <servlet-name>Signin</servlet-name>
         <url-pattern>/signin</url-pattern>
     </servlet-mapping>
-
-    <servlet>
-        <servlet-name>Exit</servlet-name>
-        <servlet-class>ru.asemenov.filter.servlets.UserExit</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Exit</servlet-name>
-        <url-pattern>/exit</url-pattern>
-    </servlet-mapping>
 </web-app>

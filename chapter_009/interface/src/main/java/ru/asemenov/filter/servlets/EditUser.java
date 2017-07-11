@@ -15,23 +15,6 @@ import java.io.IOException;
  * @version 1
  */
 public class EditUser extends HttpServlet {
-
-    /**
-     * Do get.
-     * @param req HttpServletRequest.
-     * @param resp HttpServletResponse.
-     * @throws ServletException exception.
-     * @throws IOException exception.
-     */
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        if (session.getAttribute("role").equals("administrator")) {
-            req.setAttribute("roles", ConnectSql.getInstance().getRoles());
-        }
-        req.getRequestDispatcher("/WEB-INF/views/EditUser.jsp").forward(req, resp);
-    }
-
     /**
      * Post.
      * @param req HttpServletRequest.

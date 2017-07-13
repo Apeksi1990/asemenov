@@ -9,13 +9,22 @@ function getRole() {
     });
 }
 getRole();
+function getRoles() {
+    return $.ajax('./edit', {
+        method: 'get',
+        complete: function (data) {
+            allRoles = JSON.parse(data.responseText);
+        }
+    });
+}
+getRoles();
 function loadUsers() {
+    console.log('loaduser');
     $.ajax('./get', {
         method : 'get',
         complete: function(data) {
             var result = '';
             var users = JSON.parse(data.responseText);
-            console.log(users);
             for (var i = 0; i != users.length; ++i) {
                 result += "<tr>"+
                     "<td>" + users[i].name + "</td>"+
@@ -30,34 +39,55 @@ function loadUsers() {
 }
 loadUsers();
 $(document).ready(function() {
-    $( "#table-body" ).on( "click", "tr", function() {
+    $('#table-body').on( 'click', 'tr', function() {
         var tname = $(this).find("td").eq(0).html();
         var tlogin = $(this).find("td").eq(1).html();
         var temail = $(this).find("td").eq(2).html();
         var trole = $(this).find("td").eq(3).html();
-        console.log(tname + ' ' + tlogin + ' ' + temail + ' ' + trole);
-        $('.modal-body').empty();
-        $('.modal-body').append('Name: <input type="text" class="form-control" id="edit-name" disabled></br>');
-        $('.modal-body').append('Login: <input type="text" class="form-control" id="edit-login" disabled></br>');
-        $('.modal-body').append('Email: <input type="text" class="form-control" id="edit-email" disabled></br>');
-        $('.modal-body').append('Role: <input type="text" class="form-control" id="edit-role" disabled></br>');
-        $('.modal-body').append('<input type="hidden" id="oldLogin"></br>');
+        $('#delBut').remove();
+        $('#editBut').remove();
+        $('.modal-body').empty().append('Name: <input type="text" class="form-control" id="edit-name" disabled></br>')
+                                .append('Login: <input type="text" class="form-control" id="edit-login" disabled></br>')
+                                .append('Email: <input type="text" class="form-control" id="edit-email" disabled></br>')
+                                .append('<input type="hidden" id="oldLogin"></br>');
+        addRolePanel(roleConnect, trole);
         if (roleConnect == 'administrator' || loginConnect == tlogin) {
             $('.modal-body input').attr('disabled', false);
+            addEditBut();
         }
         $('#edit-name').val(tname);
         $('#edit-login').val(tlogin);
         $('#edit-email').val(temail);
-        $('#edit-role').val(trole);
         $('#oldLogin').val(tlogin);
         $('#myModal').modal('show');
     });
 });
+function addRolePanel(role, value) {
+    if (role == 'administrator') {
+        $('.modal-body').append('<select name="role_id" class="form-control" id="edit-role"></select>');
+        $.each(allRoles, function(i,v) {
+            $('#edit-role').append($('<option>', {
+                value: v.id,
+                text: v.name
+            }));
+        });
+        $('#edit-role').find('option:contains(' + value + ')').attr('selected', 'selected');
+        addDelBut();
+    } else {
+        $('.modal-body').append('Role: <input type="text" class="form-control" id="edit-role" disabled></br>');
+        $('#edit-role').val(value);
+    }
+}
+function addEditBut() {
+    $('.modal-footer').prepend('<button type="button" class="btn btn-default" data-dismiss="modal" id="editBut" onclick="editUser()">Edit</button>')
+}
+function addDelBut() {
+    $('.modal-footer').prepend('<button type="button" class="btn btn-default" id="delBut">Delete</button>');
+}
 function editUser() {
     $.ajax('./edit', {
         method : 'post',
-        data : {login : userLogin},
-        success : location.href = "/edit.html"
+        data : {login : $('#edit-login').val(), name : $('#edit-name').val(), email : $('#edit-email').val(), role_id : $('#edit-role').val(), oldLogin : $('#oldLogin').val()},
+        complete: loadUsers()
     });
-    return false;
 }

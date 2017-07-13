@@ -257,8 +257,8 @@ public class ConnectSql {
         return user;
     }
 
-    public Map<Integer, String> getRoles() {
-        Map<Integer, String> result = new HashMap<>();
+    public List<Role> getRoles() {
+        List<Role> result = new ArrayList<>();
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -267,7 +267,7 @@ public class ConnectSql {
             ps = connection.prepareStatement("SELECT * from roles");
             rs = ps.executeQuery();
             while (rs.next()) {
-                result.put(rs.getInt("id"), rs.getString("name"));
+                result.add(new Role(rs.getInt("id"), rs.getString("name")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

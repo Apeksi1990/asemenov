@@ -56,6 +56,5 @@ public class EditUser extends HttpServlet {
             ConnectSql.getInstance().editUser(req.getParameter("oldLogin"), req.getParameter("name"), req.getParameter("login"), req.getParameter("email"));
             ConnectSql.getInstance().setRole(req.getParameter("login"), Integer.parseInt(req.getParameter("role_id")));
         }
-        resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

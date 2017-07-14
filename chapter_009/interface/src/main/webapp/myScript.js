@@ -82,12 +82,23 @@ function addEditBut() {
     $('.modal-footer').prepend('<button type="button" class="btn btn-default" data-dismiss="modal" id="editBut" onclick="editUser()">Edit</button>')
 }
 function addDelBut() {
-    $('.modal-footer').prepend('<button type="button" class="btn btn-default" id="delBut">Delete</button>');
+    $('.modal-footer').prepend('<button type="button" class="btn btn-default" data-dismiss="modal" id="delBut" onclick="deleteUser()">Delete</button>');
 }
 function editUser() {
     $.ajax('./edit', {
         method : 'post',
         data : {login : $('#edit-login').val(), name : $('#edit-name').val(), email : $('#edit-email').val(), role_id : $('#edit-role').val(), oldLogin : $('#oldLogin').val()},
-        complete: loadUsers()
+        complete: function () {
+            loadUsers()
+        }
+    });
+}
+function deleteUser() {
+    $.ajax('./delete', {
+        method : 'post',
+        data : {login : $('#edit-login').val()},
+        complete: function () {
+            loadUsers()
+        }
     });
 }

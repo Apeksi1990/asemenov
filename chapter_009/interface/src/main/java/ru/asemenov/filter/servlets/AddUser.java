@@ -29,6 +29,5 @@ public class AddUser extends HttpServlet {
                 req.getParameter("password"),
                 req.getParameter("email"),
                 Integer.parseInt(req.getParameter("role_id")));
-        resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

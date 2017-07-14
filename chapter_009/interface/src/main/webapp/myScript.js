@@ -1,3 +1,9 @@
+function addUserButton() {
+    console.log(roleConnect);
+    if (roleConnect == 'administrator') {
+        $('.container:first').append('<button type="button" class="btn btn-success">Add new user</button>')
+    }
+}
 function getRole() {
     $.ajax('./signin', {
         method: 'get',
@@ -5,6 +11,7 @@ function getRole() {
             var user = JSON.parse(data.responseText);
             roleConnect = user.role.name;
             loginConnect = user.login;
+            addUserButton()
         }
     });
 }

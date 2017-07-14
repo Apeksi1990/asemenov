@@ -1,7 +1,6 @@
 function addUserButton() {
-    console.log(roleConnect);
     if (roleConnect == 'administrator') {
-        $('.container:first').append('<button type="button" class="btn btn-success">Add new user</button>')
+        $('.container:first').append('<button type="button" class="btn btn-success" onclick="modalAddUser()">Add new user</button>')
     }
 }
 function getRole() {
@@ -26,7 +25,6 @@ function getRoles() {
 }
 getRoles();
 function loadUsers() {
-    console.log('loaduser');
     $.ajax('./get', {
         method : 'get',
         complete: function(data) {
@@ -46,13 +44,14 @@ function loadUsers() {
 }
 loadUsers();
 $(document).ready(function() {
-    $('#table-body').on( 'click', 'tr', function() {
+    $('#table-body').on('click', 'tr', function() {
         var tname = $(this).find("td").eq(0).html();
         var tlogin = $(this).find("td").eq(1).html();
         var temail = $(this).find("td").eq(2).html();
         var trole = $(this).find("td").eq(3).html();
         $('#delBut').remove();
         $('#editBut').remove();
+        $('.modal-title').empty().append('Edit user');
         $('.modal-body').empty().append('Name: <input type="text" class="form-control" id="edit-name" disabled></br>')
                                 .append('Login: <input type="text" class="form-control" id="edit-login" disabled></br>')
                                 .append('Email: <input type="text" class="form-control" id="edit-email" disabled></br>')
@@ -104,6 +103,27 @@ function deleteUser() {
     $.ajax('./delete', {
         method : 'post',
         data : {login : $('#edit-login').val()},
+        complete: function () {
+            loadUsers()
+        }
+    });
+}
+function modalAddUser() {
+    $('#delBut').remove();
+    $('#editBut').remove();
+    $('.modal-title').empty().append('Add user');
+    $('.modal-body').empty().append('Name: <input type="text" class="form-control" id="add-name" disabled></br>')
+        .append('Login: <input type="text" class="form-control" id="add-login" disabled></br>')
+        .append('Email: <input type="text" class="form-control" id="add-email" disabled></br>')
+        .append('Password: <input type="text" class="form-control" id="add-password" disabled></br>')
+    addRolePanel(roleConnect);
+    $('.modal-body input').attr('disabled', false);
+    $('#myModal').modal('show');
+}
+function addNewUser() {
+    $.ajax('./add', {
+        method : 'post',
+        data : {login : $('#add-login').val(), name : $('#add-name').val(), email : $('#add-email').val(), role_id : $('#edit-role').val(), password : $('#add-password').val()},
         complete: function () {
             loadUsers()
         }

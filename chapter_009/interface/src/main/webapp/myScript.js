@@ -51,6 +51,7 @@ $(document).ready(function() {
         var trole = $(this).find("td").eq(3).html();
         $('#delBut').remove();
         $('#editBut').remove();
+        $('#addBut').remove();
         $('.modal-title').empty().append('Edit user');
         $('.modal-body').empty().append('Name: <input type="text" class="form-control" id="edit-name" disabled></br>')
                                 .append('Login: <input type="text" class="form-control" id="edit-login" disabled></br>')
@@ -59,8 +60,9 @@ $(document).ready(function() {
         addRolePanel(roleConnect, trole);
         if (roleConnect == 'administrator' || loginConnect == tlogin) {
             $('.modal-body input').attr('disabled', false);
-            addEditBut();
+            $('.modal-footer').prepend('<button type="button" class="btn btn-default" data-dismiss="modal" id="editBut" onclick="editUser()">Edit</button>')
         }
+        addDelBut(roleConnect);
         $('#edit-name').val(tname);
         $('#edit-login').val(tlogin);
         $('#edit-email').val(temail);
@@ -78,17 +80,15 @@ function addRolePanel(role, value) {
             }));
         });
         $('#edit-role').find('option:contains(' + value + ')').attr('selected', 'selected');
-        addDelBut();
     } else {
         $('.modal-body').append('Role: <input type="text" class="form-control" id="edit-role" disabled></br>');
         $('#edit-role').val(value);
     }
 }
-function addEditBut() {
-    $('.modal-footer').prepend('<button type="button" class="btn btn-default" data-dismiss="modal" id="editBut" onclick="editUser()">Edit</button>')
-}
-function addDelBut() {
-    $('.modal-footer').prepend('<button type="button" class="btn btn-default" data-dismiss="modal" id="delBut" onclick="deleteUser()">Delete</button>');
+function addDelBut(role) {
+    if (role == 'administrator') {
+        $('.modal-footer').prepend('<button type="button" class="btn btn-default" data-dismiss="modal" id="delBut" onclick="deleteUser()">Delete</button>');
+    }
 }
 function editUser() {
     $.ajax('./edit', {
@@ -111,12 +111,14 @@ function deleteUser() {
 function modalAddUser() {
     $('#delBut').remove();
     $('#editBut').remove();
+    $('#addBut').remove();
     $('.modal-title').empty().append('Add user');
     $('.modal-body').empty().append('Name: <input type="text" class="form-control" id="add-name" disabled></br>')
         .append('Login: <input type="text" class="form-control" id="add-login" disabled></br>')
         .append('Email: <input type="text" class="form-control" id="add-email" disabled></br>')
-        .append('Password: <input type="text" class="form-control" id="add-password" disabled></br>')
+        .append('Password: <input type="text" class="form-control" id="add-password" disabled></br>');
     addRolePanel(roleConnect);
+    $('.modal-footer').prepend('<button type="button" class="btn btn-default" data-dismiss="modal" id="addBut" onclick="addNewUser()">Add User</button>');
     $('.modal-body input').attr('disabled', false);
     $('#myModal').modal('show');
 }

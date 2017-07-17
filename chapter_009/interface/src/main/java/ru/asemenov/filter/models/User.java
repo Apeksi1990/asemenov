@@ -30,6 +30,14 @@ public class User {
      * Password.
      */
     private String password;
+    /**
+     * Country.
+     */
+    private String country;
+    /**
+     * City.
+     */
+    private String city;
 
     /**
      * User constructor.
@@ -38,12 +46,30 @@ public class User {
      * @param login String.
      * @param email String.
      */
-    public User(int id, String name, String login, String password, String email, Role role) {
+    public User(int id, String name, String login, String password, String email, Role role, String country, String city) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.email = email;
         this.role = role;
+        this.country = country;
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     /**

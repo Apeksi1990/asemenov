@@ -127,7 +127,7 @@ public class ConnectSql {
         ResultSet rs = null;
         try {
             connection = this.ds.getConnection();
-            ps = connection.prepareStatement("SELECT u.id, u.name, u.login, u.password, u.email, u.role_id, r.name role_name from sec_users u LEFT JOIN roles r on u.role_id = r.id");
+            ps = connection.prepareStatement("SELECT u.id, u.name, u.login, u.password, u.email, u.role_id, r.name role_name, ci.name city, co.name country from sec_users u LEFT JOIN roles r on u.role_id = r.id LEFT JOIN cities ci on u.city_id = ci.id LEFT JOIN countries co on ci.country_id = co.id");
             rs = ps.executeQuery();
             while (rs.next()) {
                 users.add(new User(rs.getInt("id"),
@@ -135,7 +135,9 @@ public class ConnectSql {
                         rs.getString("login"),
                         rs.getString("password"),
                         rs.getString("email"),
-                        new Role(rs.getInt("role_id"), rs.getString("role_name"))));
+                        new Role(rs.getInt("role_id"), rs.getString("role_name")),
+                        rs.getString("city"),
+                        rs.getString("country")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -235,7 +237,8 @@ public class ConnectSql {
                         rs.getString("login"),
                         rs.getString("password"),
                         rs.getString("email"),
-                        new Role(rs.getInt("role_id"), rs.getString("role_name")));
+                        new Role(rs.getInt("role_id"), rs.getString("role_name")),
+                        null, null);
             }
         } catch (SQLException e) {
             e.printStackTrace();

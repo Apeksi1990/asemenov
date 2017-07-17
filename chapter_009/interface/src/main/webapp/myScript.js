@@ -36,6 +36,8 @@ function loadUsers() {
                     "<td>" + users[i].login + "</td>"+
                     "<td>" + users[i].email + "</td>"+
                     "<td>" + users[i].role.name + "</td>"+
+                    "<td>" + users[i].city + "</td>"+
+                    "<td>" + users[i].country + "</td>"+
                     "</tr>";
             }
             $('#table-body').empty().append(result);

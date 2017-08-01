@@ -44,7 +44,11 @@ public class User {
      * @param id int.
      * @param name String.
      * @param login String.
+     * @param password String.
      * @param email String.
+     * @param role Role.
+     * @param city String.
+     * @param country String.
      */
     public User(int id, String name, String login, String password, String email, Role role, String city, String country) {
         this.id = id;
@@ -56,18 +60,34 @@ public class User {
         this.city = city;
     }
 
+    /**
+     * Get country.
+     * @return counter.
+     */
     public String getCountry() {
         return country;
     }
 
+    /**
+     * Set country.
+     * @param country String.
+     */
     public void setCountry(String country) {
         this.country = country;
     }
 
+    /**
+     * Get city.
+     * @return city.
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     * Set city.
+     * @param city string.
+     */
     public void setCity(String city) {
         this.city = city;
     }
@@ -88,6 +108,10 @@ public class User {
         return role;
     }
 
+    /**
+     * to string.
+     * @return string.
+     */
     @Override
     public String toString() {
         return "User{" +

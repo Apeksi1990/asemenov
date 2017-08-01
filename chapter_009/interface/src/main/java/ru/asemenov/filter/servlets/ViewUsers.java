@@ -10,7 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * Class ViewUsers решение задачи части 009.
+ * @author asemenov
+ * @version 1
+ */
 public class ViewUsers extends HttpServlet {
     /**
      * Do get.

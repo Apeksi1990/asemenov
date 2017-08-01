@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+/**
+ * Class SigninController решение задачи части 009.
+ * @author asemenov
+ * @version 1
+ */
 public class SigninController extends HttpServlet {
 
     @Override

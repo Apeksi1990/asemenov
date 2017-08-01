@@ -16,17 +16,29 @@ import java.util.*;
  * @version 1
  */
 public class ConnectSql {
-
+    /**
+     * Instance.
+     */
     private static final ConnectSql instance = new ConnectSql();
 
+    /**
+     * Constructor.
+     */
     private ConnectSql() {
         setDataSoure();
     }
 
+    /**
+     * Get instance.
+     * @return instance.
+     */
     public static ConnectSql getInstance() {
         return instance;
     }
 
+    /**
+     * Data source.
+     */
     private BasicDataSource ds;
 
     /**
@@ -40,7 +52,7 @@ public class ConnectSql {
         try {
             fis = loader.getResourceAsStream("db.properties");
             props.load(fis);
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         this.ds.setDriverClassName(props.getProperty("DRIVER"));
@@ -50,10 +62,13 @@ public class ConnectSql {
     }
 
     /**
-     * Add users.
-     * @param name String.
-     * @param login String.
-     * @param email String.
+     * Add new user.
+     * @param name string.
+     * @param login string.
+     * @param password string.
+     * @param email string.
+     * @param role_id int.
+     * @param city_id int.
      */
     public void addUser(String name, String login, String password,  String email, int role_id, int city_id) {
         System.out.println("Перешел в коннект");
@@ -88,6 +103,7 @@ public class ConnectSql {
 
     /**
      * Edit user.
+     * @param oldLogin String.
      * @param name String.
      * @param login String.
      * @param email String.
@@ -190,6 +206,12 @@ public class ConnectSql {
         }
     }
 
+    /**
+     * Check user password.
+     * @param login string.
+     * @param password string.
+     * @return boolean.
+     */
     public boolean checkPassword(String login, String password) {
         boolean result = false;
         Connection connection = null;
@@ -224,6 +246,11 @@ public class ConnectSql {
         return result;
     }
 
+    /**
+     * Get user.
+     * @param login string.
+     * @return User.
+     */
     public User getUser(String login) {
         User user = null;
         Connection connection = null;
@@ -263,6 +290,10 @@ public class ConnectSql {
         return user;
     }
 
+    /**
+     * Get all roles.
+     * @return List.
+     */
     public List<Role> getRoles() {
         List<Role> result = new ArrayList<>();
         Connection connection = null;
@@ -295,6 +326,10 @@ public class ConnectSql {
         return result;
     }
 
+    /**
+     * Get all countries.
+     * @return List.
+     */
     public List<String> getCountries() {
         List<String> result = new ArrayList<>();
         Connection connection = null;
@@ -327,6 +362,11 @@ public class ConnectSql {
         return result;
     }
 
+    /**
+     * Get cities.
+     * @param country string.
+     * @return List.
+     */
     public List<City> getCities(String country) {
         List<City> result = new ArrayList<>();
         Connection connection = null;
@@ -360,6 +400,11 @@ public class ConnectSql {
         return result;
     }
 
+    /**
+     * Set role to user.
+     * @param login string.
+     * @param role_id int.
+     */
     public void setRole(String login, int role_id) {
         Connection connection = null;
         PreparedStatement ps = null;
@@ -385,6 +430,11 @@ public class ConnectSql {
         }
     }
 
+    /**
+     * Set city to user.
+     * @param login string.
+     * @param city_id int.
+     */
     public void setCity(String login, int city_id) {
         Connection connection = null;
         PreparedStatement ps = null;

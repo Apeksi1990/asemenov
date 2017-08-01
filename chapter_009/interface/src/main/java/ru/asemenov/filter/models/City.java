@@ -1,5 +1,9 @@
 package ru.asemenov.filter.models;
-
+/**
+ * Class City решение задачи части 009.
+ * @author asemenov
+ * @version 1
+ */
 public class City {
     /**
      * Id.

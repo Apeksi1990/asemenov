@@ -2,6 +2,7 @@ package ru.asemenov.filter.servlets;
 
 import com.google.gson.Gson;
 import ru.asemenov.filter.ConnectSql;
+import ru.asemenov.filter.models.City;
 import ru.asemenov.filter.models.Role;
 
 import javax.servlet.ServletException;
@@ -28,12 +29,29 @@ public class EditUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        List<Role> roles;
-        HttpSession session = req.getSession();
-        synchronized (session) {
-            roles = ConnectSql.getInstance().getRoles();
+        String json = "";
+        if (req.getParameter("option").equals("roles")) {
+            List<Role> roles;
+            HttpSession session = req.getSession();
+            synchronized (session) {
+                roles = ConnectSql.getInstance().getRoles();
+            }
+            json = new Gson().toJson(roles);
+        } else if (req.getParameter("option").equals("countries")) {
+            List<String> countries;
+            HttpSession session = req.getSession();
+            synchronized (session) {
+                countries = ConnectSql.getInstance().getCountries();
+            }
+            json = new Gson().toJson(countries);
+        } else if (req.getParameter("option").equals("city")) {
+            List<City> countries;
+            HttpSession session = req.getSession();
+            synchronized (session) {
+                countries = ConnectSql.getInstance().getCities(req.getParameter("country"));
+            }
+            json = new Gson().toJson(countries);
         }
-        String json = new Gson().toJson(roles);
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write(json);
@@ -55,6 +73,7 @@ public class EditUser extends HttpServlet {
         } else {
             ConnectSql.getInstance().editUser(req.getParameter("oldLogin"), req.getParameter("name"), req.getParameter("login"), req.getParameter("email"));
             ConnectSql.getInstance().setRole(req.getParameter("login"), Integer.parseInt(req.getParameter("role_id")));
+            ConnectSql.getInstance().setCity(req.getParameter("login"), Integer.parseInt(req.getParameter("city_id")));
         }
     }
 }

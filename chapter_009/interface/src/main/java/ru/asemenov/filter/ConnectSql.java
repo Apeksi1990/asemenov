@@ -1,6 +1,7 @@
 package ru.asemenov.filter;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import ru.asemenov.filter.models.City;
 import ru.asemenov.filter.models.Role;
 import ru.asemenov.filter.models.User;
 
@@ -54,18 +55,20 @@ public class ConnectSql {
      * @param login String.
      * @param email String.
      */
-    public void addUser(String name, String login, String password,  String email, int role_id) {
+    public void addUser(String name, String login, String password,  String email, int role_id, int city_id) {
+        System.out.println("Перешел в коннект");
         Connection connection = null;
         PreparedStatement ps = null;
         try {
             connection = this.ds.getConnection();
-            ps = connection.prepareStatement("INSERT INTO sec_users(name, login, password, email, create_date, role_id) VALUES (?,?,?,?,?,?)");
+            ps = connection.prepareStatement("INSERT INTO sec_users(name, login, password, email, create_date, role_id, city_id) VALUES (?,?,?,?,?,?,?)");
             ps.setString(1, name);
             ps.setString(2, login);
             ps.setString(3, password);
             ps.setString(4, email);
             ps.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
             ps.setInt(6, role_id);
+            ps.setInt(7, city_id);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -292,6 +295,71 @@ public class ConnectSql {
         return result;
     }
 
+    public List<String> getCountries() {
+        List<String> result = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            connection = this.ds.getConnection();
+            ps = connection.prepareStatement("SELECT * from countries");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                result.add(rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    public List<City> getCities(String country) {
+        List<City> result = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            connection = this.ds.getConnection();
+            ps = connection.prepareStatement("SELECT ci.id, ci.name FROM cities ci LEFT JOIN countries co ON ci.country_id = co.id WHERE co.name = ?");
+            ps.setString(1, country);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                result.add(new City(rs.getInt("id"), rs.getString("name")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
     public void setRole(String login, int role_id) {
         Connection connection = null;
         PreparedStatement ps = null;
@@ -299,6 +367,31 @@ public class ConnectSql {
             connection = this.ds.getConnection();
             ps = connection.prepareStatement("UPDATE sec_users SET role_id = ? WHERE login = ?");
             ps.setInt(1, role_id);
+            ps.setString(2, login);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void setCity(String login, int city_id) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        try {
+            connection = this.ds.getConnection();
+            ps = connection.prepareStatement("UPDATE sec_users SET city_id = ? WHERE login = ?");
+            ps.setInt(1, city_id);
             ps.setString(2, login);
             ps.executeUpdate();
         } catch (SQLException e) {

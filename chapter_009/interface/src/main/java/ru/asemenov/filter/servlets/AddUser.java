@@ -24,14 +24,17 @@ public class AddUser extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("Перешёл в сервлет");
         resp.setContentType("text/html");
         HttpSession session = req.getSession();
-        if (!session.getAttribute("role").equals("administrator")) {
+        if (session.getAttribute("role").equals("administrator")) {
             ConnectSql.getInstance().addUser(req.getParameter("name"),
                     req.getParameter("login"),
                     req.getParameter("password"),
                     req.getParameter("email"),
-                    Integer.parseInt(req.getParameter("role_id")));
+                    Integer.parseInt(req.getParameter("role_id")),
+                    Integer.parseInt(req.getParameter("city_id"))
+            );
         }
     }
 }

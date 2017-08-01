@@ -26,7 +26,7 @@ public class DeleteUser extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         HttpSession session = req.getSession();
-        if (!session.getAttribute("role").equals("administrator")) {
+        if (session.getAttribute("role").equals("administrator")) {
             ConnectSql.getInstance().deleteUser(req.getParameter("login"));
         }
     }

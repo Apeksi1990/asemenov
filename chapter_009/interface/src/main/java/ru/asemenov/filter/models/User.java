@@ -46,7 +46,7 @@ public class User {
      * @param login String.
      * @param email String.
      */
-    public User(int id, String name, String login, String password, String email, Role role, String country, String city) {
+    public User(int id, String name, String login, String password, String email, Role role, String city, String country) {
         this.id = id;
         this.name = name;
         this.login = login;
@@ -97,6 +97,8 @@ public class User {
                 ", email='" + email + '\'' +
                 ", role=" + role +
                 ", password='" + password + '\'' +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
                 '}';
     }
 

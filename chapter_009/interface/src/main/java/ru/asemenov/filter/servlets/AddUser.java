@@ -24,7 +24,6 @@ public class AddUser extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Перешёл в сервлет");
         resp.setContentType("text/html");
         HttpSession session = req.getSession();
         if (session.getAttribute("role").equals("administrator")) {

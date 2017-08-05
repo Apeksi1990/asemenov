@@ -71,7 +71,6 @@ public class ConnectSql {
      * @param city_id int.
      */
     public void addUser(String name, String login, String password,  String email, int role_id, int city_id) {
-        System.out.println("Перешел в коннект");
         Connection connection = null;
         PreparedStatement ps = null;
         try {

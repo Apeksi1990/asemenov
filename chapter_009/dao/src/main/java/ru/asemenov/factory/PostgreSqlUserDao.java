@@ -26,7 +26,7 @@ public class PostgreSqlUserDao implements UserDAO {
     @Override
     public List<User> getAll() {
         List<User> result = new ArrayList<>();
-        String sql = "SELECT * FROM role";
+        String sql = "SELECT * FROM user";
         try (Connection connection = this.factory.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {

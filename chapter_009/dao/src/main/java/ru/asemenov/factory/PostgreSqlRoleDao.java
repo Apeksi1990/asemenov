@@ -14,13 +14,20 @@ public class PostgreSqlRoleDao implements RoleDAO {
 
     private DAOFactory factory;
 
-    public PostgreSqlRoleDao(DAOFactory factory) {
+    PostgreSqlRoleDao(DAOFactory factory) {
         this.factory = factory;
     }
 
     @Override
     public void create(String name) {
-
+        String sql = "INSERT INTO role(name) VALUES (?)";
+        try (Connection connection = this.factory.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)){
+            ps.setString(1, name);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -44,16 +51,44 @@ public class PostgreSqlRoleDao implements RoleDAO {
 
     @Override
     public Role findById(int id) {
-        return null;
+        Role result = new Role();
+        String sql = "SELECT * FROM role WHERE id = ?";
+        try (Connection connection = this.factory.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                result.setId(rs.getInt("id"));
+                result.setName(rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     @Override
     public void update(int id, String name) {
-
+        String sql = "UPDATE role SET name = ? WHERE id = ?";
+        try (Connection connection = this.factory.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, name);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void delete(int id) {
-
+        String sql = "DELETE FROM role WHERE id = ?";
+        try (Connection connection = this.factory.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

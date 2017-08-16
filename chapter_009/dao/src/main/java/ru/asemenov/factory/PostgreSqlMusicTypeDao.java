@@ -14,13 +14,20 @@ public class PostgreSqlMusicTypeDao implements MusicTypeDAO {
 
     private DAOFactory factory;
 
-    public PostgreSqlMusicTypeDao(DAOFactory factory) {
+    PostgreSqlMusicTypeDao(DAOFactory factory) {
         this.factory = factory;
     }
 
     @Override
     public void create(String name) {
-
+        String sql = "INSERT INTO musictype(name) VALUES (?)";
+        try (Connection connection = this.factory.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)){
+            ps.setString(1, name);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+                 e.printStackTrace();
+        }
     }
 
     @Override
@@ -44,16 +51,44 @@ public class PostgreSqlMusicTypeDao implements MusicTypeDAO {
 
     @Override
     public MusicType findById(int id) {
-        return null;
+        MusicType result = new MusicType();
+        String sql = "SELECT * FROM musictype WHERE id = ?";
+        try (Connection connection = this.factory.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                result.setId(rs.getInt("id"));
+                result.setName(rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     @Override
     public void update(int id, String name) {
-
+        String sql = "UPDATE musictype SET name = ? WHERE id = ?";
+        try (Connection connection = this.factory.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, name);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void delete(int id) {
-
+        String sql = "DELETE FROM musictype WHERE id = ?";
+        try (Connection connection = this.factory.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -2,6 +2,7 @@ package ru.asemenov.models;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 public class User implements Serializable {
     private int id;
@@ -9,7 +10,7 @@ public class User implements Serializable {
     private String login;
     private String address;
     private String roleId;
-    private List<MusicType> musicType;
+    private Set<MusicType> musicType;
 
     public int getId() {
         return id;
@@ -51,11 +52,11 @@ public class User implements Serializable {
         this.roleId = roleId;
     }
 
-    public List<MusicType> getMusicType() {
+    public Set<MusicType> getMusicType() {
         return musicType;
     }
 
-    public void setMusicType(List<MusicType> musicType) {
+    public void setMusicType(Set<MusicType> musicType) {
         this.musicType = musicType;
     }
 

@@ -6,7 +6,9 @@ import ru.asemenov.models.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class PostgreSqlUserDao implements UserDAO {
 
@@ -75,8 +77,8 @@ public class PostgreSqlUserDao implements UserDAO {
         return result;
     }
 
-    private List<MusicType> getMusic(int id) {
-        List<MusicType> result = new ArrayList<>();
+    private Set<MusicType> getMusic(int id) {
+        Set<MusicType> result = new HashSet<>();
         String sql = "select * from musictype mt  left join user_music um on mt.id = um.music_id where um.user_id = ?";
         try (Connection connection = this.factory.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -117,13 +119,17 @@ public class PostgreSqlUserDao implements UserDAO {
     }
 
     @Override
-    public void update(int id, String name, String login, int address, int role, List<Integer> music) { //TODO доделать апдейт юзера
+    public void update(int id, String name, String login, int address, int role, List<Integer> music) {
         String sql = "UPDATE users SET name = ?,  login = ?, address_id = ?, role_id = ?  WHERE id = ?";
         try (Connection connection = this.factory.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, name);
-            ps.setInt(2, id);
+            ps.setString(2, login);
+            ps.setInt(3, address);
+            ps.setInt(4, role);
+            ps.setInt(5, id);
             ps.executeUpdate();
+            addMusicToUser(id, music);
         } catch (SQLException e) {
             e.printStackTrace();
         }

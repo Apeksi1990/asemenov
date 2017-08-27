@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="myScript.js"></script>
+    <link rel="stylesheet" type="text/css" href="myStyle.css">
+</head>
+<body>
+<div class="container">
+    <h2>ToDo List</h2>
+    </br>
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Task text">
+        <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button">Add new task</button>
+        </span>
+    </div>
+    </br>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Description</th>
+            <th>Create date</th>
+            <th>Done</th>
+        </tr>
+        </thead>
+        <tbody id="table-body">
+        <tr>
+            <td>Default</td>
+            <td>Defaultson</td>
+            <td>
+                <label class="checkbox-inline"><input type="checkbox" value="">Выполнено</label>
+            </td>
+        </tr>
+        <tr class="success">
+            <td>Success</td>
+            <td>Doe</td>
+            <td>
+                <label class="checkbox-inline"><input type="checkbox" value="">Открыто</label>
+            </td>
+        </tr>
+        <tr class="danger">
+            <td>Danger</td>
+            <td>Moe</td>
+            <td>
+                <label class="checkbox-inline"><input type="checkbox" value="">Открыто</label>
+            </td>
+        </tr>
+        <tr class="info">
+            <td>Info</td>
+            <td>Dooley</td>
+            <td>
+                <label class="checkbox-inline"><input type="checkbox" value="">Открыто</label>
+            </td>
+        </tr>
+        <tr class="warning">
+            <td>Warning</td>
+            <td>Refs</td>
+            <td>
+                <label class="checkbox-inline"><input type="checkbox" value="">Открыто</label>
+            </td>
+        </tr>
+        <tr class="active">
+            <td>Active</td>
+            <td>Activeson</td>
+            <td>
+                <label class="checkbox-inline"><input type="checkbox" value="">Открыто</label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

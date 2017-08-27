@@ -23,6 +23,8 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        resp.setContentType("text/html");
+        HiberConnect connect = HiberConnect.getInstance();
+        connect.addItem(req.getParameter("text"));
     }
 }

@@ -1,22 +1,3 @@
-/*function loadItems() {
-    $.ajax('./items', {
-        method : 'get',
-        complete: function(data) {
-            var items = JSON.parse(data.responseText);
-            $('#table-body').empty();
-            for (var i = 0; i != items.length; ++i) {
-                $('#table-body')
-                    .append($('<tr>')
-                        .append($('<td>').text(items[i].desc))
-                        .append($('<td>').text(items[i].created))
-                        .append($('<td>').append($('<input>').attr('type', 'checkbox').attr('checked', (items[i].done == false ? '' : 'true')))
-                                         .append($('<label>').text((items[i].done == false ? 'Открыто': 'Выполнено')))
-                        )
-                    )
-            }
-        }
-    });
-}*/
 loadItems();
 function loadItems() {
     $.ajax('./items', {
@@ -36,8 +17,27 @@ function createTable(items) {
             .append($('<td>', { text: item.desc }).attr('checked', (items.done == false ? 'false': 'true')))
             .append($('<td>', { text: item.created }))
             .append($('<td>')
-                .append($('<input>', { type: 'checkbox'}))
-                .append($('<label>', { text: (items.done == false ? 'Открыто': 'Выполнено') }))
+                .append($('<input>', { id: 'checkbox', type: 'checkbox', checked: (item.done == false ? false : true)}))
+                .append($('<label>', {text: (item.done == false ? 'Открыто': 'Выполнено')}))
             );
+    });
+}
+
+function addNewTask() {
+    var newtask = $('#newTask');
+    var textTask = newtask.val();
+    newtask.val('');
+    sendTask(textTask)
+}
+
+function sendTask(text) {
+    $.ajax('./items', {
+        method : 'post',
+        data : {
+            text : text
+        },
+        complete: function () {
+            loadItems()
+        }
     });
 }

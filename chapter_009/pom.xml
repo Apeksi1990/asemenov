@@ -18,6 +18,7 @@
         <module>filter_security</module>
         <module>interface</module>
         <module>dao</module>
+        <module>nodereverse</module>
     </modules>
 
     <dependencies>

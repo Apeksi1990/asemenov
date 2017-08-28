@@ -13,13 +13,14 @@ function createTable(items) {
     var tableBody = $('#table-body');
     tableBody.empty();
     items.forEach(function(item) {
-        tableBody.append($('<tr>'))
+        tableBody.append($('<tr>')
             .append($('<td>', { text: item.desc }).attr('checked', (items.done == false ? 'false': 'true')))
             .append($('<td>', { text: item.created }))
             .append($('<td>')
-                .append($('<input>', { id: 'checkbox', type: 'checkbox', checked: (item.done == false ? false : true)}))
-                .append($('<label>', {text: (item.done == false ? 'Открыто': 'Выполнено')}))
-            );
+                .append($('<label>', {class: 'checkbox-inline'})
+                    .append($('<input>', { id: 'checkbox', type: 'checkbox', checked: (item.done == false ? false : true)}))
+                    .append(item.done == false ? 'Открыто': 'Выполнено'))
+            ));
     });
 }
 

@@ -42,3 +42,31 @@ function sendTask(text) {
         }
     });
 }
+
+$(document).ready(function() {
+    $('#showAll').change(function () {
+        if ($(this).is(':checked')) {
+            showRows()
+        } else {
+            hideRows()
+        }
+    });
+});
+
+function hideRows() {
+    $('#table-body').find('tr:contains("Выполнено")').hide();
+}
+
+function showRows() {
+    $('#table-body').find('tr').show();
+}
+
+$(document).ready(function() {
+    $('#table-body').find('input[type="checkbox"]').change(function () {
+        if ($(this).is(':checked')) {
+
+        } else {
+            console.log('321')
+        }
+    });
+});

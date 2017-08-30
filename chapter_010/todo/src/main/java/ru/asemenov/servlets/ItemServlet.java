@@ -25,6 +25,10 @@ public class ItemServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         HiberConnect connect = HiberConnect.getInstance();
-        connect.addItem(req.getParameter("text"));
+        if (req.getParameter("id") != null) {
+            connect.editState(Integer.parseInt(req.getParameter("id")), Boolean.parseBoolean(req.getParameter("state")));
+        } else {
+            connect.addItem(req.getParameter("text"));
+        }
     }
 }

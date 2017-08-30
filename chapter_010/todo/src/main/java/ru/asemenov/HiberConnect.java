@@ -46,4 +46,19 @@ public class HiberConnect {
         session.close();
         factory.close();
     }
+
+    public void editState(int id, boolean state) {
+        SessionFactory factory = new Configuration()
+                .configure()
+                .buildSessionFactory();
+        Session session = factory.openSession();
+        session.beginTransaction();
+        Item item = new Item();
+        item.setId(id);
+        item.setDone(state);
+        session.update(item);
+        session.getTransaction().commit();
+        session.close();
+        factory.close();
+    }
 }

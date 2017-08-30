@@ -14,12 +14,14 @@ function createTable(items) {
     tableBody.empty();
     items.forEach(function(item) {
         tableBody.append($('<tr>')
+            .append($('<td>', { text: item.id}))
             .append($('<td>', { text: item.desc }).attr('checked', (items.done == false ? 'false': 'true')))
             .append($('<td>', { text: item.created }))
             .append($('<td>')
                 .append($('<label>', {class: 'checkbox-inline'})
-                    .append($('<input>', { id: 'checkbox', type: 'checkbox', checked: (item.done == false ? false : true)}))
-                    .append(item.done == false ? 'Открыто': 'Выполнено'))
+                    .append($('<input>', {type: 'checkbox', checked: (item.done == false ? false : true)}))
+                    .append($('<p>').text(item.done == false ? 'Открыто': 'Выполнено'))
+                )
             ));
     });
 }
@@ -62,11 +64,25 @@ function showRows() {
 }
 
 $(document).ready(function() {
-    $('#table-body').find('input[type="checkbox"]').change(function () {
+    $('#table-body').on('change', 'input[type="checkbox"]', function () {
         if ($(this).is(':checked')) {
-
+            $(this).parent().find('p').text('Выполнено');
+            console.log($(this).parent().parent().children(':first-child'))
         } else {
-            console.log('321')
+            $(this).parent().find('p').text('Открыто')
+        }
+    })
+});
+
+function editState(id, state) {
+    $.ajax('./items', {
+        method : 'post',
+        data : {
+            id : id,
+            state : state
+        },
+        complete: function () {
+            loadItems()
         }
     });
-});
+}

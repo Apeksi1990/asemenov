@@ -65,11 +65,13 @@ function showRows() {
 
 $(document).ready(function() {
     $('#table-body').on('change', 'input[type="checkbox"]', function () {
+        var id = $(this).parent().parent().parent().children(':first-child').text();
         if ($(this).is(':checked')) {
             $(this).parent().find('p').text('Выполнено');
-            console.log($(this).parent().parent().children(':first-child'))
+            editState(id, true)
         } else {
-            $(this).parent().find('p').text('Открыто')
+            $(this).parent().find('p').text('Открыто');
+            editState(id, false)
         }
     })
 });

@@ -8,6 +8,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>todo</module>
+        <module>cars</module>
     </modules>
     <artifactId>chapter_010</artifactId>
     <version>1.0</version>

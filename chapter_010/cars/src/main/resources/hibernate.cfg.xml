@@ -6,6 +6,11 @@
         <property name="connection.username">postgres</property>
         <property name="connection.password">password</property>
         <property name="dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
-        <mapping resource="ru/asemenov/models/Item.hbm.xml"/>
+        <mapping resource="ru/asemenov/models/Body.hbm.xml"/>
+        <mapping resource="ru/asemenov/models/Engine.hbm.xml"/>
+        <mapping resource="ru/asemenov/models/Mark.hbm.xml"/>
+        <mapping resource="ru/asemenov/models/Model.hbm.xml"/>
+        <mapping resource="ru/asemenov/models/Transmission.hbm.xml"/>
+        <mapping resource="ru/asemenov/models/Car.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

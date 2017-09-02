@@ -1,0 +1,12 @@
+<hibernate-mapping>
+    <class name = "ru.asemenov.models.Mark" table = "mark">
+        <id name = "id" column = "id">
+            <generator class = "identity"/>
+        </id>
+        <property name = "name" column = "name"/>
+        <bag name = "models" inverse = "true">
+            <key column = "mark_id" not-null = "true"/>
+            <one-to-many class = "ru.asemenov.models.Model"/>
+        </bag>
+    </class>
+</hibernate-mapping>

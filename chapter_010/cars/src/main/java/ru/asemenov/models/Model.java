@@ -3,6 +3,7 @@ package ru.asemenov.models;
 public class Model {
     private int id;
     private String name;
+    private Mark mark;
 
     public int getId() {
         return id;
@@ -18,5 +19,22 @@ public class Model {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Mark getMark() {
+        return mark;
+    }
+
+    public void setMark(Mark mark) {
+        this.mark = mark;
+    }
+
+    @Override
+    public String toString() {
+        return "Model{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", mark=" + mark.getName() +
+                '}';
     }
 }

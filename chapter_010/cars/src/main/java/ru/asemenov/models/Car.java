@@ -1,6 +1,7 @@
 package ru.asemenov.models;
 
 public class Car {
+    private int id;
     private Mark mark;
     private Model model;
     private Body body;
@@ -8,7 +9,16 @@ public class Car {
     private int distance;
     private Transmission transmission;
     private Engine engine;
+    private double capacity;
     private int price;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Mark getMark() {
         return mark;
@@ -64,6 +74,14 @@ public class Car {
 
     public void setEngine(Engine engine) {
         this.engine = engine;
+    }
+
+    public double getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(double capacity) {
+        this.capacity = capacity;
     }
 
     public int getPrice() {

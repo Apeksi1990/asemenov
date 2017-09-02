@@ -19,4 +19,12 @@ public class Engine {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Engine{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

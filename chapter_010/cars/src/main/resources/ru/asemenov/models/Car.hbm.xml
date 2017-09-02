@@ -9,7 +9,7 @@
         <property name = "year" column = "year"/>
         <property name = "distance" column = "distance"/>
         <many-to-one name = "transmission" column = "transmission_id" class = "ru.asemenov.models.Transmission"/>
-        <many-to-one name = "engine" column = "engine_id" class = "ru.asemenov.models.Body"/>
+        <many-to-one name = "engine" column = "engine_id" class = "ru.asemenov.models.Engine"/>
         <property name = "capacity" column = "engine_capacity"/>
         <property name = "price" column = "price"/>
     </class>

@@ -19,4 +19,12 @@ public class Transmission {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Transmission{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

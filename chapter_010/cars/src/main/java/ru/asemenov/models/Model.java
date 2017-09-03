@@ -34,7 +34,7 @@ public class Model {
         return "Model{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", mark=" + mark.getName() +
+                ", mark_name=" + mark.getName() +
                 '}';
     }
 }

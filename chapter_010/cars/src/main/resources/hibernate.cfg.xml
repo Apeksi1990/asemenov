@@ -6,6 +6,8 @@
         <property name="connection.username">postgres</property>
         <property name="connection.password">password</property>
         <property name="dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
+        <!--<property name="current_session_context_class">thread</property>-->
+        <!--<property name="hibernate.enable_lazy_load_no_trans">true</property>-->
         <mapping resource="ru/asemenov/models/Body.hbm.xml"/>
         <mapping resource="ru/asemenov/models/Engine.hbm.xml"/>
         <mapping resource="ru/asemenov/models/Mark.hbm.xml"/>

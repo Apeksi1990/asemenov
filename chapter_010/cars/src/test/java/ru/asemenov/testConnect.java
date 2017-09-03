@@ -6,6 +6,8 @@ import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 import ru.asemenov.models.*;
 
+import java.util.List;
+
 public class testConnect {
     @Test
     public void test() {
@@ -42,6 +44,14 @@ public class testConnect {
             if (factory != null) {
                 factory.close();
             }
+        }
+    }
+
+    @Test
+    public void testGetCars() {
+        List<Car> cars = HiberConnect.getInstance().getAllCars();
+        for (Car car : cars) {
+            System.out.println(car.getMark());
         }
     }
 }

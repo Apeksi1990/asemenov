@@ -1,11 +1,11 @@
 <web-app>
     <servlet>
-        <servlet-name>ItemServlet</servlet-name>
-        <servlet-class>ru.asemenov.servlets.ItemServlet</servlet-class>
+        <servlet-name>Cars</servlet-name>
+        <servlet-class>ru.asemenov.servlets.Cars</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>ItemServlet</servlet-name>
-        <url-pattern>/items</url-pattern>
+        <servlet-name>Cars</servlet-name>
+        <url-pattern>/cars</url-pattern>
     </servlet-mapping>
 </web-app>

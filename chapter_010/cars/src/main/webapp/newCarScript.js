@@ -18,7 +18,9 @@ function addMark(marks) {
             value: mark.id,
             text: mark.name
         }))
-    })
+    });
+    var mark = $('#mark_id').val();
+    getModel(mark)
 }
 
 function getModel(mark) {
@@ -30,6 +32,25 @@ function getModel(mark) {
         },
         complete: function (data) {
             var models = JSON.parse(data.responseText);
+            addModel(models)
         }
     });
 }
+
+function addModel(models) {
+    $('#model_id').empty();
+    models.forEach(function (model) {
+        $('#model_id').append($('<option>', {
+            value: model.id,
+            text: model.name
+        }))
+    })
+}
+
+$(document).ready(function () {
+    $('#mark_id').on('change', function () {
+        var optionSelected = $("option:selected", this);
+        var valueSelected = this.value;
+        getModel(valueSelected)
+    });
+});

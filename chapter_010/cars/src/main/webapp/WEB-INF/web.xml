@@ -31,7 +31,7 @@
 
     <servlet>
         <servlet-name>Models</servlet-name>
-        <servlet-class>ru.asemenov.servlets.Models</servlet-class>
+        <servlet-class>ru.asemenov.servlets.CarParameters</servlet-class>
     </servlet>
 
     <servlet-mapping>

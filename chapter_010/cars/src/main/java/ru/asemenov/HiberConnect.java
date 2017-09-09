@@ -140,12 +140,12 @@ public class HiberConnect {
                     .buildSessionFactory();
             session = factory.openSession();
             session.beginTransaction();
-            /*Query query= session.createQuery("from User where mark_id=:mark_id");
+            Query query= session.createQuery("from Model where mark.id=:mark_id");
             query.setParameter("mark_id", mark_id);
-            result = (List<Model>) query.uniqueResult();
+            result = query.list();
             for (Model model: result) {
                 System.out.println(model);
-            }*/
+            }
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();

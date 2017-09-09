@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ru.asemenov.HiberConnect;
 import ru.asemenov.models.Car;
+import ru.asemenov.servlets.adapters.CarsAdapter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,8 +18,7 @@ public class Cars extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String json;
         GsonBuilder b = new GsonBuilder();
-        b.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
-        Gson gson = b.create();
+        Gson gson = b.registerTypeAdapter(Car.class, new CarsAdapter()).create();
         if (req.getParameter("id") != null) {
             Car car = HiberConnect.getInstance().getCarById(Integer.parseInt(req.getParameter("id")));
             json = gson.toJson(car);
@@ -26,7 +26,6 @@ public class Cars extends HttpServlet {
             List<Car> cars = HiberConnect.getInstance().getAllCars();
             json = gson.toJson(cars);
         }
-        System.out.println(json);
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write(json);

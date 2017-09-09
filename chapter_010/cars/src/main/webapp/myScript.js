@@ -16,10 +16,10 @@ function createTable(cars) {
         tableBody.append($('<tr>')
                 .append($('<td>').append($('<input>', {type: 'hidden', value: car.id})))
                 .append($('<td>', { class: 'divImg'}).append($('<img>', { src: 'foto.jpg', class: 'img'})))
-                .append($('<td>').append($('<p>', {text: car.mark.name}))
-                                 .append($('<p>', {text: car.body.name}))
-                                 .append($('<p>', {text: car.transmission.name}))
-                                 .append($('<p>', {text: car.engine.name}))
+                .append($('<td>').append($('<p>', {text: car.mark}))
+                                 .append($('<p>', {text: car.body}))
+                                 .append($('<p>', {text: car.transmission}))
+                                 .append($('<p>', {text: car.engine}))
                                  .append($('<p>', {text: car.capacity}))
                 )
                 .append($('<td>').append($('<h4>', {text: car.price, class: 'inline'}))
@@ -55,10 +55,10 @@ function getCar(id) {
 }
 
 function setModalFrame(car) {
-    $('.modal-title').empty().append(car.mark.name + ' ' + car.model.name);
-    $('#mBody').empty().val(car.body.name);
-    $('#mEngine').empty().val(car.engine.name);
-    $('#mTransmission').empty().val(car.transmission.name);
+    $('.modal-title').empty().append(car.mark + ' ' + car.model);
+    $('#mBody').empty().val(car.body);
+    $('#mEngine').empty().val(car.engine);
+    $('#mTransmission').empty().val(car.transmission);
     $('#mCapacity').empty().val(car.capacity);
     $('#mYear').empty().val(car.year);
     $('#mDistance').empty().val(car.distance);

@@ -1,10 +1,10 @@
 package ru.asemenov.models;
 
-public class Model {
+public class User {
     private int id;
     private String name;
-    private Mark mark;
-
+    private String login;
+    private String password;
 
     public int getId() {
         return id;
@@ -22,20 +22,29 @@ public class Model {
         this.name = name;
     }
 
-    public Mark getMark() {
-        return mark;
+    public String getLogin() {
+        return login;
     }
 
-    public void setMark(Mark mark) {
-        this.mark = mark;
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public String toString() {
-        return "Model{" +
+        return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", mark=" + mark +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

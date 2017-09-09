@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a car to sale</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="newCarScript.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Add new car</h1>
+    <div class="container">
+        <form action="upload" method="post" enctype="multipart/form-data">
+            <input name="description" type="text"><br>
+            <input name="data" type="file"><br>
+            <input type="submit"><br>
+        </form>
+    </div>
+    <div>
+        <h4>Выбрать марку</h4>
+        <select name="mark_id" class="form-control" id="mark_id"></select>
+    </div>
+    <div>
+        <h4>Выбрать модель</h4>
+        <select name="model_id" class="form-control" id="model_id"></select>
+    </div>
+    <div>
+        <h4>Выбрать тип кузова</h4>
+        <select name="body_id" class="form-control" id="body_id"></select>
+    </div>
+    <div>
+        <h4>Выбрать тип двигателя</h4>
+        <select name="engine_id" class="form-control" id="engine_id"></select>
+    </div>
+    <div>
+        <h4>Указать мощность двигателя</h4>
+        <div class="input-group">
+            <span class="input-group-addon">л.</span>
+            <input id="capacity" type="text" class="form-control" name="capacity" placeholder="Мощность">
+        </div>
+    </div>
+    <div>
+        <h4>Выбрать тип коробки передач</h4>
+        <select name="transmission_id" class="form-control" id="transmission_id"></select>
+    </div>
+    <div>
+        <h4>Указать пробег</h4>
+        <div class="input-group">
+            <span class="input-group-addon">км.</span>
+            <input id="distance" type="text" class="form-control" name="distance" placeholder="Пробег">
+        </div>
+    </div>
+    <div>
+        <h4>Указать год выпуска</h4>
+        <div class="input-group">
+            <span class="input-group-addon">г.</span>
+            <input id="year" type="text" class="form-control" name="year" placeholder="Год">
+        </div>
+    </div>
+    <div>
+        <h4>Цена продажи</h4>
+        <div class="input-group">
+            <span class="input-group-addon">руб.</span>
+            <input id="price" type="text" class="form-control" name="price" placeholder="Цена">
+        </div>
+    </div>
+</div>
+</body>
+</html>

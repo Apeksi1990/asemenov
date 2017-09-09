@@ -65,3 +65,13 @@ INSERT INTO model (name, mark_id) VALUES ('Vesta', '3');
 INSERT INTO car (mark_id, model_id, body_id, year, distance, transmission_id, engine_id, engine_capacity, price) VALUES ('2','4','3','2005','178000','1','1','1.4','100000');
 INSERT INTO car (mark_id, model_id, body_id, year, distance, transmission_id, engine_id, engine_capacity, price) VALUES ('1','2','4','2010','56000','2','2','2.0','630000');
 INSERT INTO car (mark_id, model_id, body_id, year, distance, transmission_id, engine_id, engine_capacity, price) VALUES ('3','8','4','1990','20','2','1','6.0','31000');
+
+create table users (
+  id serial primary key,
+  name varchar(100) NOT NULL,
+  login varchar(10) NOT NULL UNIQUE,
+  password varchar(20) NOT NULL
+);
+
+INSERT INTO users (name, login, password) VALUES ('Alex','admin','password');
+INSERT INTO users (name, login, password) VALUES ('AlexUser','alex','password');

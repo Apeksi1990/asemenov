@@ -7,9 +7,6 @@ public class Mark {
     private String name;
     private List<Model> models;
 
-    public Mark() {
-    }
-
     public int getId() {
         return id;
     }

@@ -8,4 +8,34 @@
         <servlet-name>Cars</servlet-name>
         <url-pattern>/cars</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Signin</servlet-name>
+        <servlet-class>ru.asemenov.servlets.SigninController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Signin</servlet-name>
+        <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Upload</servlet-name>
+        <servlet-class>ru.asemenov.servlets.Upload</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Models</servlet-name>
+        <servlet-class>ru.asemenov.servlets.Models</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Models</servlet-name>
+        <url-pattern>/models</url-pattern>
+    </servlet-mapping>
 </web-app>

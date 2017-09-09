@@ -9,16 +9,9 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public class HiberConnect {
-    private static volatile HiberConnect instance = new HiberConnect();
+    private static final HiberConnect instance = new HiberConnect();
 
     public static HiberConnect getInstance() {
-        if (instance == null) {
-            synchronized (HiberConnect.class) {
-                if (instance == null) {
-                    instance = new HiberConnect();
-                }
-            }
-        }
         return instance;
     }
 

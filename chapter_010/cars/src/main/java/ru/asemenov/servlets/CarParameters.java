@@ -13,10 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 public class CarParameters extends HttpServlet{
+
+    private final String path = "C:\\test";
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String json = "";
@@ -49,8 +53,13 @@ public class CarParameters extends HttpServlet{
                 List<Transmission> transmission = HiberConnect.getInstance().getTransmissions();
                 json = gson.toJson(transmission);
                 break;
+            case "img":
+                int id = Integer.parseInt(req.getParameter("id"));
+                json = img(id);
+                System.out.println("File name:");
+                System.out.println(json);
+                break;
         }
-
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write(json);
@@ -64,5 +73,12 @@ public class CarParameters extends HttpServlet{
         if (car.getUser().getId() == idSessionUser) {
             HiberConnect.getInstance().statusOff(car.getId());
         }
+    }
+
+    private String img(int id) {
+        File[]fList;
+        File F = new File(path + File.separator + id);
+        fList = F.listFiles();
+        return fList[0].getName();
     }
 }

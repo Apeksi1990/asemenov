@@ -13,12 +13,14 @@ function createTable(cars) {
     var tableBody = $('#table-body');
     tableBody.empty();
     cars.forEach(function(car) {
+        var img = getImg(car.id);
+        consolel.log(img);
         tableBody.append($('<tr>')
                 .append($('<td>')
                                 .append($('<input>', {class: 'carId',type: 'hidden', value: car.id}))
                                 .append($('<input>', {class: 'userId',type: 'hidden', value: car.user}))
                 )
-                .append($('<td>', { class: 'divImg'}).append($('<img>', { src: '/files/16/foto.jpg', class: 'img'})))
+                .append($('<td>', { class: 'divImg'}).append($('<img>', { src: '/files/foto.jpg', class: 'img'})))
                 .append($('<td>').append($('<p>', {text: car.mark}))
                                  .append($('<p>', {text: car.body}))
                                  .append($('<p>', {text: car.transmission}))
@@ -112,3 +114,18 @@ $(document).ready(function() {
         statusOff($(this).val())
     });
 });
+
+function getImg(id) {
+    $.ajax('./models', {
+        method: 'get',
+        data: {
+            type: 'img',
+            id: id
+        },
+        complete: function (data) {
+            var img = data.responseText;
+            console.log(img);
+            return img;
+        }
+    });
+}

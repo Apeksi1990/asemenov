@@ -11,6 +11,8 @@ public class Car {
     private Engine engine;
     private double capacity;
     private int price;
+    private User user;
+    private boolean status;
 
     public int getId() {
         return id;
@@ -92,6 +94,22 @@ public class Car {
         this.price = price;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
@@ -105,6 +123,8 @@ public class Car {
                 ", engine=" + engine +
                 ", capacity=" + capacity +
                 ", price=" + price +
+                ", user=" + user +
+                ", status=" + status +
                 '}';
     }
 }

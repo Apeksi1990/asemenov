@@ -75,3 +75,7 @@ create table users (
 
 INSERT INTO users (name, login, password) VALUES ('Alex','admin','password');
 INSERT INTO users (name, login, password) VALUES ('AlexUser','alex','password');
+
+ALTER TABLE car ADD user_id int references users(id);
+
+ALTER TABLE car ADD status BOOLEAN;

@@ -2,6 +2,8 @@ package ru.asemenov.servlets;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,9 +18,10 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class Upload extends HttpServlet {
 
-    private final String UPLOAD_DIRECTORY = "C:/test";
+    private final String UPLOAD_DIRECTORY = "C:\\test";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String carId = null;
         //проверяем является ли полученный запрос multipart/form-data
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         if (!isMultipart) {
@@ -55,9 +58,10 @@ public class Upload extends HttpServlet {
                 if (item.isFormField()) {
                     //если принимаемая часть данных является полем формы
                     processFormField(item);
+                    carId = item.getString();
                 } else {
                     //в противном случае рассматриваем как файл
-                    processUploadedFile(item);
+                    processUploadedFile(item, carId, response);
                 }
             }
         } catch (Exception e) {
@@ -71,19 +75,13 @@ public class Upload extends HttpServlet {
      * Сохраняет файл на сервере, в папке upload.
      * Сама папка должна быть уже создана.
      */
-    private void processUploadedFile(FileItem item) throws Exception {
-        System.out.println(item.getName());
+    private void processUploadedFile(FileItem item, String carId, HttpServletResponse resp) throws Exception {
         File uploadetFile;
-        //выбираем файлу имя пока не найдём свободное
-        do{
-            String path = UPLOAD_DIRECTORY + File.separator + item.getName();
-            uploadetFile = new File(path);
-        }while(uploadetFile.exists());
-
-        //создаём файл
-        uploadetFile.createNewFile();
-        //записываем в него данные
+        System.out.println("id: " + carId);
+        new File(UPLOAD_DIRECTORY + File.separator + carId).mkdirs();
+        uploadetFile = new File(UPLOAD_DIRECTORY + File.separator + carId + File.separator + item.getName());
         item.write(uploadetFile);
+        resp.sendRedirect("/index.html");
     }
 
     /**

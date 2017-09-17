@@ -4,6 +4,13 @@ public class Body {
     private int id;
     private String name;
 
+    public Body(int id) {
+        this.id = id;
+    }
+
+    public Body() {
+    }
+
     public int getId() {
         return id;
     }

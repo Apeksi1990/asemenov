@@ -4,6 +4,13 @@ public class Transmission {
     private int id;
     private String name;
 
+    public Transmission(int id) {
+        this.id = id;
+    }
+
+    public Transmission() {
+    }
+
     public int getId() {
         return id;
     }

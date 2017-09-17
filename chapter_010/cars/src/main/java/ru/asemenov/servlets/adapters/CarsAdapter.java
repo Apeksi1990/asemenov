@@ -23,6 +23,8 @@ public class CarsAdapter implements JsonSerializer<Car> {
         jsonObject.addProperty("engine", car.getEngine().getName());
         jsonObject.addProperty("capacity", car.getCapacity());
         jsonObject.addProperty("price", car.getPrice());
+        jsonObject.addProperty("user", car.getUser().getId());
+        jsonObject.addProperty("status", car.isStatus());
         return jsonObject;
     }
 }

@@ -4,6 +4,13 @@ public class Engine {
     private int id;
     private String name;
 
+    public Engine(int id) {
+        this.id = id;
+    }
+
+    public Engine() {
+    }
+
     public int getId() {
         return id;
     }

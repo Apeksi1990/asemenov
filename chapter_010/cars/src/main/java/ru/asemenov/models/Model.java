@@ -5,6 +5,12 @@ public class Model {
     private String name;
     private Mark mark;
 
+    public Model(int id) {
+        this.id = id;
+    }
+
+    public Model() {
+    }
 
     public int getId() {
         return id;

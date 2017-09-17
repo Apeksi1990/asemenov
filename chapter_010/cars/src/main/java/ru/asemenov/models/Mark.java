@@ -7,6 +7,13 @@ public class Mark {
     private String name;
     private List<Model> models;
 
+    public Mark(int id) {
+        this.id = id;
+    }
+
+    public Mark() {
+    }
+
     public int getId() {
         return id;
     }

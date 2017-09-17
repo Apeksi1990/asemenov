@@ -12,10 +12,10 @@
 <div class="container">
     <h1>Add new car</h1>
     <div class="container">
-        <form action="upload" method="post" enctype="multipart/form-data">
-            <input name="description" type="text"><br>
+        <form id="carImg" action="upload" method="post" enctype="multipart/form-data">
+            <h4>Выбрать фотографию авто</h4>
+            <input type="hidden" name="carId" id="carId">
             <input name="data" type="file"><br>
-            <input type="submit"><br>
         </form>
     </div>
     <div>
@@ -65,6 +65,9 @@
             <span class="input-group-addon">руб.</span>
             <input id="price" type="text" class="form-control" name="price" placeholder="Цена">
         </div>
+    </div>
+    <div>
+        <button type="button" class="btn btn-success" onclick="addNewCar()">Добавить авто</button>
     </div>
 </div>
 </body>

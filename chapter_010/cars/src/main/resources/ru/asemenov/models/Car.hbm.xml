@@ -12,5 +12,7 @@
         <many-to-one name = "engine" column = "engine_id" class = "ru.asemenov.models.Engine"/>
         <property name = "capacity" column = "engine_capacity"/>
         <property name = "price" column = "price"/>
+        <many-to-one name = "user" column = "user_id" class = "ru.asemenov.models.User"/>
+        <property name = "status" column = "status"/>
     </class>
 </hibernate-mapping>

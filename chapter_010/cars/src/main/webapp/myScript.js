@@ -10,36 +10,39 @@ function loadCars() {
 }
 
 function createTable(cars) {
-    var tableBody = $('#table-body');
-    tableBody.empty();
+    $('#table-body').empty();
     cars.forEach(function(car) {
-        var img = getImg(car.id);
-        consolel.log(img);
-        tableBody.append($('<tr>')
-                .append($('<td>')
-                                .append($('<input>', {class: 'carId',type: 'hidden', value: car.id}))
-                                .append($('<input>', {class: 'userId',type: 'hidden', value: car.user}))
-                )
-                .append($('<td>', { class: 'divImg'}).append($('<img>', { src: '/files/foto.jpg', class: 'img'})))
-                .append($('<td>').append($('<p>', {text: car.mark}))
-                                 .append($('<p>', {text: car.body}))
-                                 .append($('<p>', {text: car.transmission}))
-                                 .append($('<p>', {text: car.engine}))
-                                 .append($('<p>', {text: car.capacity}))
-                )
-                .append($('<td>').append($('<h4>', {text: car.price, class: 'inline'}))
-                                 .append($('<p>', {text: 'руб.', class: 'inline'}))
-                )
-                .append($('<td>').append($('<h4>', {text: car.year, class: 'inline'}))
-                                 .append($('<p>', {text: 'г.', class: 'inline'}))
-                )
-                .append($('<td>').append($('<h4>', {text: car.distance, class: 'inline'}))
-                                 .append($('<p>', {text: 'км.', class: 'inline'}))
-                )
-                .append($('<td>').append($('<h4>', {text: (car.status == true ? '' : 'Машина продана')}))
-                )
-            );
+        getImg(car.id).then(function (result) {
+            addRow(result, car)
+        });
     });
+}
+
+function addRow(img, car) {
+    $('#table-body').append($('<tr>')
+        .append($('<td>')
+            .append($('<input>', {class: 'carId',type: 'hidden', value: car.id}))
+            .append($('<input>', {class: 'userId',type: 'hidden', value: car.user}))
+        )
+        .append($('<td>', { class: 'divImg'}).append($('<img>', { src: '/files/' + car.id + '/' + img, class: 'img'})))
+        .append($('<td>').append($('<p>', {text: car.mark}))
+            .append($('<p>', {text: car.body}))
+            .append($('<p>', {text: car.transmission}))
+            .append($('<p>', {text: car.engine}))
+            .append($('<p>', {text: car.capacity}))
+        )
+        .append($('<td>').append($('<h4>', {text: car.price, class: 'inline'}))
+            .append($('<p>', {text: 'руб.', class: 'inline'}))
+        )
+        .append($('<td>').append($('<h4>', {text: car.year, class: 'inline'}))
+            .append($('<p>', {text: 'г.', class: 'inline'}))
+        )
+        .append($('<td>').append($('<h4>', {text: car.distance, class: 'inline'}))
+            .append($('<p>', {text: 'км.', class: 'inline'}))
+        )
+        .append($('<td>').append($('<h4>', {text: (car.status == true ? '' : 'Машина продана')}))
+        )
+    );
 }
 
 $(document).ready(function() {
@@ -116,16 +119,12 @@ $(document).ready(function() {
 });
 
 function getImg(id) {
-    $.ajax('./models', {
+    return $.ajax('./models', {
         method: 'get',
+        dataType: 'text',
         data: {
             type: 'img',
             id: id
-        },
-        complete: function (data) {
-            var img = data.responseText;
-            console.log(img);
-            return img;
         }
     });
 }

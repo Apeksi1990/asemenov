@@ -2,7 +2,7 @@ package ru.asemenov.servlets;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ru.asemenov.HiberConnect;
+import ru.asemenov.CarStorage;
 import ru.asemenov.models.*;
 import ru.asemenov.servlets.adapters.CarsAdapter;
 
@@ -22,10 +22,10 @@ public class Cars extends HttpServlet {
         GsonBuilder b = new GsonBuilder();
         Gson gson = b.registerTypeAdapter(Car.class, new CarsAdapter()).create();
         if (req.getParameter("id") != null) {
-            Car car = HiberConnect.getInstance().getCarById(Integer.parseInt(req.getParameter("id")));
+            Car car = CarStorage.getInstance().getCarById(Integer.parseInt(req.getParameter("id")));
             json = gson.toJson(car);
         } else {
-            List<Car> cars = HiberConnect.getInstance().getAllCars();
+            List<Car> cars = CarStorage.getInstance().getAllCars();
             json = gson.toJson(cars);
         }
         resp.setContentType("application/json");
@@ -49,7 +49,7 @@ public class Cars extends HttpServlet {
         car.setPrice(Integer.parseInt(req.getParameter("price")));
         car.setUser(new User(Integer.parseInt(String.valueOf(session.getAttribute("id")))));
         car.setStatus(true);
-        int id = HiberConnect.getInstance().addCar(car);
+        int id = CarStorage.getInstance().addCar(car);
         PrintWriter out = new PrintWriter(resp.getOutputStream());
         out.append(String.valueOf(id));
         out.flush();

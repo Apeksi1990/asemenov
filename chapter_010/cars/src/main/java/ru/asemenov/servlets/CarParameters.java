@@ -2,7 +2,7 @@ package ru.asemenov.servlets;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ru.asemenov.HiberConnect;
+import ru.asemenov.CarStorage;
 import ru.asemenov.models.*;
 import ru.asemenov.servlets.adapters.HibernateProxyTypeAdapter;
 import ru.asemenov.servlets.adapters.MarkAdapter;
@@ -33,24 +33,24 @@ public class CarParameters extends HttpServlet{
             case "mark":
                 b.registerTypeAdapter(Model.class, new ModelAdapter());
                 gson = b.registerTypeAdapter(Mark.class, new MarkAdapter()).create();
-                List<Mark> mark = HiberConnect.getInstance().getMarks();
+                List<Mark> mark = CarStorage.getInstance().getMarks();
                 json = gson.toJson(mark);
                 break;
             case "model":
                 gson = b.registerTypeAdapter(Model.class, new ModelAdapter()).create();
-                List<Model> model = HiberConnect.getInstance().getModels(Integer.parseInt(req.getParameter("mark")));
+                List<Model> model = CarStorage.getInstance().getModels(Integer.parseInt(req.getParameter("mark")));
                 json = gson.toJson(model);
                 break;
             case "body":
-                List<Body> body = HiberConnect.getInstance().getBodies();
+                List<Body> body = CarStorage.getInstance().getBodies();
                 json = gson.toJson(body);
                 break;
             case "engine":
-                List<Engine> engine = HiberConnect.getInstance().getEngines();
+                List<Engine> engine = CarStorage.getInstance().getEngines();
                 json = gson.toJson(engine);
                 break;
             case "transmission":
-                List<Transmission> transmission = HiberConnect.getInstance().getTransmissions();
+                List<Transmission> transmission = CarStorage.getInstance().getTransmissions();
                 json = gson.toJson(transmission);
                 break;
             case "img":
@@ -67,11 +67,11 @@ public class CarParameters extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Car car = HiberConnect.getInstance().getCarById(Integer.parseInt(req.getParameter("id")));
+        Car car = CarStorage.getInstance().getCarById(Integer.parseInt(req.getParameter("id")));
         HttpSession session = req.getSession();
         int idSessionUser = (int) session.getAttribute("id");
         if (car.getUser().getId() == idSessionUser) {
-            HiberConnect.getInstance().statusOff(car.getId());
+            CarStorage.getInstance().statusOff(car.getId());
         }
     }
 

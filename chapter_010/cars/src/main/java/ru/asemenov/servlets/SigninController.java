@@ -1,7 +1,7 @@
 package ru.asemenov.servlets;
 
 import com.google.gson.Gson;
-import ru.asemenov.HiberConnect;
+import ru.asemenov.CarStorage;
 import ru.asemenov.models.User;
 
 import javax.servlet.ServletException;
@@ -25,7 +25,7 @@ public class SigninController extends HttpServlet {
         String password = req.getParameter("password");
         if (login != null) {
             resp.setContentType("text/html");
-            User user = HiberConnect.getInstance().getUser(login);
+            User user = CarStorage.getInstance().getUser(login);
             if (user != null & user.getPassword().equals(password)) {
                 HttpSession session = req.getSession();
                 synchronized (session) {
@@ -39,7 +39,7 @@ public class SigninController extends HttpServlet {
             }
         } else {
             HttpSession session = req.getSession();
-            User user = HiberConnect.getInstance().getUser(String.valueOf(session.getAttribute("login")));
+            User user = CarStorage.getInstance().getUser(String.valueOf(session.getAttribute("login")));
             String json = new Gson().toJson(user);
             resp.setContentType("application/json");
             resp.setCharacterEncoding("UTF-8");

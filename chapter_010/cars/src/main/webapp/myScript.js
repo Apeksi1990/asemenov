@@ -79,6 +79,9 @@ function setModalFrame(car) {
             $('#carStatus').append($('<button>', {type: 'button', text: 'Машина была продана', value: car.id}))
         }
     }
+    getImg(car.id).then(function (result) {
+        $('#mImg').attr('src', '/files/' + car.id + '/' + result)
+    });
     $('#myModal').modal('show');
 }
 

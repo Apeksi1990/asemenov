@@ -24,6 +24,9 @@ public class Cars extends HttpServlet {
         if (req.getParameter("id") != null) {
             Car car = CarStorage.getInstance().getCarById(Integer.parseInt(req.getParameter("id")));
             json = gson.toJson(car);
+        } else if (req.getParameterMap().size() != 0) {
+            List<Car> cars = CarStorage.getInstance().getAllCars(req.getParameterMap());
+            json = gson.toJson(cars);
         } else {
             List<Car> cars = CarStorage.getInstance().getAllCars();
             json = gson.toJson(cars);

@@ -14,5 +14,26 @@
         <property name = "price" column = "price"/>
         <many-to-one name = "user" column = "user_id" class = "ru.asemenov.models.User"/>
         <property name = "status" column = "status"/>
+
+        <filter name="mark" condition=":mark = mark_id"/>
+        <filter name="model" condition=":model = model_id"/>
+        <filter name="body" condition=":body = body_id"/>
+        <filter name="transmission" condition=":transmission = transmission_id"/>
+        <filter name="engine" condition=":engine = engine_id"/>
     </class>
+    <filter-def name="mark">
+        <filter-param name="mark" type="int"/>
+    </filter-def>
+    <filter-def name="model">
+        <filter-param name="model" type="int"/>
+    </filter-def>
+    <filter-def name="body">
+        <filter-param name="body" type="int"/>
+    </filter-def>
+    <filter-def name="transmission">
+        <filter-param name="transmission" type="int"/>
+    </filter-def>
+    <filter-def name="engine">
+        <filter-param name="engine" type="int"/>
+    </filter-def>
 </hibernate-mapping>

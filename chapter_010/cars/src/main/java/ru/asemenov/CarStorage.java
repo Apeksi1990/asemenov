@@ -6,6 +6,7 @@ import org.hibernate.query.Query;
 import ru.asemenov.models.*;
 
 import java.util.List;
+import java.util.Map;
 
 public class CarStorage {
     private final SessionFactory factory = HibernateFactory.getFactory();
@@ -27,6 +28,29 @@ public class CarStorage {
         List<Car> cars = null;
         try (Session session = factory.openSession()) {
             session.beginTransaction();
+            cars = session.createQuery("from Car").list();
+            for (Car c: cars) {
+                System.out.println(c);
+            }
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cars;
+    }
+
+    /**
+     * Get filter car.
+     * @param param Map.
+     * @return List cars.
+     */
+    public List<Car> getAllCars(Map<String, String[]> param) {
+        List<Car> cars = null;
+        try (Session session = factory.openSession()) {
+            session.beginTransaction();
+            for (Map.Entry<String, String[]> entry : param.entrySet()) {
+                session.enableFilter(entry.getKey()).setParameter(entry.getKey(), Integer.parseInt(entry.getValue()[0]));
+            }
             cars = session.createQuery("from Car").list();
             for (Car c: cars) {
                 System.out.println(c);
